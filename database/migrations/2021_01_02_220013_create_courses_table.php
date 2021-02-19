@@ -1,0 +1,60 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateCoursesTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::disableForeignKeyConstraints();
+
+        Schema::create('courses', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('team_id')->constrained()->cascadeOnDelete();
+            $table->date('display_until')->nullable();
+            $table->enum('status', ["Published","Draft"]);
+            $table->string('title', 400);
+            $table->string('slug', 400);
+            $table->longText('content');
+            $table->string('phone', 20)->nullable();
+            $table->string('email', 60)->nullable();
+            $table->boolean('from_home')->default(false);
+            $table->string('address')->nullable();
+            $table->string('postcode', 100)->nullable();
+            $table->string('address_ward', 100)->nullable();
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
+            $table->string('directions', 400)->nullable();
+            $table->string('times', 400)->nullable();
+            $table->smallInteger('minimum_age')->nullable();
+            $table->smallInteger('maximum_age')->nullable();
+            $table->string('cost', 400)->nullable();
+            $table->string('what_to_bring', 400)->nullable();
+            $table->string('qualification', 400)->nullable();
+            $table->string('requirements', 400)->nullable();
+            $table->string('booking_link', 400)->nullable();
+            $table->string('booking_instructions', 400)->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+        Schema::enableForeignKeyConstraints();
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('learning_opportunities');
+    }
+}

@@ -1,0 +1,121 @@
+created:
+    - app/Http/Controllers/ServiceController.php
+    - app/Http/Controllers/EventController.php
+    - app/Http/Controllers/VolunteeringController.php
+    - app/Http/Controllers/ActivityController.php
+    - app/Http/Controllers/CourseController.php
+    - app/Http/Controllers/SuitabilityController.php
+    - app/Http/Controllers/AccessibilityController.php
+    - app/Http/Controllers/CategoryController.php
+    - app/Http/Controllers/EnquiryController.php
+    - database/factories/ServiceFactory.php
+    - database/factories/CoursesFactory.php
+    - database/factories/ActivityFactory.php
+    - database/factories/EventFactory.php
+    - database/factories/VolunteeringFactory.php
+    - database/factories/SuitabilityFactory.php
+    - database/factories/AccessibilityFactory.php
+    - database/factories/CategoryFactory.php
+    - database/factories/EnquiryFactory.php
+    - database/migrations/2021_01_02_220012_create_services_table.php
+    - database/migrations/2021_01_02_220013_create_learning_opportunities_table.php
+    - database/migrations/2021_01_02_220014_create_activities_table.php
+    - database/migrations/2021_01_02_220015_create_events_table.php
+    - database/migrations/2021_01_02_220016_create_volunteering_opportunities_table.php
+    - database/migrations/2021_01_02_220017_create_suitabilities_table.php
+    - database/migrations/2021_01_02_220018_create_accessibilities_table.php
+    - database/migrations/2021_01_02_220019_create_categories_table.php
+    - database/migrations/2021_01_02_220020_create_enquiries_table.php
+    - app/Models/Service.php
+    - app/Models/Courses.php
+    - app/Models/Activity.php
+    - app/Models/Event.php
+    - app/Models/Volunteering.php
+    - app/Models/Suitability.php
+    - app/Models/Accessibility.php
+    - app/Models/Category.php
+    - app/Models/Enquiry.php
+    - database/seeders/ServiceSeeder.php
+    - database/seeders/EventSeeder.php
+    - database/seeders/VolunteeringSeeder.php
+    - database/seeders/ActivitySeeder.php
+    - database/seeders/CoursesSeeder.php
+    - database/seeders/SuitabilitySeeder.php
+    - database/seeders/AccessibilitySeeder.php
+    - database/seeders/CategorySeeder.php
+    - database/seeders/EnquirySeeder.php
+    - tests/Feature/Http/Controllers/ServiceControllerTest.php
+    - tests/Feature/Http/Controllers/EventControllerTest.php
+    - tests/Feature/Http/Controllers/VolunteeringControllerTest.php
+    - tests/Feature/Http/Controllers/ActivityControllerTest.php
+    - tests/Feature/Http/Controllers/CourseControllerTest.php
+    - tests/Feature/Http/Controllers/SuitabilityControllerTest.php
+    - tests/Feature/Http/Controllers/AccessibilityControllerTest.php
+    - tests/Feature/Http/Controllers/CategoryControllerTest.php
+    - tests/Feature/Http/Controllers/EnquiryControllerTest.php
+    - app/Http/Requests/ServiceStoreRequest.php
+    - app/Http/Requests/ServiceUpdateRequest.php
+    - app/Http/Requests/EventStoreRequest.php
+    - app/Http/Requests/EventUpdateRequest.php
+    - app/Http/Requests/VolunteeringStoreRequest.php
+    - app/Http/Requests/VolunteeringUpdateRequest.php
+    - app/Http/Requests/ActivityStoreRequest.php
+    - app/Http/Requests/ActivityUpdateRequest.php
+    - app/Http/Requests/CoursesStoreRequest.php
+    - app/Http/Requests/CoursesUpdateRequest.php
+    - app/Http/Requests/SuitabilityStoreRequest.php
+    - app/Http/Requests/SuitabilityUpdateRequest.php
+    - app/Http/Requests/AccessibilityStoreRequest.php
+    - app/Http/Requests/AccessibilityUpdateRequest.php
+    - app/Http/Requests/CategoryStoreRequest.php
+    - app/Http/Requests/CategoryUpdateRequest.php
+    - app/Http/Requests/EnquiryStoreRequest.php
+    - app/Notification/EnquiryNotification.php
+    - resources/views/service/index.blade.php
+    - resources/views/service/create.blade.php
+    - resources/views/service/show.blade.php
+    - resources/views/service/edit.blade.php
+    - resources/views/event/index.blade.php
+    - resources/views/event/create.blade.php
+    - resources/views/event/show.blade.php
+    - resources/views/event/edit.blade.php
+    - resources/views/volunteeringOpportunity/index.blade.php
+    - resources/views/volunteeringOpportunity/create.blade.php
+    - resources/views/volunteeringOpportunity/show.blade.php
+    - resources/views/volunteeringOpportunity/edit.blade.php
+    - resources/views/activity/index.blade.php
+    - resources/views/activity/create.blade.php
+    - resources/views/activity/show.blade.php
+    - resources/views/activity/edit.blade.php
+    - resources/views/course/index.blade.php
+    - resources/views/course/create.blade.php
+    - resources/views/course/show.blade.php
+    - resources/views/course/edit.blade.php
+    - resources/views/suitability/index.blade.php
+    - resources/views/suitability/create.blade.php
+    - resources/views/suitability/show.blade.php
+    - resources/views/suitability/edit.blade.php
+    - resources/views/accessibility/index.blade.php
+    - resources/views/accessibility/create.blade.php
+    - resources/views/accessibility/show.blade.php
+    - resources/views/accessibility/edit.blade.php
+    - resources/views/category/index.blade.php
+    - resources/views/category/create.blade.php
+    - resources/views/category/show.blade.php
+    - resources/views/category/edit.blade.php
+updated:
+    - routes/web.php
+models:
+    Models\Membership: { team_id: 'biginteger unsigned', user_id: 'biginteger unsigned', role: 'string nullable' }
+    Models\Team: { user_id: 'biginteger unsigned', name: string, personal_team: boolean }
+    Models\TeamInvitation: { team_id: 'biginteger unsigned', email: string, role: 'string nullable' }
+    Models\User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, two_factor_secret: 'text nullable', two_factor_recovery_codes: 'text nullable', remember_token: 'string:100 nullable', current_team_id: 'biginteger unsigned nullable', profile_photo_path: 'text nullable' }
+    Service: { softdeletes: softDeletes, team_id: 'id foreign', display_until: 'date nullable', last_reviewed: date, status: 'enum:Published,Draft', title: 'string:400', slug: 'string:400', content: longText, phone: 'string:20 nullable', email: 'string:60 nullable', from_home: 'boolean default:false', address: 'jsonb nullable', address_ward: 'string:200', latitude: 'double nullable', longitude: 'double nullable', directions: 'string:600 nullable', times: 'string:400 nullable', minimum_age: 'smallInteger nullable', maximum_age: 'smallInteger nullable', cost: 'string:200 nullable', what_to_bring: 'string:400 nullable', booking_link: 'string:200 nullable', booking_instructions: 'string:200 nullable' }
+    Courses: { softdeletes: softDeletes, team_id: 'id foreign', display_until: 'date nullable', last_reviewed: date, status: 'enum:Published,Draft', title: 'string:400', slug: 'string:400', content: longText, phone: 'string:20 nullable', email: 'string:60 nullable', from_home: 'boolean default:false', address: 'jsonb nullable', address_ward: 'string:200', latitude: 'double nullable', longitude: 'double nullable', directions: 'string:600 nullable', times: 'string:400 nullable', minimum_age: 'smallInteger nullable', maximum_age: 'smallInteger nullable', cost: 'string:200 nullable', what_to_bring: 'string:400 nullable', qualification: 'string:400 nullable', requirements: 'string:400 nullable', booking_link: 'string:200 nullable', booking_instructions: 'string:200 nullable' }
+    Activity: { softdeletes: softDeletes, team_id: 'id foreign', display_until: 'date nullable', last_reviewed: date, status: 'enum:Published,Draft', title: 'string:400', slug: 'string:400', content: longText, phone: 'string:20 nullable', email: 'string:60 nullable', address: 'jsonb nullable', address_ward: 'string:200', latitude: 'double nullable', longitude: 'double nullable', directions: 'string:600 nullable', times: 'string:400 nullable', minimum_age: 'smallInteger nullable', maximum_age: 'smallInteger nullable', cost: 'string:200 nullable', what_to_bring: 'string:400 nullable', booking_link: 'string:200 nullable', booking_instructions: 'string:200 nullable' }
+    Event: { softdeletes: softDeletes, team_id: 'id foreign', 'start date': date, end_date: 'date nullable', status: 'enum:Published,Draft', title: 'string:400', slug: 'string:400', content: longText, phone: 'string:20 nullable', email: 'string:60 nullable', address: 'jsonb nullable', address_ward: 'string:200', latitude: 'double nullable', longitude: 'double nullable', directions: 'string:600 nullable', times: 'string:400 nullable', minimum_age: 'smallInteger nullable', maximum_age: 'smallInteger nullable', cost: 'string:200 nullable', what_to_bring: 'string:400 nullable', booking_link: 'string:200 nullable', booking_instructions: 'string:200 nullable' }
+    Volunteering: { softdeletes: softDeletes, team_id: 'id foreign', display_until: 'date nullable', last_reviewed: date, status: 'enum:Published,Draft', title: 'string:400', slug: 'string:400', content: longText, phone: 'string:20 nullable', email: 'string:60 nullable', from_home: 'boolean default:false', address: 'jsonb nullable', address_ward: 'string:200', latitude: 'double nullable', longitude: 'double nullable', directions: 'string:600 nullable', places: 'integer nullable', 'start date': 'date nullable', end_date: 'date nullable', frequency: 'enum:"One-off","Fixed period","Ongoing"', hours: 'integer nullable', deadline: 'date nullable', minimum_age: 'smallInteger nullable', maximum_age: 'smallInteger nullable', expenses: 'string:400 nullable', what_to_bring: 'string:400 nullable', requirements: 'jsonb nullable', skills_needed: 'jsonb nullable', skills_gained: 'jsonb nullable' }
+    Suitability: { title: 'string:400', slug: 'string:400', icon: 'text nullable', image: 'string:100 nullable', colour: 'string:12 nullable', type: 'jsonb nullable' }
+    Accessibility: { title: 'string:400', slug: 'string:400', icon: 'text nullable', image: 'string:100 nullable', colour: 'string:12 nullable' }
+    Category: { title: 'string:400', slug: 'string:400', icon: 'text nullable', image: 'string:100 nullable', colour: 'string:12 nullable' }
+    Enquiry: { name: 'string:200', phone: 'string:20 nullable', email: 'string:60 nullable', message: text }

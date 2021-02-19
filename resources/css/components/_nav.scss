@@ -1,0 +1,65 @@
+.nav {
+  background-color: #fff;
+  position: relative;
+  z-index: 8;
+  border-top: 0.5px solid transparentize($brand-color-action, 0.9);
+  box-shadow: $box-shadow;
+
+  @include orientation(landscape) {
+    border-top: none;
+    background-color: transparent;
+    padding: $spacing 0;
+    margin-bottom: 0;
+    box-shadow: none;
+  }
+
+  &__inner {
+    @include orientation(portrait) {
+      padding-left: $spacing/4;
+      padding-right: $spacing/4;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    justify-content: center;
+
+    @include orientation(landscape) {
+      justify-content: flex-end;
+    }
+  }
+
+  &__link {
+    font-family: $font-family-heading;
+    display: block;
+    text-decoration: none;
+    text-transform: lowercase;
+    border-radius: $border-radius;
+    padding: $spacing/3 $spacing/2;
+    font-size: ms(0);
+    color: a11y-color(ms(0), false, $brand-color-action);
+
+    @include orientation(landscape) {
+      padding: $spacing/3 $spacing;
+      font-size: ms(1);
+      color: a11y-color(ms(1), false, $brand-color-action);
+    }
+
+    &--active {
+      background-color: #fff;
+      color: a11y-color(ms(1), false, $brand-color-action, #fff);
+    }
+  }
+
+  &__toggle {
+    @include button-reset;
+
+    display: none;
+  }
+
+  @include mq-down(lg) {
+    &.is-open &__menu {
+        display: block;
+    }
+  }
+}

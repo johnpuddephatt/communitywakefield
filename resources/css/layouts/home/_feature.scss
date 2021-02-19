@@ -1,0 +1,72 @@
+.feature {
+  position: relative;
+  padding: 2 * $spacing 0;
+
+  @include orientation(portrait) {
+    padding: $spacing 0;
+  }
+
+  &--odd &__container {
+      flex-direction: row-reverse;
+      @include orientation(portrait) {
+        flex-direction: column;
+      }
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+
+    @include orientation(portrait) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &__pre-title {
+      font-weight: 500;
+      color: $gray-dark;
+      font-size: ms(2);
+      margin-bottom: $spacing/2;
+
+      &::before {
+          vertical-align: text-bottom;
+          content: '';
+          display: inline-block;
+          width: $spacing;
+          height: $spacing;
+          margin-right: $spacing/3;
+          background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHg9IjAiIHk9IjAiIHZpZXdCb3g9IjAgMCAxMDAuNTQ1IDEwMi4wMiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjEwMC41NDUiIGhlaWdodD0iMTAyLjAyIj48c3R5bGUgdHlwZT0idGV4dC9jc3MiIGlkPSJzdHlsZTgzMyI+PC9zdHlsZT48cGF0aCBkPSJNNjAuMzkgMzYuOTRWMTguMTljMC03Ljc3LTYuMy0xNC4wNi0xNC4wNi0xNC4wNkwyNy41OCA0Ni4zMnY1MS41N2g1Mi44OGM0LjY4LjA1IDguNjgtMy4zNSA5LjM4LTcuOTdsNi40Ny00Mi4xOWMuNzgtNS4xMi0yLjc0LTkuOS03Ljg2LTEwLjY4LS41LS4wOC0xLjAxLS4xMS0xLjUxLS4xMXpNMjcuNTcgOTcuODlIMTMuNTFhOS4zOCA5LjM4IDAgMDEtOS4zOC05LjM4VjU1LjY5YzAtNS4xOCA0LjItOS4zOCA5LjM4LTkuMzhoMTQuMDYiIGlkPSJwYXRoOTI1IiBmaWxsPSJub25lIiBzdHJva2U9IiM2MGU4YWEiIHN0cm9rZS13aWR0aD0iOC4yNTkiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIvPjwvc3ZnPg==);
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+      }
+  }
+
+  &__title {
+    color: $gray-dark;
+    font-size: ms(4);
+    margin-bottom: $spacing;
+  }
+
+  &__image {
+    flex: 0 0 50%;
+    display: block;
+    margin-bottom: $spacing;
+    height: auto;
+
+    @include orientation(landscape) {
+      margin-bottom: 0;
+      padding-right: $spacing;
+    }
+  }
+
+  &__text {
+    @include orientation(landscape) {
+      padding-left: 2 * $spacing;
+      padding-right: 2 * $spacing;
+    }
+  }
+}

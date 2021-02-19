@@ -1,0 +1,52 @@
+.signup {
+    position: relative;
+    padding: 0 $spacing/2 2 * $spacing;
+
+    &__container {
+        background-color: $brand-green;
+        border-radius: $border-radius;
+        padding: 2 * $spacing;
+        text-align: center;
+
+        @include mq('lg') {
+            padding: 3 * $spacing;
+        }
+    }
+
+    .alert {
+        max-width: map-get($breakpoints,sm);
+        margin: 0 auto $spacing;
+    }
+
+    &__title {
+        max-width: map-get($breakpoints, 'sm');
+        margin: 0 auto $spacing;
+        color: #fff;
+    }
+    @include mq('lg') {
+        &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            top: -$spacing;
+            width: 25%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            background-image: url("/images/badges.svg");
+        }
+    }
+
+    @media screen and (orientation: portrait) {
+        input {
+            display: block;
+            width: 100%;
+        }
+
+        input + input {
+            margin-top: $spacing/2;
+        }
+    }
+}

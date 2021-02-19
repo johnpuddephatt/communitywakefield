@@ -1,0 +1,99 @@
+.accessibility {
+  padding: 3 * $spacing 0;
+  position: relative;
+  background-color: $brand-light-green;
+
+  &__container {
+    padding-top: 2 * $spacing;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    @include orientation(portrait) {
+      flex-direction: column;
+    }
+  }
+
+  &__pre-title {
+      text-align: center;
+      font-size: ms(3);
+
+      &::before {
+          vertical-align: text-bottom;
+          content: '';
+          display: inline-block;
+          width: $spacing;
+          height: $spacing;
+          margin-right: $spacing/3;
+          background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHg9IjAiIHk9IjAiIHZpZXdCb3g9IjAgMCA5OS4zMTkgOTkuMzE5IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iOTkuMzE5IiBoZWlnaHQ9Ijk5LjMxOSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIiBpZD0ic3R5bGU4MzMiPi5zdDl7ZmlsbDpub25lO3N0cm9rZTojZmZmO3N0cm9rZS13aWR0aDo4LjI1OTE7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MTB9PC9zdHlsZT48ZyBpZD0iZzkyMyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEwNjAuMyAtNjI1LjYpIj48Y2lyY2xlIGNsYXNzPSJzdDkiIGN4PSIxMTA5Ljk2IiBjeT0iNjc1LjI2IiByPSI0NS41MyIgaWQ9ImNpcmNsZTkxNSIvPjxwYXRoIGNsYXNzPSJzdDkiIGQ9Ik0xMDkxLjc1IDY4NC4zNnM2LjgzIDkuMTEgMTguMjEgOS4xMSAxOC4yMS05LjExIDE4LjIxLTkuMTEiIGlkPSJwYXRoOTE3Ii8+PHBhdGggY2xhc3M9InN0OSIgaWQ9ImxpbmU5MTkiIGQ9Ik0xMDk2LjMgNjYxLjZoLjA1Ii8+PHBhdGggY2xhc3M9InN0OSIgaWQ9ImxpbmU5MjEiIGQ9Ik0xMTIzLjYyIDY2MS42aC4wNCIvPjwvZz48L3N2Zz4=);
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+      }
+  }
+
+  &__title {
+    text-align: center;
+    font-size: ms(4);
+    color: $gray-dark;
+    padding-top: $spacing/2;
+
+    @include orientation(portrait) {
+      padding-top: $spacing;
+    }
+  }
+
+  &__item {
+    flex: 0 1 25%;
+    max-width: 30%;
+    padding: $spacing;
+    text-align: center;
+    border: 3px solid $gray-dark;
+    text-decoration: none;
+    transition: box-shadow 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    color: $text-color;
+    background-color: #fff;
+    border-radius: $border-radius;
+
+    svg {
+        width: $spacing;
+        height: auto;
+        margin: 0 auto $spacing/2;
+    }
+
+    + .accessibility__item {
+      margin-left: 2 * $spacing;
+    }
+
+    @include orientation(portrait) {
+      margin: 0 0 $spacing;
+      max-width: none;
+
+      + .accessibility__item {
+        margin-left: 0;
+      }
+    }
+
+    &__title {
+      font-weight: 700;
+      font-size: ms(1);
+      margin-bottom: 0;
+      color: $gray-dark;
+      margin-bottom: $spacing/2;
+    }
+
+    &__text {
+      p {
+
+      }
+    }
+
+    .read-more {
+      display: inline-block;
+      font-size: ms(-1);
+      margin-top: $spacing/2;
+    }
+  }
+}

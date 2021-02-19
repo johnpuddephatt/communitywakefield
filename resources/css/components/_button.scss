@@ -1,0 +1,55 @@
+.button {
+  position: relative;
+  font-size: ms(1);
+  display: inline-block;
+  border: 0.15em solid $brand-blue;
+  background-color: $brand-blue;
+  color: white;
+  text-decoration: none;
+  line-height: 1.25 * $line-height;
+  // font-weight: $font-weight-bold;
+  text-transform: lowercase;
+  padding: 0 $spacing/2;
+
+  @include mq(md) {
+    line-height: 1.5 * $line-height;
+    padding: 0 $spacing;
+  }
+
+  &--green {
+    border: 2px solid $brand-green;
+    color: $brand-green;
+  }
+
+  &--white {
+    background-clip: padding-box;
+    background-color: transparent;
+    border: 0.15em solid white;
+    color: white;
+    transition: border-color 1s $animation-curve-default;
+  }
+
+  &--arrow {
+    padding-right: $spacing;
+
+    &::after {
+      content: '>';
+      font-size: ms(5);
+      line-height: 1;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-60%);
+      opacity: 0.75;
+      right: $spacing/4;
+      transition: opacity 1s $animation-curve-default;
+    }
+
+    &:hover {
+      border-color: transparentize($brand-blue,0.5);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+}

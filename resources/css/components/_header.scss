@@ -1,0 +1,83 @@
+.header {
+  background-color: #fff;
+  padding: $spacing 0;
+  position: relative;
+  z-index: 9;
+  box-shadow: none;
+
+  @include orientation(landscape) {
+    box-shadow: $box-shadow;
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__brand {
+    display: inline-block;
+    position: relative;
+    padding-left: 2.25 * $spacing;
+    text-decoration: none;
+  }
+
+  &__name {
+    color: a11y-color(ms(1), true, $brand-blue, #fff);
+    font-size: ms(3);
+    text-transform: lowercase;
+    line-height: 1;
+    font-weight: $font-weight-bold;
+  }
+
+  &__description {
+    font-size: ms(1);
+    text-transform: lowercase;
+    font-weight: $font-weight-bold;
+  }
+
+  .icon--loop {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2 * $spacing;
+    height: auto;
+    opacity: 1;
+    stroke-width: 0.3rem;
+    margin-top: -0.35 * $spacing;
+  }
+
+  &__call {
+    margin: -0.6rem 0;
+    font-weight: $font-weight-bold;
+    font-family: $font-family-heading;
+
+    @include mq(md) {
+      padding-right: 0;
+    }
+
+    .call-us {
+      display: none;
+
+      @include orientation(landscape) {
+        display: inline;
+      }
+    }
+
+    svg {
+      display: none;
+
+      @include orientation(landscape) {
+        display: inline;
+      }
+    }
+
+    @include orientation(landscape) {
+      border-color: transparent;
+      text-decoration: none;
+      text-transform: none;
+      font-weight: 900;
+      color: a11y-color(ms(1), true, $brand-green, #fff);
+    }
+  }
+}

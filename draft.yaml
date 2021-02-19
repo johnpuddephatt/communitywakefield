@@ -1,0 +1,246 @@
+# Enquiry model
+
+models:
+
+  Service:
+    softDeletes
+
+    team_id: id foreign
+
+    display_until: date nullable
+    status: enum:Published,Draft
+
+    title: string:400
+    slug: string:400
+    content: longText nullable
+
+    phone: string:20 nullable
+    email: string:60 nullable
+
+    from_home: boolean default:false
+    address: string:600 nullable
+    postcode: string:10 nullable
+    address_ward: string:200 nullable
+    latitude: double nullable
+    longitude: double nullable
+    directions: string:600 nullable
+
+    times: string:400 nullable
+
+    minimum_age: smallInteger nullable
+    maximum_age: smallInteger nullable
+
+    cost: string:200 nullable
+
+    what_to_bring: string:400 nullable
+
+    booking_link: string:200 nullable
+    booking_instructions: string:200 nullable
+
+  Courses:
+    softDeletes
+
+    team_id: id foreign
+
+    display_until: date nullable
+    status: enum:Published,Draft
+
+    title: string:400
+    slug: string:400
+    content: longText nullable
+
+    phone: string:20 nullable
+    email: string:60 nullable
+    from_home: boolean default:false
+
+    address: jsonb nullable
+    address_ward: string:200 nullable
+    latitude: double nullable
+    longitude: double nullable
+    directions: string:600 nullable
+
+    times: string:400 nullable
+
+    minimum_age: smallInteger nullable
+    maximum_age: smallInteger nullable
+
+    cost: string:200 nullable
+
+    what_to_bring: string:400 nullable
+
+    qualification: string:400 nullable
+    requirements: string:400 nullable
+
+    booking_link: string:200 nullable
+    booking_instructions: string:200 nullable
+
+  Activity:
+    softDeletes
+
+    team_id: id foreign
+
+    display_until: date nullable
+    status: enum:Published,Draft
+
+    title: string:400
+    slug: string:400
+    content: longText nullable
+
+    phone: string:20 nullable
+    email: string:60 nullable
+
+    address: jsonb nullable
+    address_ward: string:200 nullable
+    latitude: double nullable
+    longitude: double nullable
+    directions: string:600 nullable
+
+    times: string:400 nullable
+
+    minimum_age: smallInteger nullable
+    maximum_age: smallInteger nullable
+
+    cost: string:200 nullable
+
+    what_to_bring: string:400 nullable
+
+    booking_link: string:200 nullable
+    booking_instructions: string:200 nullable
+
+  Event:
+    softDeletes
+
+    team_id: id foreign
+
+    start date: date
+    end_date: date nullable
+    status: enum:Published,Draft
+
+    title: string:400
+    slug: string:400
+    content: longText nullable
+
+    phone: string:20 nullable
+    email: string:60 nullable
+
+    address: jsonb nullable
+    address_ward: string:200 nullable
+    latitude: double nullable
+    longitude: double nullable
+    directions: string:600 nullable
+
+    times: string:400 nullable
+
+    minimum_age: smallInteger nullable
+    maximum_age: smallInteger nullable
+
+    cost: string:200 nullable
+
+    what_to_bring: string:400 nullable
+
+    booking_link: string:200 nullable
+    booking_instructions: string:200 nullable
+
+  Volunteering:
+    softDeletes
+
+    team_id: id foreign
+
+    display_until: date nullable
+    status: enum:Published,Draft
+
+    title: string:400
+    slug: string:400
+    content: longText nullable
+
+    phone: string:20 nullable
+    email: string:60 nullable
+    from_home: boolean default:false
+
+    address: jsonb nullable
+    address_ward: string:200 nullable
+    latitude: double nullable
+    longitude: double nullable
+    directions: string:600 nullable
+
+    places: integer nullable
+
+    start date: date nullable
+    end_date: date nullable
+    frequency: enum:"One-off","Fixed period","Ongoing"
+    hours: integer nullable
+    deadline: date nullable
+
+    minimum_age: smallInteger nullable
+    maximum_age: smallInteger nullable
+
+    expenses: string:400 nullable
+
+    what_to_bring: string:400 nullable
+
+    requirements: jsonb nullable
+    skills_needed: jsonb nullable
+    skills_gained: jsonb nullable
+
+  Suitability:
+    title: string:400
+    slug: string:400
+    icon: text nullable
+    image: string:100 nullable
+    colour: string:12 nullable
+    type: jsonb nullable
+
+  Accessibility:
+    title: string:400
+    slug: string:400
+    icon: text nullable
+    image: string:100 nullable
+    colour: string:12 nullable
+
+  Category:
+    title: string:400
+    slug: string:400
+    icon: text nullable
+    image: string:100 nullable
+    colour: string:12 nullable
+
+  Enquiry:
+    name: string:200
+    phone: string:20 nullable
+    email: string:60 nullable
+    message: text
+
+controllers:
+
+  Service:
+    resource
+
+  Event:
+    resource
+
+  Volunteering:
+    resource
+
+  Activity:
+    resource
+
+  Courses:
+    resource
+
+  Suitability:
+    resource
+
+  Accessibility:
+    resource
+
+  Category:
+    resource
+
+  Enquiry:
+    store:
+      validate: title, content
+      send: EnquiryNotification to:enquiry.team with:enquiry
+      flash: 'Message sent.'
+      redirect: back
+
+seeders: Service, Event, Volunteering, Activity, Courses, Suitability, Accessibility, Category, Enquiry
