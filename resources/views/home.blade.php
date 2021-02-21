@@ -23,7 +23,7 @@
 
     <div class="intro">
       <div class="container intro__container">
-        <img class="intro__image" width="480" height="480" src="/images/woman.jpg" />
+        <img class="intro__image" width="480" height="480" src="/images/woman2.jpg" />
         <div class="intro__text">
             <div class="intro__pre-title">Purpose</div>
             <h2 class="intro__title">A service built around the needs of community-focused organisations and services.</h2>

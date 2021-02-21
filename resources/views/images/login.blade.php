@@ -1,4 +1,4 @@
-<svg class="{{ $class }}" xmlns="http://www.w3.org/2000/svg" version="1.1" id="Layer_1" x="0" y="0" viewBox="0 0 444.448 477.486" xml:space="preserve" width="444.448" height="477.486">
+<svg class="{{ $class }}" xmlns="http://www.w3.org/2000/svg" version="1.1" id="Layer_1" x="0" y="0" viewBox="-40 0 484.448 477.486" xml:space="preserve" width="524.448" height="477.486">
   <style type="text/css" id="style1677">
     .st54{fill-rule:evenodd;clip-rule:evenodd;fill:#f3f3f3}.st59{fill:#333}.st63{font-size:14.6738px}.st66{fill:none;stroke:#195258;stroke-width:.2835;stroke-miterlimit:10}
   </style>
