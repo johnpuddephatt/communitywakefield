@@ -16,8 +16,8 @@ class CreateVolunteeringSuitabilitiesPivotTable extends Migration
         Schema::create('volunteering_suitabilities_pivot', function (Blueprint $table) {
             $table->unsignedBigInteger('volunteering_id');
             $table->foreign('volunteering_id')->references('id')->on('volunteerings');
-            $table->unsignedBigInteger('suitability_id');
-            $table->foreign('suitability_id')->references('id')->on('volunteering_suitabilities');
+            $table->unsignedBigInteger('volunteering_suitability_id');
+            $table->foreign('volunteering_suitability_id')->references('id')->on('volunteering_suitabilities');
         });
     }
 

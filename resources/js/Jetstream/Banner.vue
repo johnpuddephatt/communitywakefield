@@ -1,11 +1,11 @@
     <template>
     <div>
-        <div :class="{ 'bg-indigo-500': style == 'success', 'bg-red-700': style == 'danger' }" v-if="show && message">
+        <div :class="{ 'bg-brand-green-bright': style == 'success', 'bg-brand-red': style == 'danger' }" v-if="show && message">
             <div class="max-w-screen-xl mx-auto py-2 px-3 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between flex-wrap">
                     <div class="w-0 flex-1 flex items-center min-w-0">
-                        <span class="flex p-2 rounded-lg" :class="{ 'bg-indigo-600': style == 'success', 'bg-red-600': style == 'danger' }">
-                            <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-if="style == 'success'">
+                        <span class="flex p-1 rounded-lg">
+                            <svg class="h-5 w-5" :class="{ 'text-green-800': style == 'success', 'text-white': style == 'danger'}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-if="style == 'success'">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
 
@@ -14,7 +14,7 @@
                             </svg>
                         </span>
 
-                        <p class="ml-3 font-medium text-sm text-white truncate">
+                        <p class="ml-3 font-medium text-sm truncate" :class="{ 'text-green-800': style == 'success', 'text-white': style == 'danger'}">
                             {{ message }}
                         </p>
                     </div>
@@ -26,7 +26,7 @@
                             :class="{ 'hover:bg-indigo-600 focus:bg-indigo-600': style == 'success', 'hover:bg-red-600 focus:bg-red-600': style == 'danger' }"
                             aria-label="Dismiss"
                             @click.prevent="show = false">
-                            <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg class="h-5 w-5" :class="{ 'text-green-800': style == 'success', 'text-white': style == 'danger'}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>

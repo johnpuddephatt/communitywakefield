@@ -21,19 +21,53 @@ Route::get('/', function () {
 
 Route::group(['middleware' => config('jetstream.middleware', ['web'])], function () {
     Route::group(['middleware' => ['auth', 'verified']], function () {
+
         Route::resource('activity', App\Http\Controllers\ActivityController::class, [
             'names' => [
                 'index' => 'activities.show',
             ]
-        ]);
+        ])->middleware('team');
         Route::delete('activity/destroyAll/{ids}',  [App\Http\Controllers\ActivityController::class, 'destroyAll'])->name('activities.destroy');
+
+        Route::resource('event', App\Http\Controllers\EventController::class, [
+            'names' => [
+                'index' => 'events.show',
+            ]
+        ])->middleware('team');
+        Route::delete('activity/destroyAll/{ids}',  [App\Http\Controllers\ActivityController::class, 'destroyAll'])->name('events.destroy');
+
+        Route::resource('service', App\Http\Controllers\ServiceController::class, [
+            'names' => [
+                'index' => 'services.show',
+            ]
+        ])->middleware('team');
+        Route::delete('service/destroyAll/{ids}',  [App\Http\Controllers\ServiceController::class, 'destroyAll'])->name('services.destroy');
+
+        Route::resource('volunteering', App\Http\Controllers\VolunteeringController::class, [
+            'names' => [
+                'index' => 'volunteerings.show',
+            ]
+        ])->middleware('team');
+        Route::delete('volunteering/destroyAll/{ids}',  [App\Http\Controllers\VolunteeringController::class, 'destroyAll'])->name('volunteerings.destroy');
+
+        Route::resource('course', App\Http\Controllers\CourseController::class, [
+            'names' => [
+                'index' => 'courses.show',
+            ]
+        ])->middleware('team');
+        Route::delete('course/destroyAll/{ids}',  [App\Http\Controllers\CourseController::class, 'destroyAll'])->name('courses.destroy');
+
+
+
+
         Route::post('teams/{team}/subteam/create',  [App\Http\Controllers\SubteamController::class, 'store'])->name('subteam.store');
-        Route::delete('teams/{team}/subteam/{subteam}/destroy',  [App\Http\Controllers\SubteamController::class, 'destroy'])->name('subteam.destroy');
-        Route::post('teams/{team}/subteam/{subteam}/update',  [App\Http\Controllers\SubteamController::class, 'update'])->name('subteam.update');
-        Route::get('teams/{team}/subteam/{subteam}/edit',  [App\Http\Controllers\SubteamController::class, 'edit'])->name('subteam.edit');
+        Route::delete('teams/{team}/subteams/{subteam}/destroy',  [App\Http\Controllers\SubteamController::class, 'destroy'])->name('subteam.destroy');
+        Route::post('teams/{team}/subteams/{subteam}/update',  [App\Http\Controllers\SubteamController::class, 'update'])->name('subteam.update');
+        Route::get('teams/{team}/subteams/{subteam}/edit',  [App\Http\Controllers\SubteamController::class, 'edit'])->name('subteam.edit');
 
-
-
+        Route::get('team/join', [App\Http\Controllers\TeamController::class, 'join'])->name('teams.join');
+        Route::post('team/{team}/request', [App\Http\Controllers\TeamController::class, 'request'])->name('teams.request');
+        Route::post('team/{team}/request/{teamRequest}/approve', [App\Http\Controllers\TeamController::class, 'approveRequest'])->name('teams.approveRequest');
 
     });
 });

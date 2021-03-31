@@ -35,7 +35,7 @@ class ActivityRequest extends FormRequest
             'email' => ['nullable', 'email', 'max:60'],
             'from_home' => ['nullable', 'boolean'],
             'address' => ['nullable'],
-            'postcode' => ['nullable'],
+            'postcode' => ['nullable', 'string'],
             'address_ward' => ['nullable', 'string', 'max:100'],
             'latitude' => ['nullable', 'numeric'],
             'longitude' => ['nullable', 'numeric'],
@@ -45,7 +45,7 @@ class ActivityRequest extends FormRequest
             'maximum_age' => ['nullable', 'integer', 'min:1', 'max:120'],
             'cost' => ['nullable', 'string', 'max:400'],
             'what_to_bring' => ['nullable', 'string', 'max:400'],
-            'booking_link' => ['nullable', 'url', 'max:200'],
+            'booking_link' => ['nullable', 'max:200'],
             'booking_instructions' => ['nullable', 'string', 'max:400'],
         ];
     }

@@ -40,7 +40,8 @@ class ActivityController extends Controller
         return Inertia::render('Activities/Form', [
             'categories' => Category::select('id','title')->get(),
             'accessibilities' => Accessibility::select('id','title')->get(),
-            'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get()
+            'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get(),
+            'team' => \Auth::user()->currentTeam()->select('name','phone','email')->first()
         ]);
     }
 
@@ -52,8 +53,12 @@ class ActivityController extends Controller
     {
         $this->authorize('create', Activity::class);
 
+        $activity = Activity::create(array_merge($request->validated(), ['created_by' => \Auth::user()->id]));
+        $activity->categories()->sync($request->categories);
+        $activity->accessibilities()->sync($request->accessibilities);
+
         return Redirect::route('activity.edit', [
-            'activity' => Activity::create(array_merge($request->validated(), ['created_by' => \Auth::user()->id]))
+            'activity' => $activity
         ]);
     }
 

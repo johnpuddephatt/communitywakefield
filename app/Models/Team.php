@@ -7,6 +7,7 @@ use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\Team as JetstreamTeam;
+use App\Scopes\NonPersonalTeamScope;
 
 class Team extends JetstreamTeam
 {
@@ -18,7 +19,7 @@ class Team extends JetstreamTeam
      * @var array
      */
     protected $casts = [
-        'personal_team' => 'boolean',
+        'personal_team' => 'boolean'
     ];
 
     /**
@@ -29,7 +30,18 @@ class Team extends JetstreamTeam
     protected $fillable = [
         'name',
         'personal_team',
+        'phone',
+        'email',
+        'website',
+        'auto_join',
+        'info',
+        'logo'
     ];
+
+    protected static function booted()
+    {
+        // static::addGlobalScope(new NonPersonalTeamScope);
+    }
 
     /**
      * The event map for the model.
@@ -47,8 +59,34 @@ class Team extends JetstreamTeam
         return $this->hasMany(\App\Models\Subteam::class);
     }
 
+    public function teamRequests()
+    {
+        return $this->hasMany(\App\Models\TeamRequest::class);
+    }
+
     public function activities()
     {
         return $this->hasMany(\App\Models\Activity::class);
     }
+
+    public function services()
+    {
+        return $this->hasMany(\App\Models\Service::class);
+    }
+
+    public function events()
+    {
+        return $this->hasMany(\App\Models\Event::class);
+    }
+
+    public function volunteerings()
+    {
+        return $this->hasMany(\App\Models\Volunteering::class);
+    }
+
+    public function courses()
+    {
+        return $this->hasMany(\App\Models\Course::class);
+    }
+
 }

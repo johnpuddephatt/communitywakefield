@@ -2,7 +2,7 @@
     <input
         ref="autocomplete"
         type="text"
-        class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+        class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 shadow-sm"
         :id="id"
         placeholder="Search for an address..."
         v-model="autocompleteText"
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+    import gmapsInit from '@/utils/googlemaps';
+
     const ADDRESS_COMPONENTS = {
         street_number: 'short_name',
         route: 'long_name',
@@ -123,7 +125,7 @@
             }
         },
 
-        mounted: function() {
+        async mounted() {
           const options = {};
 
           if (this.types) {
@@ -139,6 +141,8 @@
               country: this.country
             };
           }
+
+          const google = await gmapsInit();
 
           this.autocomplete = new google.maps.places.Autocomplete(
                 document.getElementById(this.id),

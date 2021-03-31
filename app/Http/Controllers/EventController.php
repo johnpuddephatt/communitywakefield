@@ -4,19 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
+use App\Models\Category;
+use App\Models\Accessibility;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Gate;
+
+use Redirect;
 
 class EventController extends Controller
 {
+
     /**
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $events = Event::all();
+        $this->authorize('viewAny', Event::class);
 
-        return view('event.index', compact('events'));
+        return Inertia::render('Events/Index', [
+            'events' => \Auth::user()->currentTeam->events()->with('subteam:id,name')->get()
+        ]);;
+
     }
 
     /**
@@ -25,7 +35,14 @@ class EventController extends Controller
      */
     public function create(Request $request)
     {
-        return view('event.create');
+        $this->authorize('create', Event::class);
+
+        return Inertia::render('Events/Form', [
+            'categories' => Category::select('id','title')->get(),
+            'accessibilities' => Accessibility::select('id','title')->get(),
+            'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get(),
+            'team' => \Auth::user()->currentTeam()->select('name','phone','email')->first()
+        ]);
     }
 
     /**
@@ -34,11 +51,15 @@ class EventController extends Controller
      */
     public function store(EventRequest $request)
     {
-        $event = Event::create($request->validated());
+        $this->authorize('create', Event::class);
 
-        $request->session()->flash('event.id', $event->id);
+        $event = Event::create(array_merge($request->validated(), ['created_by' => \Auth::user()->id]));
+        $event->categories()->sync($request->categories);
+        $event->accessibilities()->sync($request->accessibilities);
 
-        return redirect()->route('event.index');
+        return Redirect::route('event.edit', [
+            'event' => $event
+        ]);
     }
 
     /**
@@ -48,7 +69,9 @@ class EventController extends Controller
      */
     public function show(Request $request, Event $event)
     {
-        return view('event.show', compact('event'));
+        // return Inertia::render('Events/Form', [
+        //     'event' => $event
+        // ]);
     }
 
     /**
@@ -56,9 +79,19 @@ class EventController extends Controller
      * @param \App\Models\Event $event
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Event $event)
+    public function edit(Event $event)
     {
-        return view('event.edit', compact('event'));
+        $this->authorize('update', $event);
+
+        $event->categories = $event->categories()->allRelatedIds()->toArray();
+        $event->accessibilities = $event->accessibilities()->allRelatedIds()->toArray();
+
+        return Inertia::render('Events/Form', [
+            'event' => $event,
+            'categories' => Category::select('id','title')->get(),
+            'accessibilities' => Accessibility::select('id','title')->get(),
+            'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get()
+        ]);
     }
 
     /**
@@ -68,11 +101,14 @@ class EventController extends Controller
      */
     public function update(EventRequest $request, Event $event)
     {
+        $this->authorize('update', $event);
+
         $event->update($request->validated());
+        $event->categories()->sync($request->categories);
+        $event->accessibilities()->sync($request->accessibilities);
+        $event->update(['updated_by' => \Auth::user()->id]);
 
-        $request->session()->flash('event.id', $event->id);
-
-        return redirect()->route('event.index');
+        return Redirect::route('event.edit', compact('event'));
     }
 
     /**
@@ -82,8 +118,25 @@ class EventController extends Controller
      */
     public function destroy(Request $request, Event $event)
     {
-        $event->delete();
+        $this->authorize('delete', $event);
 
-        return redirect()->route('event.index');
+        $event->delete();
+        return Redirect::route('events.show');
+    }
+
+    public function destroyAll(Request $request, $event_ids)
+    {
+        $event_ids_array = explode('-', $event_ids);
+        $events_query = Event::whereIn('id', $event_ids_array);
+
+        $events = $events_query->get();
+
+        foreach($events as $event) {
+            $this->authorize('delete', $event);
+        }
+
+        $events_query->delete();
+
+        return Redirect::route('events.show');
     }
 }

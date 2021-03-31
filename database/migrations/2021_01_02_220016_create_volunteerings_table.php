@@ -18,6 +18,10 @@ class CreateVolunteeringsTable extends Migration
         Schema::create('volunteerings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('team_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('subteam_id')->nullable()->constrained();
+            $table->foreignId('updated_by')->nullable()->constrained('users');
+            $table->foreignId('created_by')->nullable()->constrained('users');
+
             $table->date('display_until')->nullable();
             $table->enum('status', ["Published","Draft"]);
             $table->string('title', 400);
@@ -33,10 +37,10 @@ class CreateVolunteeringsTable extends Migration
             $table->double('longitude')->nullable();
             $table->string('directions', 600)->nullable();
             $table->integer('places')->nullable();
-            $table->date('start date')->nullable();
+            $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->enum('frequency', ["One-off","Fixed period","Ongoing"]);
-            $table->integer('hours')->nullable();
+            $table->string('hours', 400)->nullable();
             $table->date('deadline')->nullable();
             $table->smallInteger('minimum_age')->nullable();
             $table->smallInteger('maximum_age')->nullable();

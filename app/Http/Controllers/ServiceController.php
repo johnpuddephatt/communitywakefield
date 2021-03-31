@@ -4,19 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ServiceRequest;
 use App\Models\Service;
+use App\Models\Category;
+use App\Models\Accessibility;
+use App\Models\ServiceSuitability;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Gate;
+
+use Redirect;
 
 class ServiceController extends Controller
 {
+
     /**
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $services = Service::all();
+        $this->authorize('viewAny', Service::class);
 
-        return view('service.index', compact('services'));
+        return Inertia::render('Services/Index', [
+            'services' => \Auth::user()->currentTeam->services()->with('subteam:id,name')->get()
+        ]);;
+
     }
 
     /**
@@ -25,7 +36,15 @@ class ServiceController extends Controller
      */
     public function create(Request $request)
     {
-        return view('service.create');
+        $this->authorize('create', Service::class);
+
+        return Inertia::render('Services/Form', [
+            'categories' => Category::select('id','title')->get(),
+            'accessibilities' => Accessibility::select('id','title')->get(),
+            'suitabilities' => ServiceSuitability::select('id','title')->get(),
+            'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get(),
+            'team' => \Auth::user()->currentTeam()->select('name','phone','email')->first()
+        ]);
     }
 
     /**
@@ -34,11 +53,17 @@ class ServiceController extends Controller
      */
     public function store(ServiceRequest $request)
     {
-        $service = Service::create($request->validated());
+        $this->authorize('create', Service::class);
 
-        $request->session()->flash('service.id', $service->id);
+        $service = Service::create(array_merge($request->validated(), ['created_by' => \Auth::user()->id]));
+        $service->categories()->sync($request->categories);
+        $service->accessibilities()->sync($request->accessibilities);
+        $service->suitabilities()->sync($request->suitabilities);
 
-        return redirect()->route('service.index');
+        return Redirect::route('service.edit', [
+            'service' => $service
+        ]);
+
     }
 
     /**
@@ -48,7 +73,9 @@ class ServiceController extends Controller
      */
     public function show(Request $request, Service $service)
     {
-        return view('service.show', compact('service'));
+        // return Inertia::render('Services/Form', [
+        //     'service' => $service
+        // ]);
     }
 
     /**
@@ -56,9 +83,22 @@ class ServiceController extends Controller
      * @param \App\Models\Service $service
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Service $service)
+    public function edit(Service $service)
     {
-        return view('service.edit', compact('service'));
+        $this->authorize('update', $service);
+
+        $service->categories = $service->categories()->allRelatedIds()->toArray();
+        $service->accessibilities = $service->accessibilities()->allRelatedIds()->toArray();
+        $service->suitabilities = $service->suitabilities()->allRelatedIds()->toArray();
+
+
+        return Inertia::render('Services/Form', [
+            'service' => $service,
+            'categories' => Category::select('id','title')->get(),
+            'accessibilities' => Accessibility::select('id','title')->get(),
+            'suitabilities' => ServiceSuitability::select('id','title')->get(),
+            'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get()
+        ]);
     }
 
     /**
@@ -68,11 +108,15 @@ class ServiceController extends Controller
      */
     public function update(ServiceRequest $request, Service $service)
     {
+        $this->authorize('update', $service);
+
         $service->update($request->validated());
+        $service->categories()->sync($request->categories);
+        $service->accessibilities()->sync($request->accessibilities);
+        $service->suitabilities()->sync($request->suitabilities);
+        $service->update(['updated_by' => \Auth::user()->id]);
 
-        $request->session()->flash('service.id', $service->id);
-
-        return redirect()->route('service.index');
+        return Redirect::route('service.edit', compact('service'));
     }
 
     /**
@@ -82,8 +126,25 @@ class ServiceController extends Controller
      */
     public function destroy(Request $request, Service $service)
     {
-        $service->delete();
+        $this->authorize('delete', $service);
 
-        return redirect()->route('service.index');
+        $service->delete();
+        return Redirect::route('services.show');
+    }
+
+    public function destroyAll(Request $request, $service_ids)
+    {
+        $service_ids_array = explode('-', $service_ids);
+        $services_query = Service::whereIn('id', $service_ids_array);
+
+        $services = $services_query->get();
+
+        foreach($services as $service) {
+            $this->authorize('delete', $service);
+        }
+
+        $services_query->delete();
+
+        return Redirect::route('services.show');
     }
 }

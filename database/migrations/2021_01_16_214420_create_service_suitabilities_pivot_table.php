@@ -16,8 +16,8 @@ class CreateServiceSuitabilitiesPivotTable extends Migration
         Schema::create('service_suitabilities_pivot', function (Blueprint $table) {
             $table->unsignedBigInteger('service_id');
             $table->foreign('service_id')->references('id')->on('services');
-            $table->unsignedBigInteger('suitability_id');
-            $table->foreign('suitability_id')->references('id')->on('service_suitabilities');
+            $table->unsignedBigInteger('service_suitability_id');
+            $table->foreign('service_suitability_id')->references('id')->on('service_suitabilities');
         });
     }
 

@@ -1,23 +1,17 @@
 <template>
-    <aside class="w-72 flex-shrink-0 z-20 bg-gray-100 border-r dark:bg-gray-800 py-4 overflow-y-auto text-gray-800 dark:text-gray-400 flex flex-col">
+    <aside class="w-72 flex-shrink-0 z-20 bg-navy border-r dark:bg-gray-800 py-4 overflow-y-auto text-gray-800 dark:text-gray-400 flex flex-col">
 
-        <a class="logo flex items-center justify-center leading-none my-3 mx-6 text-xl lowercase font-bold text-gray-700 dark:text-gray-200" href="#">
-            Community
-            <svg class="w-3 h-3 mx-1" xmlns="http://www.w3.org/2000/svg" width="701.507" height="867.222" viewBox="0 0 185.607 229.452">
-              <path d="M22.5 206.952l140.607-92.226h0M22.5 22.5l140.607 92.226h0" fill="none" stroke="#8963f1" stroke-width="55" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Wakefield
-        </a>
+        <Jet-Application-Logo class="mt-2 mx-2 justify-center text-xl text-gray-100"/>
 
         <!-- User Dropdown -->
         <div class="mx-2 relative">
             <jet-dropdown align="left" width="64">
                 <template #trigger>
-                    <button class="focus:bg-gray-200 rounded hover:bg-gray-200 px-2 py-3 w-full mt-10 flex text-md border-2 border-transparent items-center focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                    <button class="focus:bg-indigo-800 text-gray-200 hover:bg-indigo-600 px-2 py-3 w-full mt-10 flex text-md border-2 border-transparent items-center focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
                         <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
                         <div class="text-left leading-tight mx-2 font-semibold overflow-hidden">
-                            <span class="block overflow-ellipsis text-gray-600 overflow-hidden">{{ $page.props.user.name }}</span>
-                            <span class="block text-xs text-gray-500 overflow-ellipsis overflow-hidden">{{ $page.props.user.email }}</span>
+                            <span class="block overflow-ellipsis text-gray-200 overflow-hidden">{{ $page.props.user.name }}</span>
+                            <span class="block text-xs text-gray-300 overflow-ellipsis overflow-hidden">{{ $page.props.user.email }}</span>
                         </div>
                         <svg class="ml-auto w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
@@ -63,52 +57,70 @@
 
             <li class="relative">
                 <jet-nav-link :href="route('activities.show')" :active="route().current('activities.show')">
-                    <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    <svg class="w-3 h-3 m-1 text-fuschia" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+                      <circle cx="40" cy="40" r="40" fill="currentColor"/>
                     </svg>
+
                     <span class="ml-4 font-semibold">Activities</span>
                 </jet-nav-link>
             </li>
 
             <li class="relative">
-                <jet-nav-link :href="route('policy.show')" :active="route().current('policy.show')">
-                    <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                <jet-nav-link :href="route('services.show')" :active="route().current('services.show')">
+                    <svg class="w-3 h-3 m-1 text-brand-green-bright" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+                      <circle cx="40" cy="40" r="40" fill="currentColor"/>
                     </svg>
                     <span class="ml-4">Services</span>
                 </jet-nav-link>
             </li>
 
             <li class="relative">
-                <jet-nav-link :href="route('policy.show')" :active="route().current('policy.show')">
-                    <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
-                        <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                <jet-nav-link :href="route('volunteerings.show')" :active="route().current('volunteerings.show')">
+                    <svg class="w-3 h-3 m-1 text-brand-blue-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+                      <circle cx="40" cy="40" r="40" fill="currentColor"/>
                     </svg>
                     <span class="ml-4">Volunteering</span>
                 </jet-nav-link>
             </li>
+
+            <li class="relative">
+                <jet-nav-link :href="route('courses.show')" :active="route().current('courses.show')">
+                    <svg class="w-3 h-3 m-1 text-brand-orange" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+                      <circle cx="40" cy="40" r="40" fill="currentColor"/>
+                    </svg>
+                    <span class="ml-4">Courses</span>
+                </jet-nav-link>
+            </li>
+
+            <li class="relative">
+                <jet-nav-link :href="route('events.show')" :active="route().current('events.show')">
+                    <svg class="w-3 h-3 m-1 text-brand-red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+                      <circle cx="40" cy="40" r="40" fill="currentColor"/>
+                    </svg>
+                    <span class="ml-4">Events</span>
+                </jet-nav-link>
+            </li>
         </ul>
 
-        <div v-if="$page.props.jetstream.hasTeamFeatures" class="border-t border-gray-100 mt-auto mb-2">
+        <div v-if="$page.props.jetstream.hasTeamFeatures && Object.keys($page.props.user.all_teams).length" class="mt-auto mb-2">
 
             <!-- Team Switcher -->
-            <div class="flex tracking-wider items-center font-semibold px-6 py-4 text-sm uppercase text-gray-500">
+            <div class="flex tracking-wider items-center font-semibold px-6 py-4 text-sm uppercase text-gray-200">
                 Teams
 
-                <inertia-link class="ml-auto tracking-normal font-sm normal-case text-xs font-normal" :href="route('teams.create')" v-if="$page.props.jetstream.canCreateTeams">
-                    Create New Team
+                <inertia-link class="ml-auto tracking-normal font-sm normal-case text-xs font-normal text-gray-300 hover:text-gray-200" :href="route('teams.join')">
+                    Add a team
                 </inertia-link>
             </div>
 
             <template v-for="team in $page.props.user.all_teams">
                 <form @submit.prevent="switchToTeam(team)" :key="team.id">
                     <div class="flex items-center">
-                        <jet-nav-link as="button" class="flex items-center">
+                        <jet-nav-link as="button" class="flex items-center pr-2 hover:bg-transparent">
                             <svg v-if="team.id == $page.props.user.current_team_id" class="mr-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <div class="font-semibold text-gray-600">{{ team.name }}</div>
+                            <div class="whitespace-nowrap overflow-ellipsis overflow-hidden font-semibold text-gray-200">{{ team.name }}</div>
                         </jet-nav-link>
-                        <inertia-link class="ml-auto mr-6 text-gray-500 text-xs" :href="route('teams.show', team.id)">
+                        <inertia-link class="ml-auto mr-6 text-gray-300 hover:text-gray-200 text-xs" :href="route('teams.show', team.id)">
                             Edit
                         </inertia-link>
                     </div>
@@ -122,12 +134,17 @@
     import JetNavLink from '@/Jetstream/NavLink'
     import JetDropdown from '@/Jetstream/Dropdown'
     import JetDropdownLink from '@/Jetstream/DropdownLink'
+    import JetApplicationMark from '@/Jetstream/ApplicationMark'
+    import JetApplicationLogo from '@/Jetstream/ApplicationLogo'
+
 
     export default {
         components: {
             JetNavLink,
             JetDropdown,
-            JetDropdownLink
+            JetDropdownLink,
+            JetApplicationMark,
+            JetApplicationLogo
         },
 
         methods: {

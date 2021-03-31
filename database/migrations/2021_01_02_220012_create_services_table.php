@@ -18,6 +18,10 @@ class CreateServicesTable extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->foreignId('team_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('subteam_id')->nullable()->constrained();
+            $table->foreignId('updated_by')->nullable()->constrained('users');
+            $table->foreignId('created_by')->nullable()->constrained('users');
+
             $table->date('display_until')->nullable();
             $table->enum('status', ["Published","Draft"]);
             $table->string('title', 400);

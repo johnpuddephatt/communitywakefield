@@ -25,16 +25,18 @@ class CourseRequest extends FormRequest
     {
         return [
             'team_id' => ['required', 'integer', 'exists:teams,id'],
+            'subteam_id' => ['nullable', 'integer', 'exists:subteams,id'],
             'display_until' => ['nullable', 'date'],
             'status' => ['required', 'in:Published,Draft'],
             'title' => ['required', 'string', 'max:40'],
-            'slug' => ['required', 'string', 'max:40'],
+            'slug' => ['nullable', 'string', 'max:40'],
             'content' => ['required', 'string'],
             'phone' => ['string', 'max:20'],
             'email' => ['email', 'max:60'],
-            'from_home' => ['nullable', 'boolean','default:false'],
+            'from_home' => ['nullable', 'boolean'],
             'address' => ['nullable', 'string'],
             'address_ward' => ['nullable', 'string', 'max:100'],
+            'postcode' => ['nullable', 'string'],
             'latitude' => ['nullable', 'numeric'],
             'longitude' => ['nullable', 'numeric'],
             'directions' => ['nullable', 'string', 'max:400'],
@@ -45,7 +47,7 @@ class CourseRequest extends FormRequest
             'what_to_bring' => ['nullable', 'string', 'max:400'],
             'qualification' => ['nullable', 'string', 'max:400'],
             'requirements' => ['nullable', 'string', 'max:400'],
-            'booking_link' => ['nullable', 'url', 'max:200'],
+            'booking_link' => ['nullable', 'max:200'],
             'booking_instructions' => ['nullable', 'string', 'max:400'],
         ];
     }

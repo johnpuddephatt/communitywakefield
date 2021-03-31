@@ -11,10 +11,10 @@
     </template>
 
     <div class="flex flex-col">
-        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div v-if="activities.length" class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle min-w-full sm:px-6 lg:px-8">
-                <div class="shadow overflow-hidden border-b border-gray-200">
-                    <table v-if="activities.length" class="min-w-full divide-y divide-gray-200">
+
+                    <table class="shadow overflow-hidden border-b border-gray-200 min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-center">
@@ -26,9 +26,7 @@
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Name
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Team
-                                </th>
+
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Status
                                 </th>
@@ -52,12 +50,8 @@
                                         {{ activity.title }}
                                     </div>
                                     <div class="text-sm text-ellipsis text-gray-500">
-                                        {{ activity.times }}
+                                        <span v-if="activity.subteam">{{ activity.subteam.name }}</span>
                                     </div>
-                                </td>
-
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    <span v-if="activity.subteam">{{ activity.subteam.name }}</span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <template v-if="activity.status == 'Published'">
@@ -81,12 +75,10 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div v-else>
-                        Nothing to see here.
-                    </div>
+
                 </div>
 
-                <div class="mx-6 my-3">
+                <div class="mx-8 my-2 px-6">
                     <jet-danger-button v-if="selected.length" @click.native="confirmEntriesDeletion">
                         Delete entries
                     </jet-danger-button>
@@ -113,8 +105,15 @@
                     </template>
                 </jet-confirmation-modal>
             </div>
+
+            <div v-if="!activities.length" class="my-24 flex-1 flex flex-col justify-center items-center">
+                <svg class="absolute inset-0 top-24 w-full h-screen" xmlns="http://www.w3.org/2000/svg" version="1.1" id="Layer_1" x="0" y="0" viewBox="0 0 491.9 442.086" xml:space="preserve" width="491.9" height="442.086">
+                  <path d="M451.67 91.36l-9.92-4 9.93-3.98c5.93-2.37 10.53-6.9 12.96-12.76 2.39-5.76 2.37-12.09-.07-17.81-4.99-11.71-18.77-17.35-30.72-12.56l-12.65 5.07 5.09-12.64c4.81-11.94-.8-25.73-12.5-30.75-5.72-2.45-12.05-2.49-17.82-.11-5.86 2.42-10.4 7.01-12.79 12.94l-4 9.92-3.98-9.93c-2.37-5.93-6.9-10.53-12.76-12.97-5.77-2.4-12.09-2.37-17.81.07-11.72 4.99-17.35 18.77-12.56 30.72l5.06 12.65-12.64-5.09c-11.94-4.82-25.73.79-30.75 12.5-2.45 5.72-2.49 12.04-.1 17.81 2.42 5.86 7.02 10.4 12.94 12.79l9.92 4-9.93 3.98c-5.93 2.37-10.53 6.91-12.97 12.76-2.39 5.76-2.37 12.09.07 17.81 4.99 11.71 18.78 17.35 30.72 12.56l12.65-5.07-5.09 12.64c-4.81 11.94.8 25.73 12.5 30.75 5.72 2.45 12.04 2.49 17.82.1 5.86-2.42 10.4-7.02 12.79-12.94l4-9.92 3.98 9.93c2.37 5.93 6.91 10.54 12.76 12.97 2.86 1.18 5.85 1.78 8.83 1.78 3.05 0 6.09-.62 8.98-1.85 11.71-4.99 17.35-18.77 12.56-30.72l-5.06-12.65 12.64 5.09c11.93 4.81 25.73-.8 30.74-12.5 2.45-5.72 2.49-12.05.11-17.82-2.41-5.85-7.01-10.39-12.93-12.77z" id="path1696" opacity=".1" fill="#ff03e1"></path>
+                  <path d="M132.42 201.66l2.73-2.27c13.06-10.9 32.97-5.56 38.84 10.41l1.22 3.33c2.13 5.81 8.12 9.27 14.22 8.21l3.5-.61c16.76-2.9 31.34 11.67 28.43 28.43l-.61 3.5c-1.06 6.1 2.4 12.09 8.21 14.22l3.33 1.22c15.97 5.86 21.3 25.78 10.41 38.84l-2.27 2.73a12.808 12.808 0 000 16.42l2.27 2.73c10.9 13.06 5.56 32.98-10.41 38.84l-3.33 1.22a12.803 12.803 0 00-8.21 14.22l.61 3.5c2.91 16.76-11.67 31.34-28.43 28.43l-3.5-.61c-6.1-1.06-12.09 2.4-14.22 8.21l-1.22 3.33c-5.86 15.97-25.78 21.3-38.84 10.41l-2.73-2.27a12.808 12.808 0 00-16.42 0l-2.73 2.27c-13.06 10.89-32.98 5.56-38.84-10.41l-1.22-3.33a12.814 12.814 0 00-14.22-8.21l-3.5.61c-16.76 2.91-31.34-11.67-28.43-28.43l.61-3.5c1.06-6.1-2.4-12.09-8.21-14.22l-3.33-1.22C.16 361.8-5.17 341.88 5.72 328.82l2.27-2.73a12.808 12.808 0 000-16.42l-2.27-2.73c-10.9-13.06-5.56-32.98 10.41-38.84l3.33-1.22c5.82-2.13 9.27-8.12 8.21-14.22l-.61-3.5c-2.91-16.76 11.67-31.34 28.43-28.43l3.5.61c6.1 1.06 12.09-2.4 14.22-8.21l1.22-3.33c5.86-15.97 25.78-21.31 38.84-10.41l2.73 2.27c4.75 3.96 11.66 3.96 16.42 0" id="path1701" opacity=".1" fill="#60e8aa"></path>
+                </svg>
+                <p class="relative text-gray-400 mt-24">No activities have been added to this team yet. <a class="text-navy" :href="route('activity.create')">Create an activity</a></p>
+            </div>
         </div>
-    </div>
 </app-layout>
 </template>
 

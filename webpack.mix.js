@@ -13,8 +13,9 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/admin.js', 'public/js').vue({ version: 2 })
     .postCss('resources/css/admin.css', 'public/css', [
-        require('tailwindcss'),
-        require('postcss-import'),
+        require("@tailwindcss/jit"),
+        // require('tailwindcss'),
+        // require('postcss-import'),
         require('autoprefixer'),
     ])
     .js('resources/js/app.js', 'public/js').vue({ version: 2 })

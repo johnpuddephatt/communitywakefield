@@ -1,10 +1,10 @@
 <template>
     <div>
         <jet-banner />
-        <div class="flex h-screen bg-gray-50 dark:bg-gray-900">
+        <div class="flex h-screen">
 
             <sidebar />
-            <div class="flex-grow h-screen bg-gray-100 overflow-y-auto">
+            <div class="relative flex-grow h-screen bg-gradient-to-b from-indigo-50 to-white overflow-y-auto" :class="{'h-screen-with-banner': this.$page.props.jetstream.flash}">
 
                 <!-- Page Heading -->
                 <header class="bg-white shadow flex flex-row items-center sticky top-0 z-50">
@@ -21,7 +21,6 @@
                     </div>
 
                     <slot name="actions" class="mx-2"></slot>
-
 
                     <div class="ml-4 mr-8 relative">
                         <!-- Notifications Dropdown -->

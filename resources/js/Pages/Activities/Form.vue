@@ -8,7 +8,7 @@
     <template #actions>
         <div v-if="isDirty" class="mx-4 text-sm font-semibold"><span class="text-red-700 mr-1 text-3xl leading-none align-bottom">•</span><span class="align-text-bottom">Unsaved changes</span></div>
         <div v-else-if="(activity && activity.status == 'Draft')" class="mx-4 text-sm font-semibold"><span class="text-gray-500 mr-1 text-3xl leading-none align-bottom">•</span><span class="align-text-bottom">Saved as draft</span></div>
-        <div v-else-if="activity" class="mx-4 text-sm font-semibold">Expires on {{ plus_thirty_days(activity.updated_at) }}</div>
+        <div v-else-if="activity" class="mx-4 text-sm font-semibold">Expires on {{ add_days(activity.updated_at, 90) }}</div>
         <jet-secondary-button v-if="isDirty && (!activity || activity.status == 'Draft')" @click.native="saveEntry(false)" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Save draft</jet-secondary-button>
         <jet-secondary-button v-else-if="!isDirty && activity && activity.status == 'Published'" @click.native="saveEntry(false)" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Change to draft</jet-secondary-button>
 
@@ -245,7 +245,8 @@ export default {
         activity: Object,
         categories: Array,
         accessibilities: Array,
-        subteams: Array
+        subteams: Array,
+        team: Object,
     },
     components: {
         AppLayout,
@@ -276,8 +277,8 @@ export default {
                 status: this.activity?.status ?? 'Draft',
                 title: this.activity?.title ?? null,
                 content: this.activity?.content ?? null,
-                phone: this.activity?.phone ?? null,
-                email: this.activity?.email ?? null,
+                phone: this.activity ? this.activity.phone : this.team.phone,
+                email: this.activity ? this.activity.email : this.team.email,
                 times: this.activity?.times ?? null,
                 cost: this.activity?.cost ?? null,
                 address: this.activity?.address ?? '',
@@ -298,6 +299,7 @@ export default {
     watch: {
         form: {
          handler(val){
+             console.log('so dirty');
             if(!this.isDirty)
                 this.isDirty = true;
          },
@@ -305,9 +307,9 @@ export default {
       }
     },
     methods: {
-        plus_thirty_days(date) {
+        add_days(date, number) {
             let dateTime = new Date(date);
-            let futureDate = new Date(dateTime.setDate(dateTime.getDate() + 90));
+            let futureDate = new Date(dateTime.setDate(dateTime.getDate() + number));
             return futureDate.toLocaleDateString('en-UK', { year: 'numeric', month: 'long', day: 'numeric' });
         },
         getAddressData(addressData, placeResultData, id) {

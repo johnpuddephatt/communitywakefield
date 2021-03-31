@@ -4,19 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CourseRequest;
 use App\Models\Course;
+use App\Models\Category;
+use App\Models\Accessibility;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Gate;
+
+use Redirect;
 
 class CourseController extends Controller
 {
+
     /**
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $courses = Course::all();
+        $this->authorize('viewAny', Course::class);
 
-        return view('course.index', compact('courses'));
+        return Inertia::render('Courses/Index', [
+            'courses' => \Auth::user()->currentTeam->courses()->with('subteam:id,name')->get()
+        ]);;
+
     }
 
     /**
@@ -25,7 +35,13 @@ class CourseController extends Controller
      */
     public function create(Request $request)
     {
-        return view('course.create');
+        $this->authorize('create', Course::class);
+
+        return Inertia::render('Courses/Form', [
+            'categories' => Category::select('id','title')->get(),
+            'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get(),
+            'team' => \Auth::user()->currentTeam()->select('name','phone','email')->first()
+        ]);
     }
 
     /**
@@ -34,11 +50,14 @@ class CourseController extends Controller
      */
     public function store(CourseRequest $request)
     {
-        $course = Course::create($request->validated());
+        $this->authorize('create', Course::class);
 
-        $request->session()->flash('course.id', $course->id);
+        $course = Course::create(array_merge($request->validated(), ['created_by' => \Auth::user()->id]));
+        $course->categories()->sync($request->categories);
 
-        return redirect()->route('course.index');
+        return Redirect::route('course.edit', [
+            'course' => $course
+        ]);
     }
 
     /**
@@ -48,7 +67,9 @@ class CourseController extends Controller
      */
     public function show(Request $request, Course $course)
     {
-        return view('course.show', compact('course'));
+        // return Inertia::render('Courses/Form', [
+        //     'course' => $course
+        // ]);
     }
 
     /**
@@ -56,9 +77,17 @@ class CourseController extends Controller
      * @param \App\Models\Course $course
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Course $course)
+    public function edit(Course $course)
     {
-        return view('course.edit', compact('course'));
+        $this->authorize('update', $course);
+
+        $course->categories = $course->categories()->allRelatedIds()->toArray();
+
+        return Inertia::render('Courses/Form', [
+            'course' => $course,
+            'categories' => Category::select('id','title')->get(),
+            'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get()
+        ]);
     }
 
     /**
@@ -68,11 +97,13 @@ class CourseController extends Controller
      */
     public function update(CourseRequest $request, Course $course)
     {
+        $this->authorize('update', $course);
+
         $course->update($request->validated());
+        $course->categories()->sync($request->categories);
+        $course->update(['updated_by' => \Auth::user()->id]);
 
-        $request->session()->flash('course.id', $course->id);
-
-        return redirect()->route('course.index');
+        return Redirect::route('course.edit', compact('course'));
     }
 
     /**
@@ -82,8 +113,25 @@ class CourseController extends Controller
      */
     public function destroy(Request $request, Course $course)
     {
-        $course->delete();
+        $this->authorize('delete', $course);
 
-        return redirect()->route('course.index');
+        $course->delete();
+        return Redirect::route('courses.show');
+    }
+
+    public function destroyAll(Request $request, $course_ids)
+    {
+        $course_ids_array = explode('-', $course_ids);
+        $courses_query = Course::whereIn('id', $course_ids_array);
+
+        $courses = $courses_query->get();
+
+        foreach($courses as $course) {
+            $this->authorize('delete', $course);
+        }
+
+        $courses_query->delete();
+
+        return Redirect::route('courses.show');
     }
 }

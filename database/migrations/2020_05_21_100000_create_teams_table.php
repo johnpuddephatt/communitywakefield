@@ -17,7 +17,13 @@ class CreateTeamsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->index();
             $table->string('name');
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('website')->nullable();
+            $table->string('auto_join')->nullable();
+            $table->text('info')->nullable();
             $table->boolean('personal_team');
+            $table->text('logo')->nullable();
             $table->timestamps();
         });
     }

@@ -44,13 +44,14 @@ class JetstreamServiceProvider extends ServiceProvider
         Jetstream::deleteUsersUsing(DeleteUser::class);
 
         Jetstream::inertia()->whenRendering(
-        'Teams/Show',
-        function (Request $request, array $data) {
-            $data['team']->load('subteams');
-            $data['permissions']['canManageSubteams'] = Gate::check('manageSubteam', $data['team']);
-            return $data;
-        }
-    );
+            'Teams/Show',
+            function (Request $request, array $data) {
+                $data['team']->load('subteams');
+                $data['teamRequests'] = $data['team']->teamRequests()->with('user:id,name,email,profile_photo_path')->get();
+                $data['permissions']['canManageSubteams'] = Gate::check('manageSubteam', $data['team']);
+                return $data;
+            }
+        );
     }
 
     /**

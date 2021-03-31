@@ -10,9 +10,25 @@ module.exports = {
 
     theme: {
         extend: {
-            fontFamily: {
-                sans: ['Inter', ...defaultTheme.fontFamily.sans],
+            colors: {
+              'spruce': '#335057',
+              'navy': '#3267AE',
+              'fuschia': '#f9c2f4',
+              'brand-green-bright': '#86e4af',
+              'brand-red': '#c34f6f',
+              'brand-orange': '#e2753f',
+              'brand-blue-light': '#d1eafb'
             },
+            fontFamily: {
+                sans: ['Yantramanav', ...defaultTheme.fontFamily.sans],
+            },
+            backgroundImage: theme => ({
+             'badges-splash': "url('/images/badges-splash.svg')",
+             'badges': "url('/images/badges.svg')"
+            }),
+            backgroundSize: {
+              'cover-width': '100% auto',
+             }
         },
     },
 

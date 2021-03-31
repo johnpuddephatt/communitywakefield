@@ -21,9 +21,11 @@ class AddTeamMember implements AddsTeamMembers
      * @param  string|null  $role
      * @return void
      */
-    public function add($user, $team, string $email, string $role = null)
+    public function add($user, $team, string $email, string $role = null, $overrideGate = false)
     {
-        Gate::forUser($user)->authorize('addTeamMember', $team);
+        if(!$overrideGate) {
+            Gate::forUser($user)->authorize('addTeamMember', $team);
+        }
 
         $this->validate($team, $email, $role);
 

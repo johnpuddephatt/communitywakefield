@@ -25,15 +25,17 @@ class ServiceRequest extends FormRequest
     {
         return [
             'team_id' => ['required', 'integer', 'exists:teams,id'],
+            'subteam_id' => ['nullable', 'integer', 'exists:subteams,id'],
             'display_until' => ['nullable', 'date'],
             'status' => ['required', 'in:Published,Draft'],
             'title' => ['required', 'string', 'max:400'],
-            'slug' => ['required', 'string', 'max:400'],
+            'slug' => ['nullable', 'string', 'max:400'],
             'content' => ['required', 'string'],
             'phone' => ['nullable', 'string', 'max:20'],
             'email' => ['nullable', 'email', 'max:60'],
-            'from_home' => ['nullable', 'boolean','default:false'],
+            'from_home' => ['nullable', 'boolean'],
             'address' => ['nullable'],
+            'postcode' => ['nullable'],
             'address_ward' => ['nullable', 'string', 'max:100'],
             'latitude' => ['nullable', 'numeric'],
             'longitude' => ['nullable', 'numeric'],
@@ -43,7 +45,7 @@ class ServiceRequest extends FormRequest
             'maximum_age' => ['nullable', 'integer'],
             'cost' => ['nullable', 'string', 'max:400'],
             'what_to_bring' => ['nullable', 'string', 'max:400'],
-            'booking_link' => ['nullable', 'url', 'max:200'],
+            'booking_link' => ['nullable', 'max:200'],
             'booking_instructions' => ['nullable', 'string', 'max:400'],
         ];
     }
