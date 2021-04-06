@@ -17,7 +17,7 @@ class CreateServiceSuitabilitiesPivotTable extends Migration
             $table->unsignedBigInteger('service_id');
             $table->foreign('service_id')->references('id')->on('services');
             $table->unsignedBigInteger('service_suitability_id');
-            $table->foreign('service_suitability_id')->references('id')->on('service_suitabilities');
+            $table->foreign('service_suitability_id', 's_s_id_foreign')->references('id')->on('service_suitabilities');
         });
     }
 

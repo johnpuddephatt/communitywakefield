@@ -14,6 +14,12 @@
                     <jet-section-border />
                 </div>
 
+                <div>
+                    <update-notification-emails-form :user="$page.props.user" :notification_emails="notification_emails" />
+
+                    <jet-section-border />
+                </div>
+
                 <div v-if="$page.props.jetstream.canUpdatePassword">
                     <update-password-form class="mt-10 sm:mt-0" />
 
@@ -46,9 +52,10 @@
     import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
     import UpdatePasswordForm from './UpdatePasswordForm'
     import UpdateProfileInformationForm from './UpdateProfileInformationForm'
+    import UpdateNotificationEmailsForm from './UpdateNotificationEmailsForm'
 
     export default {
-        props: ['sessions'],
+        props: ['sessions', 'notification_emails'],
 
         components: {
             AppLayout,
@@ -57,6 +64,7 @@
             LogoutOtherBrowserSessionsForm,
             TwoFactorAuthenticationForm,
             UpdatePasswordForm,
+            UpdateNotificationEmailsForm,
             UpdateProfileInformationForm,
         },
     }

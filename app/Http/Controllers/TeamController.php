@@ -5,6 +5,9 @@ use App\Models\Team;
 use App\Models\TeamRequest;
 use Illuminate\Http\Request;
 use App\Actions\Jetstream\AddTeamMember;
+use App\Events\TeamMemberRequestReceived;
+use App\Events\TeamMemberRequestApproved;
+
 use Inertia\Inertia;
 use Gate;
 
@@ -23,6 +26,8 @@ class TeamController extends Controller
             'team_id' => $team->id,
         ]);
 
+        TeamMemberRequestReceived::dispatch(\Auth::user(), $team);
+
         return redirect()->back();
     }
 
@@ -30,8 +35,8 @@ class TeamController extends Controller
         $action = new AddTeamMember;
         $action->add(\Auth::user(), $team, $teamRequest->user->email, 'editor');
         $teamRequest->user->switchTeam($team);
-
         $teamRequest->delete();
+        TeamMemberRequestApproved::dispatch(\Auth::user(), $team);
 
         return redirect()->back();
     }

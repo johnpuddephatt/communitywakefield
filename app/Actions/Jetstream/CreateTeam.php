@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Events\AddingTeam;
+use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Jetstream;
 
 class CreateTeam implements CreatesTeams
@@ -55,6 +56,8 @@ class CreateTeam implements CreatesTeams
         ]);
 
         \Auth::user()->switchTeam($team);
+
+        TeamCreated::dispatch($team);
 
         return $team;
     }

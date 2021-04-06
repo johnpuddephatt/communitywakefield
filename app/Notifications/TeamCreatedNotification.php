@@ -1,33 +1,30 @@
 <?php
 
-namespace App\Notification;
+namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Notifications\Notification;
 
-class EnquiryNotification extends Notification
+class TeamCreatedNotification extends Notification
 {
-    use Queueable, SerializesModels;
-
-    public $enquiry;
+    use Queueable;
 
     /**
-     * Create a new message instance.
+     * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($enquiry)
+    public function __construct()
     {
-        $this->enquiry = $enquiry;
+        //
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -38,21 +35,21 @@ class EnquiryNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', 'https://laravel.com')
-            ->line('Thank you for using our application!');
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

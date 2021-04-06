@@ -52,6 +52,15 @@ class JetstreamServiceProvider extends ServiceProvider
                 return $data;
             }
         );
+
+        Jetstream::inertia()->whenRendering(
+            'Profile/Show',
+            function (Request $request, array $data) {
+                return array_merge($data, [
+                    'notification_emails' => \App\Models\User::$notificationEmails
+                ]);
+            }
+        );
     }
 
     /**

@@ -33,7 +33,7 @@
 
                 <div class="ml-12">
                     <div class="mt-2 text-sm text-gray-500">
-                        Laravel has wonderful documentation covering every aspect of the framework. Whether you're new to the framework or have previous experience, we recommend reading all of the documentation from beginning to end.
+                        We’ve put together information to help you and your team get the most out of Community Wakefield. Our documentation is designed to help you if you run into problems, as well as to be a useful training resource for new members of your team.
                     </div>
 
                     <a href="https://laravel.com/docs">
@@ -56,7 +56,7 @@
 
                 <div class="ml-12">
                     <div class="mt-2 text-sm text-gray-500">
-                        Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
+                        We know members of the public find it frustrating when information they find online is innaccurate or out of date. Community Wakefield helps you keep your listings current by reminding you when it’s time to review them.
                     </div>
 
                     <a href="https://laracasts.com">
@@ -74,12 +74,12 @@
             <div class="p-6 border-t border-gray-200">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-brand-green-bright"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                    <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">Manage multiple teams in one place</div>
+                    <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">Manage everything in one place</div>
                 </div>
 
                 <div class="ml-12">
                     <div class="mt-2 text-sm text-gray-500">
-                        Laravel Jetstream is built with Tailwind, an amazing utility first CSS framework that doesn't get in your way. You'll be amazed how easily you can build and maintain fresh, modern designs with this wonderful framework at your fingertips.
+                        Community Wakefield makes it easy for multiple members of your team to manage listings, and allows you to manage listings for multiple teams from one account. Create subteams to manage listings belonging to different departments or services within your organisation.
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
 
                 <div class="ml-12">
                     <div class="mt-2 text-sm text-gray-500">
-                        Authentication and registration views are included with Laravel Jetstream, as well as support for user email verification and resetting forgotten passwords. So, you're free to get started what matters most: building your application.
+                        Later this year we’re planning to roll out functionality that allows you to list information from Community Wakefield on your own website. That means you can add details of what you offer in once place and know it’s kept up to date everywhere.
                     </div>
                 </div>
             </div>

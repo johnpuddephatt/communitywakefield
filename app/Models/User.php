@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'notification_emails'
     ];
 
     /**
@@ -49,6 +50,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'notification_emails' => AsArrayObject::class
     ];
 
     /**
@@ -58,6 +60,16 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+    ];
+
+    public static $notificationEmails = [
+        'TeamMemberAutojoined' => 'Someone automatically joins a team I administer',
+        'TeamMemberRequestReceived' => 'Someone requests to join a team I administer',
+        'TeamMemberRequestApproved' => 'My request to join a team has been approved',
+        'EntryExpiresSoon' => 'One of my listings will expire soon',
+        'EntryExpired' => 'One of my listings has expired',
+        'EntryReported' => 'An inaccuracy has been reported in one of my listings',
+        'EnquiryCreated' => 'An enquiry has been received about one of my listings',
     ];
 
     public function teamRequests()

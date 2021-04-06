@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Events\TeamMemberAutojoined;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -31,15 +32,11 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
 
         return DB::transaction(function () use ($input) {
-            // return User::create([
-            //     'name' => $input['name'],
-            //     'email' => $input['email'],
-            //     'password' => Hash::make($input['password']),
-            // ]);
             return tap(User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
+                'notification_emails' => array_keys(\App\Models\User::$notificationEmails),
             ]), function (User $user) {
                 $this->autoJoinTeams($user);
             });
@@ -50,10 +47,11 @@ class CreateNewUser implements CreatesNewUsers
         $email_domain = explode('@',$user->email)[1];
         $auto_join_teams = Team::where('auto_join', $email_domain)->get();
 
-        foreach($auto_join_teams as $auto_join_team) {
+        foreach($auto_join_teams as $team) {
             $action = new AddTeamMember;
-            $action->add($user, $auto_join_team, $user->email, 'editor', true);
-            $user->switchTeam($auto_join_team);
+            $action->add($user, $team, $user->email, 'editor', true);
+            $user->switchTeam($team);
+            TeamMemberAutojoined::dispatch($user, $team);
         }
     }
 

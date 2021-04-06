@@ -24,7 +24,7 @@
 
                     <div class="ml-4 mr-8 relative">
                         <!-- Notifications Dropdown -->
-                        <jet-dropdown align="right" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
+                        <jet-dropdown align="right" width="60">
                             <template #trigger>
                                 <span class="inline-flex rounded-md">
                                     <button title="Notifications" type="button" class="inline-flex items-center px-3 py-3 rounded-full border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
@@ -35,8 +35,12 @@
                                 </span>
                             </template>
 
-                            <template #content>
-                                <div class="w-60 px-4 py-6 text-sm">
+                            <template class="px-0" #content>
+                                <div v-for="notification in $page.props.notifications" class="border-b w-60 px-4 py-2 text-xs">
+                                    <p>{{ notification.data.title }}</p>
+                                    <inertia-link class="text-blue-800 text-right" v-if="notification.data.action" :href="notification.data.action.url">{{notification.data.action.text}}</inertia-link>
+                                </div>
+                                <div v-if="!$page.props.notifications.length" class="w-60 px-4 py-6 text-sm">
                                     No notifications to show you!
                                 </div>
                             </template>

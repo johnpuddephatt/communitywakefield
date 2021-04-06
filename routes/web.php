@@ -69,6 +69,8 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
         Route::post('team/{team}/request', [App\Http\Controllers\TeamController::class, 'request'])->name('teams.request');
         Route::post('team/{team}/request/{teamRequest}/approve', [App\Http\Controllers\TeamController::class, 'approveRequest'])->name('teams.approveRequest');
 
+        Route::put('user/update-notification-emails', [App\Http\Controllers\NotificationEmailController::class, 'update'])->name('user-notification-emails.update');
+
     });
 });
 
