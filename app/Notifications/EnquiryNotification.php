@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Queue\SerializesModels;
 
-class EnquiryNotificationNotification extends Notification
+class EnquiryNotification extends Notification
 {
     use Queueable, SerializesModels;
 

@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Join or create a team
+                Join or create an organisation
             </h2>
         </template>
 

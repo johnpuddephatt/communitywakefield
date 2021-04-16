@@ -1,17 +1,17 @@
 <template>
     <jet-form-section>
         <template #title>
-            Join an existing team
+            Join an existing organisation
         </template>
 
         <template #description>
-            Request to join a team that already exists
+            Request to join an organisation that already exists
         </template>
 
         <template #form>
 
             <div class="col-span-6 sm:col-span-6">
-                <jet-label for="name" value="Team Name" />
+                <jet-label for="name" value="Organisation Name" />
                 <jet-search @join-request="joinRequest" :options="teams" :selected="requests" label="name" id="name" class="mt-1" autofocus />
             </div>
 
@@ -52,7 +52,7 @@
                     preserveScroll: true,
                     onSuccess: () => {
                         this.$page.props.jetstream.flash = {
-                            banner: 'Your request to join this team has been sent. You’ll receive an email if it’s approved.',
+                            banner: 'Your request to join this organisation has been sent. You’ll receive an email if it’s approved.',
                             bannerStyle: 'success'
                         }
                     }

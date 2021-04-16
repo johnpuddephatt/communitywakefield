@@ -98,7 +98,7 @@ class Service extends Model
     }
 
     public function suitabilities() {
-        return $this->belongsToMany(\App\Models\ServiceSuitability::class, 'service_suitabilities_pivot');
+        return $this->morphToMany(\App\Models\Suitability::class, 'suitable');
     }
 
 }

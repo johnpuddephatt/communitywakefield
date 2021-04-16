@@ -38,7 +38,7 @@ class CourseController extends Controller
         $this->authorize('create', Course::class);
 
         return Inertia::render('Courses/Form', [
-            'categories' => Category::select('id','title')->get(),
+            'categories' => Category::where('type', 'course')->orWhere('type', null)->select('id','title')->get(),
             'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get(),
             'team' => \Auth::user()->currentTeam()->select('name','phone','email')->first()
         ]);
@@ -85,7 +85,7 @@ class CourseController extends Controller
 
         return Inertia::render('Courses/Form', [
             'course' => $course,
-            'categories' => Category::select('id','title')->get(),
+            'categories' => Category::where('type', 'course')->orWhere('type', null)->select('id','title')->get(),
             'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get()
         ]);
     }

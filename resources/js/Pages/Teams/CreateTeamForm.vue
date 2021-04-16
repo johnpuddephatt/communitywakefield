@@ -1,17 +1,17 @@
 <template>
     <jet-form-section @submitted="createTeam">
         <template #title>
-            Create a new team
+            Create a new organisation
         </template>
 
         <template #description>
-            Create a new team to collaborate with others on projects.
+            You can manage multiple organisations from one account.
         </template>
 
         <template #form>
 
             <div class="col-span-6">
-                <jet-label value="Team Owner" />
+                <jet-label value="Organisation Owner" />
 
                 <div class="flex items-center mt-2">
                     <img class="w-12 h-12 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
@@ -24,13 +24,13 @@
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="name" value="Team Name" />
+                <jet-label for="name" value="Organisation Name" />
                 <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus />
                 <jet-input-error :message="form.errors.name" class="mt-2" />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="logo" value="Team logo" />
+                <jet-label for="logo" value="Organisation logo" />
                 <jet-croppie v-model="form.logo"></jet-croppie>
             </div>
 
@@ -63,7 +63,7 @@
                     <jet-checkbox id="auto_join" :value="true" v-model="form.auto_join"/>
                     <jet-label class="ml-2" for="auto_join" :value="`Allow anyone with a matching email to join automatically`" />
                 </div>
-                <p v-if="emailDomain" class="ml-6 text-xs text-gray-700 mt-1 font-italic">Enable to allow anyone with an email ending <span class="bg-green-100 rounded-sm">@{{ emailDomain}}</span> to join this team automatically. Only enable this if the contact email above uses a domain that your organisation owns.</p>
+                <p v-if="emailDomain" class="ml-6 text-xs text-gray-700 mt-1 font-italic">Enable to allow anyone with an email ending <span class="bg-green-100 rounded-sm">@{{ emailDomain}}</span> to join this organisation automatically. Only enable this if the contact email above uses a domain that your organisation owns.</p>
                 <jet-input-error :message="form.errors.auto_join" class="mt-2" />
             </div>
 
@@ -124,7 +124,7 @@
                     preserveScroll: true,
                     onSuccess: () => {
                         this.$page.props.jetstream.flash = {
-                            banner: 'Your new team has been created!',
+                            banner: 'Your new organisation has been created!',
                             bannerStyle: 'success'
                         }
                         this.isDirty = false;

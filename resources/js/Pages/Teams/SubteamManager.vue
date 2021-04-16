@@ -6,17 +6,17 @@
             <!-- Add Team Member -->
             <jet-form-section @submitted="addSubteam">
                 <template #title>
-                    Add subteam
+                    Add a department
                 </template>
 
                 <template #description>
-                    Add a new subteam to your team.
+                    Add a new department to your organisation.
                 </template>
 
                 <template #form>
                     <div class="col-span-6">
                         <div class="max-w-xl text-sm text-gray-600">
-                            Please provide the name of the subteam you would like to add to this team.
+                            Please provide the name of the department you would like to add to this organisation.
                         </div>
                     </div>
 
@@ -49,11 +49,11 @@
             <!-- Manage Subteams -->
             <jet-action-section class="mt-10 sm:mt-0">
                 <template #title>
-                    Subteams
+                    Departments
                 </template>
 
                 <template #description>
-                    All of the subteams that are part of this team.
+                    All of the departments that are part of this organisation.
                 </template>
 
                 <!-- Subteam List -->
@@ -83,11 +83,11 @@
         <!-- Remove Subteam Confirmation Modal -->
         <jet-confirmation-modal :show="subteamBeingRemoved" @close="subteamBeingRemoved = null">
             <template #title>
-                Remove Subteam
+                Remove department
             </template>
 
             <template #content>
-                Are you sure you would like to remove this subteam from the team?
+                Are you sure you would like to remove this department from the organisation?
             </template>
 
             <template #footer>

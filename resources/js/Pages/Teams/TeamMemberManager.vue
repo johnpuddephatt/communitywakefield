@@ -6,17 +6,17 @@
             <!-- Add Team Member -->
             <jet-form-section @submitted="addTeamMember">
                 <template #title>
-                    Add Team Member
+                    Add Organisation Member
                 </template>
 
                 <template #description>
-                    Add a new team member to your team, allowing them to collaborate with you.
+                    Add a new member to your organisation, allowing them to manage listings for this organisation.
                 </template>
 
                 <template #form>
                     <div class="col-span-6">
                         <div class="max-w-xl text-sm text-gray-600">
-                            Please provide the email address of the person you would like to add to this team.
+                            Please provide the email address of the person you would like to add to this organisation.
                         </div>
                     </div>
 
@@ -76,11 +76,11 @@
             <!-- Team Member Invitations -->
             <jet-action-section class="mt-10 sm:mt-0">
                 <template #title>
-                    Pending Team Invitations
+                    Pending Organisation Invitations
                 </template>
 
                 <template #description>
-                    These people have been invited to your team and have been sent an invitation email. They may join the team by accepting the email invitation.
+                    These people have been invited to your organisation and have been sent an invitation email. They may join the organisation by accepting the email invitation.
                 </template>
 
                 <!-- Pending Team Member Invitation List -->
@@ -109,11 +109,11 @@
             <!-- Manage Team Members -->
             <jet-action-section class="mt-10 sm:mt-0">
                 <template #title>
-                    Team Members
+                    Organisation Members
                 </template>
 
                 <template #description>
-                    All of the people that are part of this team.
+                    All of the people that are part of this organisation.
                 </template>
 
                 <!-- Team Member List -->
@@ -225,11 +225,11 @@
         <!-- Leave Team Confirmation Modal -->
         <jet-confirmation-modal :show="confirmingLeavingTeam" @close="confirmingLeavingTeam = false">
             <template #title>
-                Leave Team
+                Leave Organisation
             </template>
 
             <template #content>
-                Are you sure you would like to leave this team?
+                Are you sure you would like to leave this organisation?
             </template>
 
             <template #footer>
@@ -246,11 +246,11 @@
         <!-- Remove Team Member Confirmation Modal -->
         <jet-confirmation-modal :show="teamMemberBeingRemoved" @close="teamMemberBeingRemoved = null">
             <template #title>
-                Remove Team Member
+                Remove Organisation Member
             </template>
 
             <template #content>
-                Are you sure you would like to remove this person from the team?
+                Are you sure you would like to remove this person from the organisation?
             </template>
 
             <template #footer>

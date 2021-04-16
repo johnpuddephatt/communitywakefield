@@ -38,7 +38,7 @@ class ActivityController extends Controller
         $this->authorize('create', Activity::class);
 
         return Inertia::render('Activities/Form', [
-            'categories' => Category::select('id','title')->get(),
+            'categories' => Category::where('type', 'activity')->orWhere('type', null)->select('id','title')->get(),
             'accessibilities' => Accessibility::select('id','title')->get(),
             'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get(),
             'team' => \Auth::user()->currentTeam()->select('name','phone','email')->first()
@@ -88,7 +88,7 @@ class ActivityController extends Controller
 
         return Inertia::render('Activities/Form', [
             'activity' => $activity,
-            'categories' => Category::select('id','title')->get(),
+            'categories' => Category::where('type', 'activity')->orWhere('type', null)->select('id','title')->get(),
             'accessibilities' => Accessibility::select('id','title')->get(),
             'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get()
         ]);

@@ -6,11 +6,11 @@
             <!-- Add Team Member -->
             <jet-action-section>
                 <template #title>
-                    Team Join Requests
+                    Organisation Join Requests
                 </template>
 
                 <template #description>
-                    Requests to join your team will be shown here.
+                    Requests to join your organisation will be shown here.
                 </template>
 
                 <template #content>
@@ -84,7 +84,7 @@
                     errorBag: 'approveTeamRequest',
                     preserveScroll: true,
                     onSuccess: () => this.$page.props.jetstream.flash = {
-                        banner: 'The request to join your team has been approved.',
+                        banner: 'The request to join your organisation has been approved.',
                         bannerStyle: 'success'
                     }
                 });

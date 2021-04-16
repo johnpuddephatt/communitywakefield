@@ -23,8 +23,8 @@
     </div>
 
     <div v-show="isOpen || expand" ref="dropdown" :class="expand ? 'cursor-pointer relative w-full h-32 overflow-y-auto border border-gray-300 bg-white text-left sm:text-sm sm:leading-5' : 'z-30 absolute mt-1 w-full bg-white shadow-lg max-h-56 py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5'">
-        <button @keydown.tab.exact="checkIfShouldClose(key)" @keydown.shift.tab="checkIfShouldCloseReverse(key)" @click.prevent="toggle(option)" role="option" v-for="(option, key) in options" v-bind:key="isSimple ? option : option[identifier]" class="w-full text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9  cursor-pointer hover:text-white hover:bg-indigo-600 focus:outline-none focus:text-white focus:bg-indigo-600 flex items-center space-x-3">
-            <span class="block truncate" v-bind:class="{ 'font-normal' : !isSelected(option) , 'font-semibold' : isSelected(option)}">
+        <button @keydown.tab.exact="checkIfShouldClose(key)" @keydown.shift.tab="checkIfShouldCloseReverse(key)" @click.prevent="toggle(option)" role="option" v-for="(option, key) in options" v-bind:key="isSimple ? option : option[identifier]" class="w-full text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9  cursor-pointer hover:text-white hover:bg-indigo-600 focus:outline-none focus:text-white focus:bg-indigo-600 flex items-center space-x-3" :class="{ 'font-normal' : !isSelected(option) , 'font-semibold bg-indigo-50' : isSelected(option)}">
+            <span class="block truncate">
                 {{ isSimple ? option : option[label] }}
             </span>
 

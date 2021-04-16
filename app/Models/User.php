@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Filament\Models\Concerns\IsFilamentUser;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -13,14 +15,18 @@ use Laravel\Jetstream\HasProfilePhoto;
 use App\Traits\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
+    use IsFilamentUser;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
+
+
+    public static $filamentUserColumn = 'is_admin';
 
     /**
      * The attributes that are mass assignable.

@@ -28,20 +28,4 @@ return [
         'Access to a computer',
         'References'
     ],
-
-    'skills' => [
-        'Creative',
-        'Catering',
-        'Decorating & carpentry',
-        'Design',
-        'IT / Computers',
-        'Leadership',
-        'Listening',
-        'Maths/Numeracy',
-        'Organising',
-        'Photography',
-        'Reading & writing',
-        'Talking to others',
-        'Teamwork'
-    ]
 ];

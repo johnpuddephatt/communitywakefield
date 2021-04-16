@@ -29,6 +29,7 @@ class CategoryRequest extends FormRequest
             'icon' => ['nullable', 'string'],
             'image' => ['nullable', 'string', 'max:200'],
             'colour' => ['nullable', 'string', 'max:7'],
+            'type' => ['nullable', 'string', 'max:30'],
         ];
     }
 }

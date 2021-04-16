@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Filament\Filament;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Filament::ignoreMigrations();
+
     }
 
     /**

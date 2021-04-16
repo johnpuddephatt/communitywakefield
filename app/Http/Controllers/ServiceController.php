@@ -6,7 +6,7 @@ use App\Http\Requests\ServiceRequest;
 use App\Models\Service;
 use App\Models\Category;
 use App\Models\Accessibility;
-use App\Models\ServiceSuitability;
+use App\Models\Suitability;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Gate;
@@ -39,9 +39,9 @@ class ServiceController extends Controller
         $this->authorize('create', Service::class);
 
         return Inertia::render('Services/Form', [
-            'categories' => Category::select('id','title')->get(),
+            'categories' => Category::where('type', 'service')->orWhere('type', null)->select('id','title')->get(),
             'accessibilities' => Accessibility::select('id','title')->get(),
-            'suitabilities' => ServiceSuitability::select('id','title')->get(),
+            'suitabilities' => Suitability::where('type', 'service')->orWhere('type', null)->select('id','title')->get(),
             'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get(),
             'team' => \Auth::user()->currentTeam()->select('name','phone','email')->first()
         ]);
@@ -94,9 +94,9 @@ class ServiceController extends Controller
 
         return Inertia::render('Services/Form', [
             'service' => $service,
-            'categories' => Category::select('id','title')->get(),
+            'categories' => Category::where('type', 'service')->orWhere('type', null)->select('id','title')->get(),
             'accessibilities' => Accessibility::select('id','title')->get(),
-            'suitabilities' => ServiceSuitability::select('id','title')->get(),
+            'suitabilities' => Suitability::where('type', 'service')->orWhere('type', null)->select('id','title')->get(),
             'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get()
         ]);
     }

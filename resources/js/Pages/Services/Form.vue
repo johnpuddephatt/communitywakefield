@@ -28,31 +28,35 @@
                     </template>
 
                     <template #description>
-                        Description
+                        Provide the name of your service, choose a category and provide a description.
                     </template>
 
                     <template #form>
+
+                        <div class="col-span-6 sm:col-span-6">
+                            <jet-label for="title" value="Title" />
+                            <jet-input id="title" type="text" class="mt-1 block w-full text-2xl" v-model="form.title" />
+                            <jet-input-error :message="form.errors.title" class="mt-2" />
+                        </div>
+
+                        <div v-if="subteams.length" class="col-span-6 sm:col-span-6">
+                            <jet-label for="subteam" value="Department" />
+                            <jet-multiselect label="name" identifier="id" :options="subteams" id="subteam" class="mt-1 block w-full text-2xl" v-model="form.subteam_id" />
+                            <jet-input-error :message="form.errors.subteam_id" class="mt-2" />
+                        </div>
 
                         <div class="col-span-6 sm:col-span-6">
                             <jet-label for="categories" value="Categories" />
                             <jet-multiselect label="title" :multiple="true" identifier="id" :options="categories" id="categories" class="mt-1 block w-full text-2xl" v-model="form.categories" />
                             <jet-input-error :message="form.errors.categories" class="mt-2" />
                         </div>
-                        <div class="col-span-6 sm:col-span-6">
-                            <jet-label for="title" value="Title" />
-                            <jet-input id="title" type="text" class="mt-1 block w-full text-2xl" v-model="form.title" />
-                            <jet-input-error :message="form.errors.title" class="mt-2" />
-                        </div>
-                        <div v-if="subteams.length" class="col-span-6 sm:col-span-6">
-                            <jet-label for="subteam" value="Subteam" />
-                            <jet-multiselect label="name" identifier="id" :options="subteams" id="subteam" class="mt-1 block w-full text-2xl" v-model="form.subteam_id" />
-                            <jet-input-error :message="form.errors.subteam_id" class="mt-2" />
-                        </div>
+
                         <div class="col-span-6 sm:col-span-6">
                             <jet-label for="content" value="Description" />
                             <jet-tip-tap id="content" v-model="form.content" />
                             <jet-input-error :message="form.errors.content" class="mt-2" />
                         </div>
+
                         <div class="col-span-6 sm:col-span-6">
                             <jet-label for="suitabilities" value="Who is your service suitable for?" />
                             <jet-multiselect :multiple="true" :expand="true" label="title" identifier="id" :options="suitabilities" id="suitabilities" class="mt-1 block w-full text-2xl" v-model="form.suitabilities" />
@@ -67,7 +71,7 @@
                     </template>
 
                     <template #description>
-                        Description
+                        Provide contact details for your service. These are optional but will be shown publicly on the listing if provided.
                     </template>
 
                     <template #form>
@@ -90,12 +94,12 @@
                     </template>
 
                     <template #description>
-                        Description
+                        Let people know when your service takes place, as well as the cost if applicable.
                     </template>
 
                     <template #form>
                         <div class="col-span-6 sm:col-span-4">
-                            <jet-label for="times" value="Times" />
+                            <jet-label for="times" value="Times/Dates" />
                             <jet-textarea id="times" class="mt-1 block w-full" v-model="form.times" />
                             <jet-input-error :message="form.errors.times" class="mt-2" />
                         </div>
@@ -113,7 +117,8 @@
                     </template>
 
                     <template #description>
-                        Description
+                        Provide the location of your service. Letting people know how to get there can be helpful.
+
                     </template>
 
                     <template #form>
@@ -150,7 +155,7 @@
                     </template>
 
                     <template #description>
-                        Description
+                        If applicable, let people know how they can book this service.
                     </template>
 
                     <template #form>
@@ -173,7 +178,7 @@
                     </template>
 
                     <template #description>
-                        Description
+                        Provide details on who this service is suitable for and what to bring.
                     </template>
 
                     <template #form>

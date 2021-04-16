@@ -6,7 +6,7 @@ use App\Http\Requests\VolunteeringRequest;
 use App\Models\Volunteering;
 use App\Models\Category;
 use App\Models\Accessibility;
-use App\Models\VolunteeringSuitability;
+use App\Models\Suitability;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Gate;
@@ -39,9 +39,9 @@ class VolunteeringController extends Controller
         $this->authorize('create', Volunteering::class);
 
         return Inertia::render('Volunteering/Form', [
-            'categories' => Category::select('id','title')->get(),
+            'categories' => Category::where('type', 'volunteering')->orWhere('type', null)->select('id','title')->get(),
             'accessibilities' => Accessibility::select('id','title')->get(),
-            'suitabilities' => VolunteeringSuitability::select('id','title')->get(),
+            'suitabilities' => Suitability::where('type', 'volunteering')->orWhere('type', null)->select('id','title')->get(),
             'requirements' => config('system.requirements'),
             'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get(),
             'team' => \Auth::user()->currentTeam()->select('name','phone','email')->first()
@@ -94,10 +94,10 @@ class VolunteeringController extends Controller
 
         return Inertia::render('Volunteering/Form', [
             'volunteering' => $volunteering,
-            'categories' => Category::select('id','title')->get(),
+            'categories' => Category::where('type', 'volunteering')->orWhere('type', null)->select('id','title')->get(),
             'accessibilities' => Accessibility::select('id','title')->get(),
-            'suitabilities' => VolunteeringSuitability::select('id','title')->get(),
             'requirements' => config('system.requirements'),
+            'suitabilities' => Suitability::where('type', 'volunteering')->orWhere('type', null)->select('id','title')->get(),
             'skills' => config('system.skills'),
             'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get()
         ]);

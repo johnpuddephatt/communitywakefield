@@ -5,7 +5,7 @@
         </template>
 
         <template #description>
-            Your pending requests to join an existing team
+            Your pending requests to join an existing organisation
         </template>
 
         <template #content>

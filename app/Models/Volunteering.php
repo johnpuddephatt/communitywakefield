@@ -69,6 +69,9 @@ class Volunteering extends Model
         'deadline' => 'date',
         'minimum_age' => 'integer',
         'maximum_age' => 'integer',
+        'requirements' => 'array',
+        'skills_needed' => 'array',
+        'skills_gained' => 'array',
     ];
 
     protected static function booted() {
@@ -111,6 +114,6 @@ class Volunteering extends Model
     }
 
     public function suitabilities() {
-        return $this->belongsToMany(\App\Models\VolunteeringSuitability::class, 'volunteering_suitabilities_pivot');
+        return $this->morphToMany(\App\Models\Suitability::class, 'suitable');
     }
 }

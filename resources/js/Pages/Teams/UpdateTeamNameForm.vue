@@ -1,23 +1,23 @@
 <template>
 <jet-form-section @submitted="updateTeamName">
     <template #title>
-        Team details
+        Organisation details
     </template>
 
     <template #description>
-        Information about the team including contact details.
+        Information about the organisation including contact details.
     </template>
 
     <template #form>
 
         <div class="col-span-6 sm:col-span-4">
-            <jet-label for="name" value="Team Name" />
+            <jet-label for="name" value="Organisation Name" />
             <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus />
             <jet-input-error :message="form.errors.name" class="mt-2" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">
-            <jet-label for="logo" value="Team logo" />
+            <jet-label for="logo" value="Organisation logo" />
             <jet-croppie v-model="form.logo"></jet-croppie>
         </div>
 

@@ -58,8 +58,6 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
         Route::delete('course/destroyAll/{ids}',  [App\Http\Controllers\CourseController::class, 'destroyAll'])->name('courses.destroy');
 
 
-
-
         Route::post('teams/{team}/subteam/create',  [App\Http\Controllers\SubteamController::class, 'store'])->name('subteam.store');
         Route::delete('teams/{team}/subteams/{subteam}/destroy',  [App\Http\Controllers\SubteamController::class, 'destroy'])->name('subteam.destroy');
         Route::post('teams/{team}/subteams/{subteam}/update',  [App\Http\Controllers\SubteamController::class, 'update'])->name('subteam.update');
@@ -77,21 +75,3 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
-
-
-// Route::resource('service', App\Http\Controllers\ServiceController::class);
-//
-// Route::resource('event', App\Http\Controllers\EventController::class);
-//
-// Route::resource('volunteering-opportunity', App\Http\Controllers\VolunteeringController::class);
-//
-//
-// Route::resource('learning-opportunity', App\Http\Controllers\CourseController::class);
-//
-// Route::resource('suitability', App\Http\Controllers\SuitabilityController::class);
-//
-// Route::resource('accessibility', App\Http\Controllers\AccessibilityController::class);
-//
-// Route::resource('category', App\Http\Controllers\CategoryController::class);
-//
-// Route::resource('enquiry', App\Http\Controllers\EnquiryController::class)->only('store');

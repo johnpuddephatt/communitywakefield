@@ -106,10 +106,10 @@
 
             <!-- Team Switcher -->
             <div class="flex tracking-wider items-center font-semibold px-6 py-4 text-sm uppercase text-gray-200">
-                Teams
+                Organisations
 
                 <inertia-link class="ml-auto tracking-normal font-sm normal-case text-xs font-normal text-gray-300 hover:text-gray-200" :href="route('teams.join')">
-                    Add a team
+                    Add
                 </inertia-link>
             </div>
 

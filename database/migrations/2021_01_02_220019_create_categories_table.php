@@ -22,6 +22,7 @@ class CreateCategoriesTable extends Migration
             $table->text('icon')->nullable();
             $table->string('image', 200)->nullable();
             $table->string('colour', 7)->nullable();
+            $table->string('type', 20)->nullable();
             $table->timestamps();
         });
 

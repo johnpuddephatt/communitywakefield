@@ -46,7 +46,7 @@ class CreateTeam implements CreatesTeams
 
         $team = $user->ownedTeams()->create([
             'name' => $input['name'],
-            'logo' => Storage::url($logo_path),
+            'logo' => $logo_path,
             'website' => $input['website'],
             'phone' => $input['phone'],
             'email' => $input['email'],
