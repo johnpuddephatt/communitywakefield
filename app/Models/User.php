@@ -24,6 +24,7 @@ class User extends Authenticatable implements FilamentUser
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use MustVerifyEmail;
 
 
     public static $filamentUserColumn = 'is_admin';
