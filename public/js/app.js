@@ -1,1 +1,7 @@
-console.log("nothing happening yet");
+/******/ (() => { // webpackBootstrap
+/*!*****************************!*\
+  !*** ./resources/js/app.js ***!
+  \*****************************/
+console.log('nothing happening yet');
+/******/ })()
+;

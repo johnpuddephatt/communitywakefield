@@ -28,7 +28,7 @@
             <div class="p-6">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-brand-green-bright"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-                    <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="/docs">Documentation</a></div>
+                    <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="https://docs.communitywakefield.org">Documentation</a></div>
                 </div>
 
                 <div class="ml-12">
@@ -36,7 +36,7 @@
                         We’ve put together information to help you and your organisations get the most out of Community Wakefield. Our documentation is designed to help you if you run into problems, as well as to be a useful training resource for members of your team.
                     </div>
 
-                    <a href="/docs">
+                    <a href="https://docs.communitywakefield.org">
                         <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
                                 <div>Explore the documentation</div>
 
