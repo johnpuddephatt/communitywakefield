@@ -15,7 +15,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use App\Traits\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
     use IsFilamentUser;
     use HasApiTokens;
@@ -24,7 +24,6 @@ class User extends Authenticatable implements FilamentUser
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
-    use MustVerifyEmail;
 
 
     public static $filamentUserColumn = 'is_admin';
