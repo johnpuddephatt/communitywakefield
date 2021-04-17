@@ -78,6 +78,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         'EnquiryCreated' => 'An enquiry has been received about one of my listings',
     ];
 
+    public function scopeAdmins($query)
+    {
+        return $query->where('is_admin', true);
+    }
+
     public function teamRequests()
     {
         return $this->hasMany(\App\Models\TeamRequest::class);

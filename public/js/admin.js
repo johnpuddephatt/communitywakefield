@@ -66949,7 +66949,8 @@ var render = function() {
     { attrs: { href: "/" } },
     [
       _c("Jet-Application-Mark", {
-        staticClass: "p-4 rounded-full w-24 h-24 bg-blue-500 text-white mx-1"
+        staticClass:
+          "p-4 rounded-full w-24 h-24 bg-blue-500 text-white mx-auto mb-4"
       })
     ],
     1
@@ -69443,38 +69444,42 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("a", { attrs: { href: "/docs" } }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "mt-3 flex items-center text-sm font-semibold text-indigo-700"
-                },
-                [
-                  _c("div", [_vm._v("Explore the documentation")]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "ml-1 text-indigo-500" }, [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "w-4 h-4",
-                        attrs: { viewBox: "0 0 20 20", fill: "currentColor" }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            "fill-rule": "evenodd",
-                            d:
-                              "M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z",
-                            "clip-rule": "evenodd"
-                          }
-                        })
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ])
+            _c(
+              "a",
+              { attrs: { href: "https://docs.communitywakefield.org" } },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "mt-3 flex items-center text-sm font-semibold text-indigo-700"
+                  },
+                  [
+                    _c("div", [_vm._v("Explore the documentation")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "ml-1 text-indigo-500" }, [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "w-4 h-4",
+                          attrs: { viewBox: "0 0 20 20", fill: "currentColor" }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              "fill-rule": "evenodd",
+                              d:
+                                "M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z",
+                              "clip-rule": "evenodd"
+                            }
+                          })
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ]
+            )
           ])
         ]),
         _vm._v(" "),
@@ -69664,7 +69669,11 @@ var staticRenderFns = [
     return _c(
       "div",
       { staticClass: "ml-4 text-lg text-gray-600 leading-7 font-semibold" },
-      [_c("a", { attrs: { href: "/docs" } }, [_vm._v("Documentation")])]
+      [
+        _c("a", { attrs: { href: "https://docs.communitywakefield.org" } }, [
+          _vm._v("Documentation")
+        ])
+      ]
     )
   },
   function() {

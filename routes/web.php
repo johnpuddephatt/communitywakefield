@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::group(['middleware' => config('jetstream.middleware', ['web','verified'])], function () {
+Route::group(['prefix' => 'dashboard', 'middleware' => config('jetstream.middleware', ['web','verified'])], function () {
     Route::group(['middleware' => ['auth', 'verified']], function () {
 
         Route::resource('activity', App\Http\Controllers\ActivityController::class, [

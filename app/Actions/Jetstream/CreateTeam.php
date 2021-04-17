@@ -57,7 +57,7 @@ class CreateTeam implements CreatesTeams
 
         \Auth::user()->switchTeam($team);
 
-        TeamCreated::dispatch($team);
+        TeamCreated::dispatch($team, $user);
 
         return $team;
     }

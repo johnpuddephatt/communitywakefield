@@ -1,6 +1,6 @@
 <template>
     <a href="/" class="">
-        <Jet-Application-Mark class="p-4 rounded-full w-24 h-24 bg-blue-500 text-white mx-1"/>
+        <Jet-Application-Mark class="p-4 rounded-full w-24 h-24 bg-blue-500 text-white mx-auto mb-4"/>
     </a>
 </template>
 

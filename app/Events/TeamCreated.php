@@ -15,6 +15,7 @@ class TeamCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $user;
     public $team;
 
     /**
@@ -22,8 +23,9 @@ class TeamCreated
      *
      * @return void
      */
-    public function __construct(Team $team)
+    public function __construct(User $user, Team $team)
     {
+        $this->user = $user;
         $this->team = $team;
     }
 }
