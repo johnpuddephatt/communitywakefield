@@ -43,6 +43,7 @@ class VolunteeringController extends Controller
             'accessibilities' => Accessibility::select('id','title')->get(),
             'suitabilities' => Suitability::where('type', 'volunteering')->orWhere('type', null)->select('id','title')->get(),
             'requirements' => config('system.requirements'),
+            'skills' => config('system.skills'),
             'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get(),
             'team' => \Auth::user()->currentTeam()->select('name','phone','email')->first()
         ]);

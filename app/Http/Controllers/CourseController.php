@@ -39,6 +39,7 @@ class CourseController extends Controller
 
         return Inertia::render('Courses/Form', [
             'categories' => Category::where('type', 'course')->orWhere('type', null)->select('id','title')->get(),
+            'accessibilities' => Accessibility::select('id','title')->get(),
             'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get(),
             'team' => \Auth::user()->currentTeam()->select('name','phone','email')->first()
         ]);
@@ -54,6 +55,7 @@ class CourseController extends Controller
 
         $course = Course::create(array_merge($request->validated(), ['created_by' => \Auth::user()->id]));
         $course->categories()->sync($request->categories);
+        $activity->accessibilities()->sync($request->accessibilities);
 
         return Redirect::route('course.edit', [
             'course' => $course
@@ -82,9 +84,11 @@ class CourseController extends Controller
         $this->authorize('update', $course);
 
         $course->categories = $course->categories()->allRelatedIds()->toArray();
+        $activity->accessibilities = $activity->accessibilities()->allRelatedIds()->toArray();
 
         return Inertia::render('Courses/Form', [
             'course' => $course,
+            'accessibilities' => Accessibility::select('id','title')->get(),
             'categories' => Category::where('type', 'course')->orWhere('type', null)->select('id','title')->get(),
             'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get()
         ]);
@@ -101,6 +105,7 @@ class CourseController extends Controller
 
         $course->update($request->validated());
         $course->categories()->sync($request->categories);
+        $activity->accessibilities()->sync($request->accessibilities);
         $course->update(['updated_by' => \Auth::user()->id]);
 
         return Redirect::route('course.edit', compact('course'));
