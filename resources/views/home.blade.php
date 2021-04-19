@@ -114,20 +114,24 @@
           <h2 class="timeline__title">Where we’re up to.</h2>
           <ul class="timeline__list">
               <li class="complete">
-                  <h3>Consultation</h3>
+                  <h3>Consultation <span class="tag">complete</span></h3>
                   <p>We’ve talked to community groups, council services and Wakefield residents to build a picture of what will make the service a success.</p>
               </li>
               <li class="complete">
-                  <h3>Branding and system build</h3>
+                  <h3>Branding and system build <span class="tag">complete</span></h3>
                   <p>We’ve developed a new brand identity for Community Wakefield that works in partnership with Volunteer Wakefield. The new system is currently being built.</p>
               </li>
               <li>
-                  <h3>Launch to groups and services</h3>
-                  <p>We’ll be inviting groups to set up an account and add their listings in advance of the public launch.</p>
+                  <h3>System preview <span class="tag">April 2021</span></h3>
+                  <p>We’re inviting selected organisations to preview how the system works for testing and feedback.</p>
               </li>
               <li>
-                  <h3>District-wide public launch campaign</h3>
-                  <p>We’ll be running a district-wide launch campaign in the coming months.</p>
+                  <h3>Launch to groups and services <span class="tag">May 2021</span></h3>
+                  <p>We’ll be inviting groups across the district to set up an account and add their listings in advance of the public launch.</p>
+              </li>
+              <li>
+                  <h3>District-wide launch campaign <span class="tag">June 2021</span></h3>
+                  <p>We’ll be launching the website in June and beginning a district-wide campaign over the summer.</p>
               </li>
           </ul>
 
