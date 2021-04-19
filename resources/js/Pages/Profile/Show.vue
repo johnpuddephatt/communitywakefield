@@ -14,7 +14,7 @@
                     <jet-section-border />
                 </div>
 
-                <div>
+                <div id="update-notification-emails">
                     <update-notification-emails-form :user="$page.props.user" :notification_emails="notification_emails" />
 
                     <jet-section-border />

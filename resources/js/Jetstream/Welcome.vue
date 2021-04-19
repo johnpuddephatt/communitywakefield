@@ -51,7 +51,7 @@
             <div class="p-6 border-t border-gray-200 md:border-t-0 md:border-l">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-brand-green-bright"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                    <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">Be reminded to update your listings</div>
+                    <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="/user/profile#update-notification-emails">Be reminded to update your listings</a></div>
                 </div>
 
                 <div class="ml-12">
@@ -59,7 +59,7 @@
                         We know members of the public find it frustrating when information they find online is innaccurate or out of date. Community Wakefield helps you keep your listings current by reminding you when it’s time to review them.
                     </div>
 
-                    <a href="https://laracasts.com">
+                    <a href="/user/profile#update-notification-emails">
                         <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
                                 <div>Manage your notification settings</div>
 
