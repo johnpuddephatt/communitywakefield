@@ -17,6 +17,7 @@ class CreateSubteamsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
+            $table->text('info')->nullable();
             $table->foreignId('team_id')->constrained()->cascadeOnDelete();
         });
     }

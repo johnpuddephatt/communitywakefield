@@ -1,8 +1,8 @@
 <template>
 <app-layout>
     <template #header>
-        <h2 v-if="subteam" class="font-semibold text-xl text-gray-800 leading-tight">Edit subteam</h2>
-        <h2 v-else class="font-semibold text-xl text-gray-800 leading-tight">Create subteam</h2>
+        <h2 v-if="subteam" class="font-semibold text-xl text-gray-800 leading-tight">Edit department</h2>
+        <h2 v-else class="font-semibold text-xl text-gray-800 leading-tight">Create department</h2>
     </template>
 
     <template #actions>
@@ -19,7 +19,7 @@
                     </template>
 
                     <template #description>
-                        Description
+                        Provide the name and optionally a description for this department. You might want to let people know what its responsibilities are.
                     </template>
 
                     <template #form>
@@ -27,6 +27,12 @@
                             <jet-label for="name" value="Name" />
                             <jet-input id="name" type="text" class="mt-1 block w-full text-2xl" v-model="form.name" />
                             <jet-input-error :message="form.errors.name" class="mt-2" />
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-4">
+                            <jet-label for="info" value="Provide a short overview of what the department does" />
+                            <jet-textarea id="info" class="mt-1 block w-full" v-model="form.info" />
+                            <jet-input-error :message="form.errors.info" class="mt-2" />
                         </div>
                     </template>
                 </jet-fieldset>
@@ -79,7 +85,9 @@ export default {
     data() {
         return {
             form: this.$inertia.form({
+                _method: 'PUT',
                 name: this.subteam?.name ?? null,
+                info: this.subteam?.info ?? null
             })
         }
     },
@@ -87,50 +95,26 @@ export default {
     },
     methods: {
         saveEntry() {
-            if(this.activity) {
-                this.form.put(route('subteam.update', this.activity.id), {
-                    preserveScroll: true,
-                    resetOnSuccess: false,
-                    bag: 'updateSubteam',
+            this.form.post(route('subteam.update', {team: this.team.id, subteam: this.subteam.id }), {
+                preserveScroll: true,
+                resetOnSuccess: false,
+                bag: 'updateSubteam',
 
-                    onSuccess: () => {
-                        if (! this.form.hasErrors ) {
-                            this.$page.props.jetstream.flash = {
-                                banner: 'Entry updated!',
-                                bannerStyle: 'success'
-                            }
-                            this.form.isDirty = false;
-                        }
-                        else {
-                            this.$page.props.jetstream.flash = {
-                                banner: 'Error updating entry',
-                                bannerStyle: 'danger'
-                            }
+                onSuccess: () => {
+                    if (! this.form.hasErrors ) {
+                        this.$page.props.jetstream.flash = {
+                            banner: 'Department updated!',
+                            bannerStyle: 'success'
                         }
                     }
-                })
-            }
-            else {
-                this.form.post(route('subteam.store', this.team.id), {
-                    preserveScroll: true,
-                    bag: 'storeSubteam',
-                    onSuccess: () => {
-                        if (! this.form.hasErrors ) {
-                            this.$page.props.jetstream.flash = {
-                                banner: 'Entry created',
-                                bannerStyle: 'success'
-                            }
-                            this.form.isDirty = false;
-                        }
-                        else {
-                            this.$page.props.jetstream.flash = {
-                                banner: 'Error creating entry',
-                                bannerStyle: 'danger'
-                            }
+                    else {
+                        this.$page.props.jetstream.flash = {
+                            banner: 'Error updating department',
+                            bannerStyle: 'danger'
                         }
                     }
-                });
-            }
+                }
+            })
         }
     }
 }

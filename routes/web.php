@@ -60,12 +60,14 @@ Route::group(['prefix' => 'dashboard', 'middleware' => config('jetstream.middlew
 
         Route::post('teams/{team}/subteam/create',  [App\Http\Controllers\SubteamController::class, 'store'])->name('subteam.store');
         Route::delete('teams/{team}/subteams/{subteam}/destroy',  [App\Http\Controllers\SubteamController::class, 'destroy'])->name('subteam.destroy');
-        Route::post('teams/{team}/subteams/{subteam}/update',  [App\Http\Controllers\SubteamController::class, 'update'])->name('subteam.update');
+        Route::put('teams/{team}/subteams/{subteam}/update',  [App\Http\Controllers\SubteamController::class, 'update'])->name('subteam.update');
         Route::get('teams/{team}/subteams/{subteam}/edit',  [App\Http\Controllers\SubteamController::class, 'edit'])->name('subteam.edit');
 
         Route::get('team/join', [App\Http\Controllers\TeamController::class, 'join'])->name('teams.join');
         Route::post('team/{team}/request', [App\Http\Controllers\TeamController::class, 'request'])->name('teams.request');
+
         Route::post('team/{team}/request/{teamRequest}/approve', [App\Http\Controllers\TeamController::class, 'approveRequest'])->name('teams.approveRequest');
+        Route::get('team/{team}/request/{teamRequest}/approve', [App\Http\Controllers\TeamController::class, 'approveRequest'])->name('teams.approveRequestGet');
 
         Route::put('user/update-notification-emails', [App\Http\Controllers\NotificationEmailController::class, 'update'])->name('user-notification-emails.update');
 

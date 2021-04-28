@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Models\TeamRequest;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -24,9 +25,10 @@ class TeamMemberRequestReceived
      *
      * @return void
      */
-    public function __construct(User $user, Team $team)
+    public function __construct(User $user, Team $team, TeamRequest $teamRequest)
     {
         $this->user = $user;
         $this->team = $team;
+        $this->teamRequest = $teamRequest;
     }
 }

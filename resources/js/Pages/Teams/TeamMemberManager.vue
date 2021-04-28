@@ -33,7 +33,7 @@
                         <jet-input-error :message="addTeamMemberForm.errors.role" class="mt-2" />
 
                         <div class="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
-                            <button type="button" class="relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
+                            <button type="button" class="text-left relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue"
                                             :class="{'border-t border-gray-200 rounded-t-none': i > 0, 'rounded-b-none': i != Object.keys(availableRoles).length - 1}"
                                             @click="addTeamMemberForm.role = role.key"
                                             v-for="(role, i) in availableRoles"
@@ -86,7 +86,7 @@
                 <!-- Pending Team Member Invitation List -->
                 <template #content>
                     <div class="space-y-6">
-                        <div class="flex items-center justify-between" v-for="invitation in team.team_invitations" :key="invitation.id">
+                        <div class="flex items-center justify-between mb-2" v-for="invitation in team.team_invitations" :key="invitation.id">
                             <div class="text-gray-600">{{ invitation.email }}</div>
 
                             <div class="flex items-center">

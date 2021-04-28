@@ -29,6 +29,7 @@ class CreateNewUser implements CreatesNewUsers
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
+            'notification_emails' =>  ['nullable']
         ])->validate();
 
         return DB::transaction(function () use ($input) {
@@ -36,7 +37,7 @@ class CreateNewUser implements CreatesNewUsers
                 'name' => $input['name'],
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
-                'notification_emails' => array_keys(\App\Models\User::$notificationEmails),
+                'notification_emails' => $input['notification_emails'] ? array_keys(\App\Models\User::$notificationEmails) : [],
             ]), function (User $user) {
                 $this->autoJoinTeams($user);
             });

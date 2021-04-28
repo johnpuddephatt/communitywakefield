@@ -28,6 +28,7 @@ class SubteamRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:60'],
+            'info' => ['sometimes', 'string', 'max:300'],
         ];
     }
 }

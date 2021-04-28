@@ -14,7 +14,7 @@
         </div>
         <div class="overflow-hidden border-t relative mt-4">
             <jet-secondary-button class="w-full border-none text-center">Select another image</jet-secondary-button>
-            <input class="cursor-pointer absolute block opacity-0 inset-0" id="logo" type="file" @change="fileUploaded" />
+            <input class="cursor-pointer absolute block opacity-0 inset-0" id="logo" type="file" accept="image/png, image/jpeg" @change="fileUploaded" />
         </div>
     </div>
 

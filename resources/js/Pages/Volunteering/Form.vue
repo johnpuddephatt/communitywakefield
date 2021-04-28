@@ -340,14 +340,18 @@ export default {
             })
         }
     },
+    mounted() {
+        this.initial = JSON.stringify(this.form.data());
+    },
     watch: {
         form: {
-         handler(val){
-            if(!this.isDirty)
-                this.isDirty = true;
-         },
-         deep: true
-      }
+            handler(value){
+                if(!this.isDirty && !this.form.recentlySuccessful && this.initial != JSON.stringify(value.data())) {
+                    this.isDirty = true;
+                }
+            },
+            deep: true
+        }
     },
     methods: {
         add_days(date, number) {
@@ -370,6 +374,11 @@ export default {
                     resetOnSuccess: false,
                     bag: 'addVolunteering',
 
+                    onFinish: () => {
+                        this.isDirty = false;
+                        this.initial = JSON.stringify(this.form.data());
+                    },
+
                     onError: () => {
                         this.$page.props.jetstream.flash = {
                             banner: this.form.hasErrors ? 'Entry could not be updated. See below for errors.' : 'Entry could not be updated',
@@ -382,13 +391,17 @@ export default {
                             banner: 'Entry updated!',
                             bannerStyle: 'success'
                         }
-                        this.isDirty = false;
                     }
                 })
             }
             else {
                 this.form.post(route('volunteering.store'), {
                     preserveScroll: true,
+
+                    onFinish: () => {
+                        this.isDirty = false;
+                        this.initial = JSON.stringify(this.form.data());
+                    },
 
                     onError: () => {
                         this.$page.props.jetstream.flash = {
@@ -402,7 +415,6 @@ export default {
                             banner: 'Entry created!',
                             bannerStyle: 'success'
                         }
-                        this.isDirty = false;
                     }
                 });
             }

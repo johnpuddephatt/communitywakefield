@@ -33,7 +33,7 @@ class TeamMemberAutojoinedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return in_array('TeamMemberAutojoined', $notifiable->notification_emails->toArray()) ? ['mail','database'] : ['database'];
+        return ($notifiable->notification_emails && in_array('TeamMemberAutojoined', $notifiable->notification_emails->toArray())) ? ['mail','database'] : ['database'];
     }
 
     /**

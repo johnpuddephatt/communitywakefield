@@ -26,10 +26,10 @@ class CreateServicesTable extends Migration
             $table->enum('status', ["Published","Draft"]);
             $table->string('title', 400);
             $table->string('slug', 400);
-            $table->longText('content');
+            $table->longText('content')->nullable();
             $table->string('phone', 20)->nullable();
             $table->string('email', 60)->nullable();
-            $table->boolean('from_home')->default(false);
+            $table->boolean('from_home')->default(false)->nullable();
             $table->string('address')->nullable();
             $table->string('postcode', 100)->nullable();
             $table->string('address_ward', 100)->nullable();

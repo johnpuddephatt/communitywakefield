@@ -25,7 +25,7 @@ class UpdateTeamName implements UpdatesTeamNames
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'logo' => ['required'],
+            'logo' => ['nullable'],
             'website' => ['nullable', 'string'],
             'phone' => ['nullable', 'string'],
             'email' => ['nullable', 'string'],
@@ -34,13 +34,16 @@ class UpdateTeamName implements UpdatesTeamNames
 
         ])->validateWithBag('updateTeamName');
 
-        $logo = Image::make($input['logo'])->resize(250, 250)->encode('png', 80);
-        $logo_path = Str::random(12) . '.png';
-        Storage::disk('public')->put($logo_path, $logo);
+        if(isset($input['logo'])) {
+            $logo = Image::make($input['logo'])->resize(250, 250)->encode('png', 80);
+            $logo_name = Str::random(12) . '.png';
+            Storage::disk('public')->put($logo_name, $logo);
+            $logo_path = Storage::disk('public')->url($logo_name);
+        }
 
         $team->forceFill([
             'name' => $input['name'],
-            'logo' => Storage::url($logo_path),
+            'logo' => $logo_path,
             'website' => $input['website'],
             'phone' => $input['phone'],
             'email' => $input['email'],

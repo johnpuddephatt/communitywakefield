@@ -30,7 +30,7 @@ class ActivityRequest extends FormRequest
             'status' => ['required', 'in:Published,Draft'],
             'title' => ['required', 'string', 'max:40'],
             'slug' => ['nullable', 'string', 'max:40'],
-            'content' => ['required', 'string'],
+            'content' => ['exclude_if:status,Draft', 'required', 'string'],
             'phone' => ['nullable', 'string', 'max:20'],
             'email' => ['nullable', 'email', 'max:60'],
             'from_home' => ['nullable', 'boolean'],

@@ -1,5 +1,5 @@
 <template>
-    <aside class="w-72 flex-shrink-0 z-20 bg-navy border-r dark:bg-gray-800 py-4 overflow-y-auto text-gray-800 dark:text-gray-400 flex flex-col">
+    <aside :class="showingNavigation ? 'translate-x-0' : 'translate-x-full'" class="transform xl:translate-x-0 fixed top-0 bottom-0 right-0 xl:relative flex w-72 flex-shrink-0 z-50 xl:z-20 bg-navy dark:bg-gray-800 py-4 overflow-y-auto text-gray-800 dark:text-gray-400 flex-col">
 
         <Jet-Application-Logo class="mt-2 mx-2 justify-center text-xl text-gray-100"/>
 
@@ -139,6 +139,9 @@
 
 
     export default {
+
+        props: ['showingNavigation'],
+
         components: {
             JetNavLink,
             JetDropdown,

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Illuminate\Support\Facades\Session;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -36,14 +37,15 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
-        if(\Auth::user()) {
-            return array_merge(parent::share($request),
-                [ 'notifications' => \Auth::user()->notifications()->get()->toArray() ]
-            );
-        }
-        else {
-            return $request;
-        }
+        $share = parent::share($request);
+
+        return array_merge(parent::share($request), [
+            'success' => Session::get('success'),
+            'error' => Session::get('error'),
+            'notifications' => fn () => \Auth::user()
+                ? \Auth::user()->notifications()->get()->toArray()
+                : null,
+        ]);
 
     }
 }

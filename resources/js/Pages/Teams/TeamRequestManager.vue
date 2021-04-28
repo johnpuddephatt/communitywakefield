@@ -14,7 +14,7 @@
                 </template>
 
                 <template #content>
-                    <div class="flex items-center justify-between" v-for="request in teamRequests" :key="request.id">
+                    <div class="flex items-center mb-4 justify-between" v-for="request in teamRequests" :key="request.id">
                         <div class="flex items-center">
                             <img class="w-8 h-8 rounded-full" :src="request.user.profile_photo_url" :alt="request.user.name">
                             <div class="ml-4 leading-tight">

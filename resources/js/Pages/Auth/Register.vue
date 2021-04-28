@@ -27,6 +27,18 @@
                 <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
             </div>
 
+            <div class="mt-4">
+                <jet-label for="notification_emails">
+                    <div class="flex items-center">
+                        <jet-checkbox name="notification_emails" id="notification_emails" v-model="form.notification_emails" />
+
+                        <div class="ml-2">
+                            Send me email alerts about my listings (recommended)
+                        </div>
+                    </div>
+                </jet-label>
+            </div>
+
             <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
                 <jet-label for="terms">
                     <div class="flex items-center">
@@ -80,6 +92,7 @@
                     password: '',
                     password_confirmation: '',
                     terms: false,
+                    notification_emails: false,
                 })
             }
         },

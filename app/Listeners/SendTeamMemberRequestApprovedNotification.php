@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\TeamMemberRequestApproved;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Notifications\TeamMemberRequestApprovedNotification;
 
 class SendTeamMemberRequestApprovedNotification
 {
@@ -26,6 +27,6 @@ class SendTeamMemberRequestApprovedNotification
      */
     public function handle(TeamMemberRequestApproved $event)
     {
-        //
+       $event->user->notify(new TeamMemberRequestApprovedNotification($event->team));
     }
 }

@@ -10,7 +10,7 @@
 
         <template #content>
 
-            <div class="flex py-4 items-center justify-between" v-for="request in requests" :key="request.id">
+            <div class="flex py-4 items-center justify-between mb-2" v-for="request in requests" :key="request.id">
                 <div class="flex items-center">
                     <div class="ml-4 leading-tight">
                         <div>{{ request.team.name }}</div>

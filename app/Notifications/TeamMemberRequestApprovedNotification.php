@@ -11,14 +11,16 @@ class TeamMemberRequestApprovedNotification extends Notification
 {
     use Queueable;
 
+    public $team;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($team)
     {
-        //
+        $this->team = $team;
     }
 
     /**
@@ -29,7 +31,7 @@ class TeamMemberRequestApprovedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ($notifiable->notification_emails && in_array('TeamMemberRequestApproved', $notifiable->notification_emails->toArray())) ? ['mail','database'] : ['database'];
     }
 
     /**
@@ -40,10 +42,12 @@ class TeamMemberRequestApprovedNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        $team = $this->team;
+
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->greeting("Your request to join $team->name has been approved")
+            ->line("You can now add and manage listings for $team->name")
+            ->action('Visit your dashboard', route('dashboard'));
     }
 
     /**
@@ -54,8 +58,10 @@ class TeamMemberRequestApprovedNotification extends Notification
      */
     public function toArray($notifiable)
     {
+        $team = $this->team;
+
         return [
-            //
+            'title' => "Your request to join $team->name was approved.",
         ];
     }
 }

@@ -69,9 +69,9 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     ];
 
     public static $notificationEmails = [
-        'TeamMemberAutojoined' => 'Someone automatically joins a team I administer',
-        'TeamMemberRequestReceived' => 'Someone requests to join a team I administer',
-        'TeamMemberRequestApproved' => 'My request to join a team has been approved',
+        'TeamMemberAutojoined' => 'Someone automatically joins an organisation I created',
+        'TeamMemberRequestReceived' => 'Someone requests to join an organisation I administer',
+        'TeamMemberRequestApproved' => 'My request to join an organisation has been approved',
         'EntryExpiresSoon' => 'One of my listings will expire soon',
         'EntryExpired' => 'One of my listings has expired',
         'EntryReported' => 'An inaccuracy has been reported in one of my listings',

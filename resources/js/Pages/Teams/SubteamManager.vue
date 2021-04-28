@@ -16,7 +16,7 @@
                 <template #form>
                     <div class="col-span-6">
                         <div class="max-w-xl text-sm text-gray-600">
-                            Please provide the name of the department you would like to add to this organisation.
+                            Provide the name and optionally a description for this department. You might want to let people know what its responsibilities are.
                         </div>
                     </div>
 
@@ -25,6 +25,12 @@
                         <jet-label for="name" value="Name" />
                         <jet-input id="name" type="text" class="mt-1 block w-full" v-model="addSubteamForm.name" />
                         <jet-input-error :message="addSubteamForm.errors.name" class="mt-2" />
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-4">
+                        <jet-label for="info" value="Provide a short overview of what the department does" />
+                        <jet-textarea id="info" class="mt-1 block w-full" v-model="addSubteamForm.info" />
+                        <jet-input-error :message="addSubteamForm.errors.info" class="mt-2" />
                     </div>
 
 
@@ -112,6 +118,7 @@
     import JetDialogModal from '@/Jetstream/DialogModal'
     import JetFormSection from '@/Jetstream/FormSection'
     import JetInput from '@/Jetstream/Input'
+    import JetTextarea from '@/Jetstream/Textarea'
     import JetInputError from '@/Jetstream/InputError'
     import JetLabel from '@/Jetstream/Label'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
@@ -128,6 +135,7 @@
             JetFormSection,
             JetInput,
             JetInputError,
+            JetTextarea,
             JetLabel,
             JetSecondaryButton,
             JetSectionBorder,
@@ -143,7 +151,8 @@
         data() {
             return {
                 addSubteamForm: this.$inertia.form({
-                    name: ''
+                    name: '',
+                    info: ''
                 }),
 
                 removeSubteamForm: this.$inertia.form(),

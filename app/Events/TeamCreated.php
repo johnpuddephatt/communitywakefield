@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -23,7 +24,7 @@ class TeamCreated
      *
      * @return void
      */
-    public function __construct(User $user, Team $team)
+    public function __construct(Team $team, User $user)
     {
         $this->user = $user;
         $this->team = $team;

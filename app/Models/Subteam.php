@@ -10,7 +10,8 @@ class Subteam extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'info'
     ];
 
     public function team()

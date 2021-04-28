@@ -37,6 +37,11 @@
                             <jet-input id="title" type="text" class="mt-1 block w-full text-2xl" v-model="form.title" />
                             <jet-input-error :message="form.errors.title" class="mt-2" />
                         </div>
+                        <div v-if="subteams.length" class="col-span-6 sm:col-span-6">
+                            <jet-label for="subteam" value="Department" />
+                            <jet-multiselect label="name" identifier="id" :options="subteams" id="subteam" class="mt-1 block w-full text-2xl" v-model="form.subteam_id" />
+                            <jet-input-error :message="form.errors.subteam_id" class="mt-2" />
+                        </div>
                         <div class="col-span-6 sm:col-span-6">
                             <jet-label for="categories" value="Categories" />
                             <jet-multiselect label="title" :multiple="true" identifier="id" :options="categories" id="categories" class="mt-1 block w-full text-2xl" v-model="form.categories" />
@@ -46,11 +51,6 @@
                             <jet-label for="content" value="Description" />
                             <jet-tip-tap id="content" v-model="form.content" />
                             <jet-input-error :message="form.errors.content" class="mt-2" />
-                        </div>
-                        <div v-if="subteams.length" class="col-span-6 sm:col-span-6">
-                            <jet-label for="subteam" value="Department" />
-                            <jet-multiselect label="name" identifier="id" :options="subteams" id="subteam" class="mt-1 block w-full text-2xl" v-model="form.subteam_id" />
-                            <jet-input-error :message="form.errors.subteam_id" class="mt-2" />
                         </div>
                     </template>
                 </jet-fieldset>
@@ -222,6 +222,8 @@
 </template>
 
 <script>
+import { Inertia } from '@inertiajs/inertia'
+
 import AppLayout from '@/Layouts/AppLayout'
 import JetButton from '@/Jetstream/Button'
 import JetSecondaryButton from '@/Jetstream/SecondaryButton'
@@ -266,12 +268,12 @@ export default {
     },
     data() {
         return {
+            initial: null,
             isDirty: false,
             confirmingRenewal: false,
             form: this.$inertia.form({
                 team_id: this.activity?.team_id ?? this.$page.props.user.current_team_id,
                 subteam_id: this.activity?.subteam_id ?? null,
-
                 categories: this.activity?.categories ?? [],
                 status: this.activity?.status ?? 'Draft',
                 title: this.activity?.title ?? null,
@@ -295,15 +297,18 @@ export default {
             })
         }
     },
+    mounted() {
+        this.initial = JSON.stringify(this.form.data());
+    },
     watch: {
         form: {
-         handler(val){
-             console.log('so dirty');
-            if(!this.isDirty)
-                this.isDirty = true;
-         },
-         deep: true
-      }
+            handler(value){
+                if(!this.isDirty && !this.form.recentlySuccessful && this.initial != JSON.stringify(value.data())) {
+                    this.isDirty = true;
+                }
+            },
+            deep: true
+        }
     },
     methods: {
         add_days(date, number) {
@@ -326,7 +331,10 @@ export default {
                     resetOnSuccess: false,
                     bag: 'addActivity',
 
-                    onFinish: () => console.log('onFinish'),
+                    onFinish: () => {
+                        this.isDirty = false;
+                        this.initial = JSON.stringify(this.form.data());
+                    },
                     onError: () => {
                         this.$page.props.jetstream.flash = {
                             banner: this.form.hasErrors ? 'Entry could not be updated. See below for errors.' : 'Entry could not be updated',
@@ -339,14 +347,16 @@ export default {
                             banner: 'Entry updated!',
                             bannerStyle: 'success'
                         }
-                        this.isDirty = false;
                     }
                 })
             }
             else {
                 this.form.post(route('activity.store'), {
                     preserveScroll: true,
-                    onFinish: () => console.log('onFinish'),
+                    onFinish: () => {
+                        this.isDirty = false;
+                        this.initial = JSON.stringify(this.form.data());
+                    },
                     onError: () => {
                         this.$page.props.jetstream.flash = {
                             banner: this.form.hasErrors ? 'Entry could not be created. See below for errors.' : 'Entry could not be updated',
@@ -358,7 +368,6 @@ export default {
                             banner: 'Entry created!',
                             bannerStyle: 'success'
                         }
-                        this.isDirty = false;
                     }
                 });
             }

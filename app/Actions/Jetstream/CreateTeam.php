@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Events\AddingTeam;
-use Laravel\Jetstream\Events\TeamCreated;
+use App\Events\TeamCreated;
 use Laravel\Jetstream\Jetstream;
 
 class CreateTeam implements CreatesTeams
@@ -29,7 +29,7 @@ class CreateTeam implements CreatesTeams
 
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'logo' => ['required'],
+            'logo' => ['nullable'],
             'website' => ['nullable', 'string'],
             'phone' => ['nullable', 'string'],
             'email' => ['nullable', 'string'],
@@ -38,9 +38,12 @@ class CreateTeam implements CreatesTeams
 
         ])->validateWithBag('createTeam');
 
-        $logo = Image::make($input['logo'])->resize(250, 250)->encode('png', 80);
-        $logo_path = Str::random(12) . '.png';
-        Storage::disk('public')->put($logo_path, $logo);
+        if(isset($input['logo'])) {
+            $logo = Image::make($input['logo'])->resize(250, 250)->encode('png', 80);
+            $logo_name = Str::random(12) . '.png';
+            Storage::disk('public')->put($logo_name, $logo);
+            $logo_path = Storage::disk('public')->url($logo_name);
+        }
 
         AddingTeam::dispatch($user);
 

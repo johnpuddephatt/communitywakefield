@@ -310,15 +310,18 @@ export default {
             })
         }
     },
+    mounted() {
+        this.initial = JSON.stringify(this.form.data());
+    },
     watch: {
         form: {
-         handler(val){
-             console.log('so dirty');
-            if(!this.isDirty)
-                this.isDirty = true;
-         },
-         deep: true
-      }
+            handler(value){
+                if(!this.isDirty && !this.form.recentlySuccessful && this.initial != JSON.stringify(value.data())) {
+                    this.isDirty = true;
+                }
+            },
+            deep: true
+        }
     },
     methods: {
         add_days(date, number) {
@@ -341,7 +344,11 @@ export default {
                     resetOnSuccess: false,
                     bag: 'addEvent',
 
-                    onFinish: () => console.log('onFinish'),
+                    onFinish: () => {
+                        this.isDirty = false;
+                        this.initial = JSON.stringify(this.form.data());
+                    },
+
                     onError: () => {
                         this.$page.props.jetstream.flash = {
                             banner: this.form.hasErrors ? 'Entry could not be updated. See below for errors.' : 'Entry could not be updated',
@@ -354,26 +361,30 @@ export default {
                             banner: 'Entry updated!',
                             bannerStyle: 'success'
                         }
-                        this.isDirty = false;
                     }
                 })
             }
             else {
                 this.form.post(route('event.store'), {
                     preserveScroll: true,
-                    onFinish: () => console.log('onFinish'),
+
+                    onFinish: () => {
+                        this.isDirty = false;
+                        this.initial = JSON.stringify(this.form.data());
+                    },
+
                     onError: () => {
                         this.$page.props.jetstream.flash = {
                             banner: this.form.hasErrors ? 'Entry could not be created. See below for errors.' : 'Entry could not be updated',
                             bannerStyle: 'danger'
                         }
                     },
+
                     onSuccess: () => {
                         this.$page.props.jetstream.flash = {
                             banner: 'Entry created!',
                             bannerStyle: 'success'
                         }
-                        this.isDirty = false;
                     }
                 });
             }

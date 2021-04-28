@@ -86,6 +86,6 @@ class JetstreamServiceProvider extends ServiceProvider
             'read',
             'create',
             'update',
-        ])->description(__('Editor users have the ability to read, create, and update.'));
+        ])->description(__('Editor can read, create, and update entries. They can only delete their own entries.'));
     }
 }

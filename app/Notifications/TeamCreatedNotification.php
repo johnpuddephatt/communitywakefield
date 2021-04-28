@@ -52,7 +52,7 @@ class TeamCreatedNotification extends Notification
             ->greeting("New organisation created")
             ->line("A new organisation – $team->name – has been created.")
             ->line("This organisation was created by $user->name ($user->email).")
-            ->line("If this team looks suspicious, consider disabling it while you investigate further.")
+            ->line("If you are unsure whether this account is genuine, consider disabling it while you investigate further.")
             ->action('Edit this team', route('filament.resources.teams.edit', $team->id));
     }
 
