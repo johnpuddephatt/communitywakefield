@@ -1,3 +1,5 @@
+# Privacy policy
+
 This website is operated by Nova Wakefield District Limited (Nova).
 
 This website privacy policy describes how Nova protects and makes use of the information you provide when you use this website.
@@ -144,6 +146,6 @@ Links from our site
 
 Our website may contain links to other websites.
 
-Please note that we have no control of websites outside the volunteerwakefield.org domain. If you provide information to a website to which we link, we are not responsible for its protection and privacy.
+Please note that we have no control of websites outside the communitywakefield.org domain. If you provide information to a website to which we link, we are not responsible for its protection and privacy.
 
 Always be wary when submitting data to websites. Read the site's data protection and privacy policies fully.
