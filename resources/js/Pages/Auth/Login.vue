@@ -1,7 +1,8 @@
 <template>
     <jet-authentication-card>
         <template #logo>
-            <jet-application-logo class="text-2xl text-blue-700 my-8 justify-center" />
+            <jet-application-logo class="text-2xl text-blue-700 mt-8 justify-center" />
+            <p class="mt-2 mb-10 text-xs text-center font-semibold ">Together, for a happier, healthier Wakefield District</p>
         </template>
 
         <jet-validation-errors class="mb-4" />

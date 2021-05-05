@@ -55,7 +55,7 @@
             <div class="feature__pre-title">Effective</div>
             <h2 class="feature__title">Making your job easier.</h2>
             <p>You’ll receive emails reminding you when your listings need reviewing to keep them up to date.</p>
-            <p>Have multiple team members able to manage your organisation’s listings, and create subteams which share your branding.</p>
+            <p>Have multiple team members able to manage your organisation’s listings, and create departments within your organisation which share your branding.</p>
         </div>
       </div>
     </div>
@@ -122,8 +122,8 @@
                   <p>We’ve developed a new brand identity for Community Wakefield that works in partnership with Volunteer Wakefield. The new system is currently being built.</p>
               </li>
               <li>
-                  <h3>System preview <span class="tag">April 2021</span></h3>
-                  <p>We’re inviting selected organisations to preview how the system works for testing and feedback.</p>
+                  <h3>System preview <span class="tag">Complete</span></h3>
+                  <p>We’ve invited selected organisations to preview how the system works for testing and feedback.</p>
               </li>
               <li>
                   <h3>Launch to groups and services <span class="tag">May 2021</span></h3>

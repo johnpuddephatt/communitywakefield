@@ -86,7 +86,7 @@
                 <!-- Pending Team Member Invitation List -->
                 <template #content>
                     <div class="space-y-6">
-                        <div class="flex items-center justify-between mb-2" v-for="invitation in team.team_invitations" :key="invitation.id">
+                        <div class="flex items-center justify-between" v-for="invitation in team.team_invitations" :key="invitation.id">
                             <div class="text-gray-600">{{ invitation.email }}</div>
 
                             <div class="flex items-center">

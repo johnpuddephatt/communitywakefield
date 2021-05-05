@@ -1,10 +1,13 @@
 <template>
     <jet-authentication-card>
         <template #logo>
-            <jet-application-logo class="text-2xl text-blue-700 my-8 justify-center" />
+            <jet-application-logo class="text-2xl text-blue-700 mt-8 justify-center" />
+            <p class="mt-2 mb-10 text-xs text-center font-semibold ">Together, for a happier, healthier Wakefield District</p>
         </template>
 
         <jet-validation-errors class="mb-4" />
+
+        <jet-notice>Provide your own name and email address when registering. You’ll enter your organisation’s details later.</jet-notice>
 
         <form @submit.prevent="submit">
             <div>
@@ -72,12 +75,14 @@
     import JetLabel from '@/Jetstream/Label'
     import JetValidationErrors from '@/Jetstream/ValidationErrors'
     import JetApplicationLogo from '@/Jetstream/ApplicationLogo'
+    import JetNotice from '@/Jetstream/Notice'
 
     export default {
         components: {
             JetAuthenticationCard,
             JetApplicationLogo,
             JetButton,
+            JetNotice,
             JetInput,
             JetCheckbox,
             JetLabel,

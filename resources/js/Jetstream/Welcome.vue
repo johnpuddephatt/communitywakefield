@@ -13,22 +13,22 @@
         </div>
 
         <div v-if="!Object.keys($page.props.user.all_teams).length" class="p-6 sm:px-20 bg-fuschia">
-            <h2 class="font-semibold text-lg mb-1">Getting started</h2>
+            <h2 class="font-semibold text-xl mb-1">Getting started</h2>
             <p class="text-sm">Before adding your listings, you’ll need to create or join an organisation</p>
-            <a :href="route('teams.join')" class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
+            <jet-button class="mt-4" :href="route('teams.join')">
                 <div>Create or join an organisation</div>
 
-                <div class="ml-1 text-indigo-500">
+                <div class="ml-1">
                     <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 </div>
-            </a>
+            </jet-button>
         </div>
 
         <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2">
             <div class="p-6">
                 <div class="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 text-brand-green-bright"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-                    <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="https://docs.communitywakefield.org">Documentation</a></div>
+                    <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a target="_blank" href="https://docs.communitywakefield.org">Documentation</a></div>
                 </div>
 
                 <div class="ml-12">
@@ -36,7 +36,7 @@
                         We’ve put together information to help you and your organisations get the most out of Community Wakefield. Our documentation is designed to help you if you run into problems, as well as to be a useful training resource for members of your team.
                     </div>
 
-                    <a href="https://docs.communitywakefield.org">
+                    <a target="_blank" href="https://docs.communitywakefield.org">
                         <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
                                 <div>Explore the documentation</div>
 
@@ -102,9 +102,11 @@
 
 <script>
     import JetApplicationLogo from '@/Jetstream/ApplicationLogo'
+    import JetButton from '@/Jetstream/Button'
 
     export default {
         components: {
+            JetButton,
             JetApplicationLogo,
         },
     }
