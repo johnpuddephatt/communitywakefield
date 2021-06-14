@@ -25,17 +25,31 @@ class SettingsServiceProvider extends ServiceProvider
     public function boot()
     {
         if (!app()->runningInConsole()) {
-            if (\Request::getHost() == config('system.volunteerwakefield_url')) {
-                $settings = Cache::rememberForever('settings_volunteer-wakefield', function () {
-                    return \App\Models\Setting::where('slug', 'volunteer-wakefield')->first()->toArray();
-                });
+            if (\Request::getHost() == config("system.volunteerwakefield_url")) {
+                $settings = Cache::rememberForever(
+                    "settings_volunteer-wakefield",
+                    function () {
+                        $settings = \App\Models\Setting::where(
+                            "slug",
+                            "volunteer-wakefield"
+                        )->first();
+                        return $settings ? $settings->toArray() : [];
+                    }
+                );
             } else {
-                $settings = Cache::rememberForever('settings_community-wakefield', function () {
-                    return \App\Models\Setting::where('slug', 'community-wakefield')->first()->toArray();
-                });
+                $settings = Cache::rememberForever(
+                    "settings_community-wakefield",
+                    function () {
+                        $settings = \App\Models\Setting::where(
+                            "slug",
+                            "community-wakefield"
+                        )->first();
+                        return $settings ? $settings->toArray() : [];
+                    }
+                );
             }
 
-            config()->set('settings', $settings);
+            config()->set("settings", $settings);
         }
     }
 }
