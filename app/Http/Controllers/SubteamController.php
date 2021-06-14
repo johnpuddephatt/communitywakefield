@@ -29,7 +29,7 @@ class SubteamController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Activities/Form');
+        return Inertia::render("Activities/Form");
     }
 
     /**
@@ -40,14 +40,11 @@ class SubteamController extends Controller
      */
     public function store(SubteamRequest $request, Team $team)
     {
-
-
-        Gate::forUser(\Auth::user())->authorize('manageSubteam', $team);
+        Gate::forUser(\Auth::user())->authorize("manageSubteam", $team);
         // AddingSubteam::dispatch($user);
 
         $team->subteams()->create($request->validated());
-        return Redirect::route('teams.show', $team);
-
+        return Redirect::route("teams.show", $team);
     }
 
     /**
@@ -67,10 +64,10 @@ class SubteamController extends Controller
      * @param  \App\Models\Subteam  $subteam
      * @return \Illuminate\Http\Response
      */
-    public function edit( Team $team, Subteam $subteam)
+    public function edit(Team $team, Subteam $subteam)
     {
-        Gate::forUser(\Auth::user())->authorize('manageSubteam', $team);
-        return Inertia::render('Subteam/Form', compact('team','subteam'));
+        Gate::forUser(\Auth::user())->authorize("manageSubteam", $team);
+        return Inertia::render("Subteam/Form", compact("team", "subteam"));
     }
 
     /**
@@ -80,12 +77,15 @@ class SubteamController extends Controller
      * @param  \App\Models\Subteam  $subteam
      * @return \Illuminate\Http\Response
      */
-    public function update(SubteamRequest $request, Team $team, Subteam $subteam)
-    {
-        Gate::forUser(\Auth::user())->authorize('manageSubteam', $team);
+    public function update(
+        SubteamRequest $request,
+        Team $team,
+        Subteam $subteam
+    ) {
+        Gate::forUser(\Auth::user())->authorize("manageSubteam", $team);
         $subteam->update($request->validated());
 
-        return Redirect::route('teams.show',$team);
+        return Redirect::route("teams.show", $team);
     }
 
     /**
@@ -96,9 +96,8 @@ class SubteamController extends Controller
      */
     public function destroy(Team $team, Subteam $subteam)
     {
-        Gate::forUser(\Auth::user())->authorize('manageSubteam', $team);
+        Gate::forUser(\Auth::user())->authorize("manageSubteam", $team);
         $subteam->delete();
-        return Redirect::route('teams.show',$team);
-
+        return Redirect::route("teams.show", $team);
     }
 }

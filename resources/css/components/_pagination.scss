@@ -1,0 +1,50 @@
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: auto;
+  gap: $spacing/2
+}
+
+.pagination-card {
+  margin-top: 2 * $spacing;
+}
+
+.page-item {
+  flex: 1;
+  text-align: center;
+}
+
+.page-link {
+  border-radius: $border-radius;
+  font-size: ms(1);
+  display: block;
+  color: $gray-dark;
+  height: 1.25 * $spacing;
+  padding: 0 $spacing/2;
+  line-height: 1.25 * $spacing;
+  text-align: center;
+  text-decoration: none;
+  transition: all $duration ease;
+  @include mq(md) {
+    height: 1.75 * $spacing;
+    line-height: 1.75 * $spacing;
+    padding: 0;
+  }
+}
+
+a.page-link:hover {
+  background-color: transparentize($brand-green,0.5);
+  color: $text-color;
+}
+
+.active .page-link {
+  background-color: $brand-green;
+  color: white;
+}
+
+.disabled .page-link {
+  color: $gray-medium;
+}

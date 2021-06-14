@@ -2,149 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ServiceRequest;
 use App\Models\Service;
-use App\Models\Category;
-use App\Models\Accessibility;
-use App\Models\Suitability;
+use App\Models\Location;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use Illuminate\Support\Facades\Gate;
-
-use Redirect;
+use App\Http\Controllers\EnquiryController;
 
 class ServiceController extends Controller
 {
-
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    public function single(Service $entry)
     {
-        $this->authorize('viewAny', Service::class);
-
-        return Inertia::render('Services/Index', [
-            'services' => \Auth::user()->currentTeam->services()->with('subteam:id,name')->get()
-        ]);;
-
+        return view("single", compact("entry"));
     }
 
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
+    public function index(Request $request, Location $location = null)
     {
-        $this->authorize('create', Service::class);
+        $entries = Service::published()
+            ->postcodeFilter($request->input("postcode"))
+            ->teamFilter($request->input("team"))
+            ->locationFilter($location)
+            ->categoryFilter($request->input("category"))
+            ->orderBy("created_at", "desc")
+            ->paginate(config("system.results_per_page"));
 
-        return Inertia::render('Services/Form', [
-            'categories' => Category::where('type', 'service')->orWhere('type', null)->select('id','title')->get(),
-            'accessibilities' => Accessibility::select('id','title')->get(),
-            'suitabilities' => Suitability::where('type', 'service')->orWhere('type', null)->select('id','title')->get(),
-            'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get(),
-            'team' => \Auth::user()->currentTeam()->select('name','phone','email')->first()
+        $filters = Service::filters(["postcode", "team", "categories"]);
+        $name = Service::$name;
+
+        return view("index", compact("name", "entries", "location", "filters"));
+    }
+    public function enquire(Service $entry)
+    {
+        return view("enquire", compact("entry"));
+    }
+
+    public function storeEnquiry(Request $request, Service $entry)
+    {
+        return EnquiryController::store($entry, [
+            "name" => $request->name,
+            "phone" => $request->phone,
+            "email" => $request->email,
+            "message" => $request->message,
         ]);
-    }
-
-    /**
-     * @param \App\Http\Requests\ServiceRequest $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(ServiceRequest $request)
-    {
-        $this->authorize('create', Service::class);
-
-        $service = Service::create(array_merge($request->validated(), ['created_by' => \Auth::user()->id]));
-        $service->categories()->sync($request->categories);
-        $service->accessibilities()->sync($request->accessibilities);
-        $service->suitabilities()->sync($request->suitabilities);
-
-        return Redirect::route('service.edit', [
-            'service' => $service
-        ]);
-
-    }
-
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Service $service
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request, Service $service)
-    {
-        // return Inertia::render('Services/Form', [
-        //     'service' => $service
-        // ]);
-    }
-
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Service $service
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Service $service)
-    {
-        $this->authorize('update', $service);
-
-        $service->categories = $service->categories()->allRelatedIds()->toArray();
-        $service->accessibilities = $service->accessibilities()->allRelatedIds()->toArray();
-        $service->suitabilities = $service->suitabilities()->allRelatedIds()->toArray();
-
-
-        return Inertia::render('Services/Form', [
-            'service' => $service,
-            'categories' => Category::where('type', 'service')->orWhere('type', null)->select('id','title')->get(),
-            'accessibilities' => Accessibility::select('id','title')->get(),
-            'suitabilities' => Suitability::where('type', 'service')->orWhere('type', null)->select('id','title')->get(),
-            'subteams' => \Auth::user()->currentTeam->subteams()->select('id','name')->get()
-        ]);
-    }
-
-    /**
-     * @param \App\Http\Requests\ServiceRequest $request
-     * @param \App\Models\Service $service
-     * @return \Illuminate\Http\Response
-     */
-    public function update(ServiceRequest $request, Service $service)
-    {
-        $this->authorize('update', $service);
-
-        $service->update($request->validated());
-        $service->categories()->sync($request->categories);
-        $service->accessibilities()->sync($request->accessibilities);
-        $service->suitabilities()->sync($request->suitabilities);
-        $service->update(['updated_by' => \Auth::user()->id]);
-
-        return Redirect::route('service.edit', compact('service'));
-    }
-
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Service $service
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request, Service $service)
-    {
-        $this->authorize('delete', $service);
-
-        $service->delete();
-        return Redirect::route('services.show');
-    }
-
-    public function destroyAll(Request $request, $service_ids)
-    {
-        $service_ids_array = explode('-', $service_ids);
-        $services_query = Service::whereIn('id', $service_ids_array);
-
-        $services = $services_query->get();
-
-        foreach($services as $service) {
-            $this->authorize('delete', $service);
-        }
-
-        $services_query->delete();
-
-        return Redirect::route('services.show');
     }
 }

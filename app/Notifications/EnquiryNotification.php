@@ -7,21 +7,24 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\HtmlString;
 
 class EnquiryNotification extends Notification
 {
     use Queueable, SerializesModels;
 
     public $enquiry;
+    public $enquirable;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($enquiry)
+    public function __construct($enquiry, $enquirable)
     {
         $this->enquiry = $enquiry;
+        $this->enquirable = $enquirable;
     }
 
     /**
@@ -32,7 +35,13 @@ class EnquiryNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        // If we’re emailing the creator of the entry AND they receive EnquiryCreated notifications
+        // Or, we're emailing a team member who receives TeamEnquiryCreated notifications
+        return ($notifiable->id == $this->enquirable->creator->id &&
+            $notifiable->receives("EnquiryCreated")) ||
+            $notifiable->receives("TeamEnquiryCreated")
+            ? ["mail", "database"]
+            : ["database"];
     }
 
     /**
@@ -43,10 +52,26 @@ class EnquiryNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', 'https://laravel.com')
-            ->line('Thank you for using our application!');
+        $enquiry = $this->enquiry;
+        $enquirable = $this->enquirable;
+
+        return (new MailMessage())
+            ->replyTo($enquiry->email, $enquiry->name)
+            ->greeting("Enquiry received about $enquirable->title")
+            ->line(new HtmlString("<br><hr>"))
+            ->line(new HtmlString("<strong>From:</strong> " . $enquiry->name))
+            ->line(
+                new HtmlString(
+                    "<strong>Email:</strong> <a href=\"mailto:" .
+                        $enquiry->email .
+                        "\">" .
+                        $enquiry->email .
+                        "</a>"
+                )
+            )
+            ->line(new HtmlString("<strong>Phone:</strong> " . $enquiry->phone))
+            ->line(new HtmlString("<strong>Message:</strong><br>" . $enquiry->message))
+            ->line(new HtmlString("<hr><br>"));
     }
 
     /**
@@ -58,7 +83,7 @@ class EnquiryNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
-        ];
+                //
+            ];
     }
 }

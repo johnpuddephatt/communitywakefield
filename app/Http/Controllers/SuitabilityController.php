@@ -16,7 +16,7 @@ class SuitabilityController extends Controller
     {
         $suitabilities = Suitability::all();
 
-        return view('suitability.index', compact('suitabilities'));
+        return view("suitability.index", compact("suitabilities"));
     }
 
     /**
@@ -25,7 +25,7 @@ class SuitabilityController extends Controller
      */
     public function create(Request $request)
     {
-        return view('suitability.create');
+        return view("suitability.create");
     }
 
     /**
@@ -36,9 +36,9 @@ class SuitabilityController extends Controller
     {
         $suitability = Suitability::create($request->validated());
 
-        $request->session()->flash('suitability.id', $suitability->id);
+        $request->session()->flash("suitability.id", $suitability->id);
 
-        return redirect()->route('suitability.index');
+        return redirect()->route("suitability.index");
     }
 
     /**
@@ -48,7 +48,7 @@ class SuitabilityController extends Controller
      */
     public function show(Request $request, Suitability $suitability)
     {
-        return view('suitability.show', compact('suitability'));
+        return view("suitability.show", compact("suitability"));
     }
 
     /**
@@ -58,7 +58,7 @@ class SuitabilityController extends Controller
      */
     public function edit(Request $request, Suitability $suitability)
     {
-        return view('suitability.edit', compact('suitability'));
+        return view("suitability.edit", compact("suitability"));
     }
 
     /**
@@ -66,13 +66,15 @@ class SuitabilityController extends Controller
      * @param \App\Models\Suitability $suitability
      * @return \Illuminate\Http\Response
      */
-    public function update(SuitabilityRequest $request, Suitability $suitability)
-    {
+    public function update(
+        SuitabilityRequest $request,
+        Suitability $suitability
+    ) {
         $suitability->update($request->validated());
 
-        $request->session()->flash('suitability.id', $suitability->id);
+        $request->session()->flash("suitability.id", $suitability->id);
 
-        return redirect()->route('suitability.index');
+        return redirect()->route("suitability.index");
     }
 
     /**
@@ -84,6 +86,6 @@ class SuitabilityController extends Controller
     {
         $suitability->delete();
 
-        return redirect()->route('suitability.index');
+        return redirect()->route("suitability.index");
     }
 }

@@ -75,13 +75,7 @@ html {
     }
     overflow-x: hidden;
     // Sets a specific default `font-size` for user with `rem` type scales.
-    font-size: $font-size-root /  1.1;
-    @include mq(lg) {
-      font-size: $font-size-root;
-    }
-    @include mq(xl) {
-      font-size: $font-size-root * 1.1;
-    }
+
     // Changes the default tap highlight to be completely transparent in iOS.
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -91,9 +85,10 @@ body {
     font-family: $font-family-base;
     font-variant: no-common-ligatures;
 
+    margin: 0;
+
     line-height: $line-height;
     color: $text-color;
-    background-color: $bg-color;
     letter-spacing: 0.015em;
 
     -ms-text-size-adjust: 100%;

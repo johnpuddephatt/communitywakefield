@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-spruce mb-4 p-3">
+    <div class="bg-spruce mb-4 py-5 px-3">
             <div class="flex items-center justify-between flex-wrap">
               <div class="w-0 flex-1 flex items-flex-start">
                 <span class="flex p-2 mb-auto">

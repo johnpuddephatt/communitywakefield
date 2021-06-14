@@ -1,0 +1,67 @@
+.entry-single--sidebar {
+  @include mq(lg) {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    flex: 0 0 18em;
+  }
+
+  @extend %padded-box;
+
+  background-color: lighten($brand-blue, 35%) !important;
+  box-shadow: none;
+
+  &--photo {
+    margin: (-2 * $spacing) (-2 * $spacing) 0;
+    width: calc(100% + #{4 * $spacing});
+    height: 8 * $spacing;
+    object-fit: cover;
+    object-position: center;
+    max-width: none;
+    display: block;
+    background-color: $brand-blue;
+  }
+
+  &--logo {
+    border-radius: 50%;
+    background-color: #fff;
+    border: 0.5 * $spacing/2 solid white;
+    box-shadow: $box-shadow;
+    width: 6 * $spacing;
+    height: 6 * $spacing;
+    margin-top: -5 * $spacing;
+    margin-right: -$spacing/2;
+    position: relative;
+    z-index: 9;
+    margin-left: auto;
+    display: block;
+  }
+
+  &--name {
+    font-size: ms(0);
+    font-weight: $font-weight-black;
+    font-family: $font-family-base;
+    margin-top: $spacing;
+    margin-bottom: $spacing/2;
+  }
+
+  &--info {
+    margin-bottom: $spacing;
+  }
+
+  &--email {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &--email,
+  &--phone {
+    svg {
+      opacity: 0.5;
+    }
+  }
+
+  &--email {
+    margin-bottom: $spacing;
+  }
+}

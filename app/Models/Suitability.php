@@ -34,11 +34,11 @@ class Suitability extends Model
 
     public function volunteerings()
     {
-        return $this->morphedByMany(\App\Model\Volunteering::class, 'suitable');
+        return $this->morphedByMany(\App\Models\Volunteering::class, 'suitable');
     }
 
     public function services()
     {
-        return $this->morphedByMany(\App\Model\Service::class, 'suitable');
+        return $this->morphedByMany(\App\Models\Service::class, 'suitable');
     }
 }

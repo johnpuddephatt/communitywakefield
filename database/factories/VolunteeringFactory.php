@@ -40,7 +40,7 @@ class VolunteeringFactory extends Factory
             'longitude' => $this->faker->longitude,
             'directions' => $this->faker->sentence(10),
             'places' => $this->faker->numberBetween(-10000, 10000),
-            'start date' => $this->faker->date(),
+            'start_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),
             'frequency' => $this->faker->randomElement(["One-off","Fixed period","Ongoing"]),
             'hours' => $this->faker->numberBetween(0, 12),

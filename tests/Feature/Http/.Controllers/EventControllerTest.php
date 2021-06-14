@@ -62,7 +62,7 @@ class EventControllerTest extends TestCase
     public function store_saves_and_redirects()
     {
         $team = Team::factory()->create();
-        $start date = $this->faker->date();
+        $start_date = $this->faker->date();
         $status = $this->faker->randomElement(/** enum_attributes **/);
         $title = $this->faker->sentence(4);
         $slug = $this->faker->slug;
@@ -71,7 +71,7 @@ class EventControllerTest extends TestCase
 
         $response = $this->post(route('event.store'), [
             'team_id' => $team->id,
-            'start date' => $start date,
+            'start_date' => $start_date,
             'status' => $status,
             'title' => $title,
             'slug' => $slug,
@@ -81,7 +81,7 @@ class EventControllerTest extends TestCase
 
         $events = Event::query()
             ->where('team_id', $team->id)
-            ->where('start date', $start date)
+            ->where('start date', $start_date)
             ->where('status', $status)
             ->where('title', $title)
             ->where('slug', $slug)
@@ -145,7 +145,7 @@ class EventControllerTest extends TestCase
     {
         $event = Event::factory()->create();
         $team = Team::factory()->create();
-        $start date = $this->faker->date();
+        $start_date = $this->faker->date();
         $status = $this->faker->randomElement(/** enum_attributes **/);
         $title = $this->faker->sentence(4);
         $slug = $this->faker->slug;
@@ -154,7 +154,7 @@ class EventControllerTest extends TestCase
 
         $response = $this->put(route('event.update', $event), [
             'team_id' => $team->id,
-            'start date' => $start date,
+            'start date' => $start_date,
             'status' => $status,
             'title' => $title,
             'slug' => $slug,
@@ -168,7 +168,7 @@ class EventControllerTest extends TestCase
         $response->assertSessionHas('event.id', $event->id);
 
         $this->assertEquals($team->id, $event->team_id);
-        $this->assertEquals(Carbon::parse($start date), $event->start date);
+        $this->assertEquals(Carbon::parse($start_date), $event->start_date);
         $this->assertEquals($status, $event->status);
         $this->assertEquals($title, $event->title);
         $this->assertEquals($slug, $event->slug);

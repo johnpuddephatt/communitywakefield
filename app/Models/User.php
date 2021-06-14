@@ -25,17 +25,14 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-
-    public static $filamentUserColumn = 'is_admin';
+    public static $filamentUserColumn = "is_admin";
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password', 'notification_emails'
-    ];
+    protected $fillable = ["name", "email", "password", "notification_emails"];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -43,10 +40,10 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
      * @var array
      */
     protected $hidden = [
-        'password',
-        'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
+        "password",
+        "remember_token",
+        "two_factor_recovery_codes",
+        "two_factor_secret",
     ];
 
     /**
@@ -55,8 +52,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'notification_emails' => AsArrayObject::class
+        "email_verified_at" => "datetime",
+        "notification_emails" => AsArrayObject::class,
     ];
 
     /**
@@ -64,23 +61,28 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
      *
      * @var array
      */
-    protected $appends = [
-        'profile_photo_url',
-    ];
+    protected $appends = ["profile_photo_url"];
 
     public static $notificationEmails = [
-        'TeamMemberAutojoined' => 'Someone automatically joins an organisation I created',
-        'TeamMemberRequestReceived' => 'Someone requests to join an organisation I administer',
-        'TeamMemberRequestApproved' => 'My request to join an organisation has been approved',
-        'EntryExpiresSoon' => 'One of my listings will expire soon',
-        'EntryExpired' => 'One of my listings has expired',
-        'EntryReported' => 'An inaccuracy has been reported in one of my listings',
-        'EnquiryCreated' => 'An enquiry has been received about one of my listings',
+        "TeamMemberAutojoined" => "Someone automatically joins an organisation I created",
+        "TeamMemberRequestReceived" => "Someone requests to join an organisation I administer",
+        "TeamMemberRequestApproved" => "My request to join an organisation has been approved",
+        "EntryExpiresSoon" => "One of my listings will expire soon",
+        "EntryExpired" => "One of my listings has expired",
+        "EntryReported" => "An inaccuracy has been reported in one of my listings",
+        "EnquiryCreated" => "An enquiry has been received about a listing I created",
+        "TeamEnquiryCreated" => "An enquiry has been received about any of my team’s listings",
     ];
+
+    public function receives($notification)
+    {
+        return $this->notification_emails &&
+            in_array($notification, $this->notification_emails->toArray());
+    }
 
     public function scopeAdmins($query)
     {
-        return $query->where('is_admin', true);
+        return $query->where("is_admin", true);
     }
 
     public function teamRequests()

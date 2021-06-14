@@ -39,7 +39,6 @@ class CreateVolunteeringsTable extends Migration
             $table->integer('places')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->enum('frequency', ["One-off","Fixed period","Ongoing"]);
             $table->string('hours', 400)->nullable();
             $table->date('deadline')->nullable();
             $table->smallInteger('minimum_age')->nullable();

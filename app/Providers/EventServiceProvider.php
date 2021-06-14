@@ -8,12 +8,14 @@ use App\Events\TeamMemberRequestReceived;
 use App\Events\TeamMemberAutojoined;
 use App\Events\TeamMemberRequestApproved;
 use App\Events\TeamCreated;
+use App\Events\EnquiryCreated;
 
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use App\Listeners\SendTeamMemberRequestNotification;
 use App\Listeners\SendTeamMemberAutojoinedNotification;
 use App\Listeners\SendTeamMemberRequestApprovedNotification;
 use App\Listeners\SendTeamCreatedNotification;
+use App\Listeners\SendEnquiryNotification;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
@@ -26,25 +28,17 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
-        ],
+        Registered::class => [SendEmailVerificationNotification::class],
 
-        TeamMemberRequestReceived::class => [
-            SendTeamMemberRequestNotification::class,
-        ],
+        TeamMemberRequestReceived::class => [SendTeamMemberRequestNotification::class],
 
-        TeamMemberAutojoined::class => [
-            SendTeamMemberAutojoinedNotification::class,
-        ],
+        TeamMemberAutojoined::class => [SendTeamMemberAutojoinedNotification::class],
 
-        TeamMemberRequestApproved::class => [
-            SendTeamMemberRequestApprovedNotification::class,
-        ],
+        TeamMemberRequestApproved::class => [SendTeamMemberRequestApprovedNotification::class],
 
-        TeamCreated::class => [
-            SendTeamCreatedNotification::class,
-        ]
+        TeamCreated::class => [SendTeamCreatedNotification::class],
+
+        EnquiryCreated::class => [SendEnquiryNotification::class],
     ];
 
     /**

@@ -1,1 +1,2 @@
-console.log('nothing happening yet');
+require('./frontend/footer');
+require('./frontend/sidebar-filters');

@@ -1,33 +1,36 @@
 // Main Site Layout
 
-.layout {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  min-height: 100vh;
-  position: relative;
-  width: 100%;
-
-  .header,
-  .footer {
-    flex: none;
+html {
+  @include mq(lg) {
+    background-image: linear-gradient(
+      to bottom,
+      transparentize($bg-color, 0) 0%,
+      transparentize($bg-color, 1) 100%
+    );
   }
+}
 
-  .main {
-    display: flex;
-    flex-direction: column;
-    flex: 1 0 auto;
+body {
+  transition: background-color 4 * $duration ease;
+}
 
-    &::after {
-      content: '';
-      display: block;
-      height: 0px;
-      visibility: hidden;
-    }
+main {
+  min-height: calc(100vh - #{$navbar-height});
+}
+
+#app {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-top: 0;
+  height: 100vh;
+  -webkit-overflow-scrolling: touch;
+  @include mq(md) {
+    perspective: 1px;
   }
 }
 
 .container {
+  width: 100%;
   padding-left: $spacing/2;
   padding-right: $spacing/2;
   margin-left: auto;
@@ -43,5 +46,56 @@
     width: 90%;
     padding-left: 0;
     padding-right: 0;
+  }
+
+  @include mq(xl) {
+    max-width: map-get($breakpoints, lg);
+  }
+
+  &__full-screen {
+    height: 100vh;
+    margin-top: -$navbar-height;
+    overflow-y: auto;
+    padding-bottom: 0;
+    overflow-y: auto;
+  }
+
+  &__full-height {
+    min-height: calc(100vh - #{$navbar-height});
+  }
+
+  &__row {
+    @include mq(lg) {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  &__row-reverse {
+    @include mq(lg) {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+    }
+  }
+
+  &__wide {
+    @include mq(xl) {
+      max-width: map-get($breakpoints, xl);
+    }
+  }
+
+  &__narrow {
+    max-width: map-get($breakpoints, md);
+  }
+
+  &__center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 2 * $spacing;
+    padding-bottom: 2 * $spacing;
   }
 }

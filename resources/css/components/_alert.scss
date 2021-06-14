@@ -1,7 +1,95 @@
+.alert--wrapper {
+    margin: 0 auto;
+    @include mq(md) {
+        padding: 0 2 * $spacing;
+    }
+
+    .alert {
+        padding: $spacing;
+        @include mq(md) {
+            box-shadow: $box-shadow;
+            padding: $spacing 2 * $spacing;
+        }
+        margin: 0;
+    }
+
+    &.fixed {
+        width: map-get($breakpoints, md);
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        @include mq(md) {
+            margin-bottom: $spacing/2;
+        }
+        animation: slidein 2.5s forwards ease-in-out;
+
+        &.autodismiss {
+            animation: slideinout 6s forwards ease-in-out;
+        }
+    }
+}
+
 .alert {
-    background-color: #fff;
-    padding: $spacing/2 $spacing;
-    text-align: center;
-    font-weight: bold;
-    box-shadow: $box-shadow;
+    margin: $spacing 0;
+    background-color: lighten($brand-blue,35%);
+    font-weight: 700;
+    color: $text-color;
+    border-radius: $border-radius;
+    padding: $spacing/2;
+    position: relative;
+    border-left: $brand-blue solid $spacing/2;
+
+    &__success {
+        background-color: lighten($brand-green,35%);
+        border-left-color: $brand-green;
+    }
+
+    &__error {
+        background-color: lighten($brand-pink,35%);
+        border-left-color: $brand-pink;
+    }
+
+    &__warning {
+        background-color: lighten($brand-peach,20%);
+        border-left-color: $brand-peach;
+    }
+
+    .close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: ms(2);
+        text-align: center;
+        padding: $spacing;
+        line-height: $spacing;
+        height: 3 * $spacing;
+    }
+}
+@keyframes slideinout {
+    0%,
+    100% {
+        transform: translateY(5 * $spacing);
+        opacity: 0;
+    }
+
+    25%,
+    75% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes slidein {
+    0% {
+        transform: translateY(5 * $spacing);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

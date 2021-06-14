@@ -10,6 +10,8 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
+use App\Models\Enquiry;
+
 class EnquiryCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
@@ -19,18 +21,9 @@ class EnquiryCreated
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Enquiry $enquiry)
     {
-        //
-    }
-
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
-    public function broadcastOn()
-    {
-        return new PrivateChannel('channel-name');
+        $this->enquiry = $enquiry;
+        $this->enquirable = $enquiry->enquirable;
     }
 }

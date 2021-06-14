@@ -12,7 +12,9 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/admin.js', 'public/js').vue({ version: 2 })
+    .options({ processCssUrls: false })
     .copy('resources/css/docs.css', 'public/css')
+    .copyDirectory('resources/images', 'public/images')
     .postCss('resources/css/admin.css', 'public/css', [
         require("@tailwindcss/jit"),
         // require('tailwindcss'),

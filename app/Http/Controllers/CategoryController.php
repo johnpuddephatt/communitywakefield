@@ -16,7 +16,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
-        return view('category.index', compact('categories'));
+        return view("category.index", compact("categories"));
     }
 
     /**
@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create(Request $request)
     {
-        return view('category.create');
+        return view("category.create");
     }
 
     /**
@@ -36,9 +36,9 @@ class CategoryController extends Controller
     {
         $category = Category::create($request->validated());
 
-        $request->session()->flash('category.id', $category->id);
+        $request->session()->flash("category.id", $category->id);
 
-        return redirect()->route('category.index');
+        return redirect()->route("category.index");
     }
 
     /**
@@ -48,7 +48,7 @@ class CategoryController extends Controller
      */
     public function show(Request $request, Category $category)
     {
-        return view('category.show', compact('category'));
+        return view("category.show", compact("category"));
     }
 
     /**
@@ -58,7 +58,7 @@ class CategoryController extends Controller
      */
     public function edit(Request $request, Category $category)
     {
-        return view('category.edit', compact('category'));
+        return view("category.edit", compact("category"));
     }
 
     /**
@@ -70,9 +70,9 @@ class CategoryController extends Controller
     {
         $category->update($request->validated());
 
-        $request->session()->flash('category.id', $category->id);
+        $request->session()->flash("category.id", $category->id);
 
-        return redirect()->route('category.index');
+        return redirect()->route("category.index");
     }
 
     /**
@@ -84,6 +84,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return redirect()->route('category.index');
+        return redirect()->route("category.index");
     }
 }

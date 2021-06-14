@@ -12,12 +12,11 @@ class EnquiryController extends Controller
      * @param \App\Http\Requests\EnquiryRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EnquiryRequest $request)
+    public static function store($entry, $data)
     {
-        Notification::send($enquiry->team, new EnquiryNotification($enquiry));
-
-        $request->session()->flash('Message sent.', $enquiry);
-
-        return redirect()->route('back');
+        $entry->enquiries()->create($data);
+        return redirect()
+            ->back()
+            ->with("message", "Your enquiry has been sent!");
     }
 }

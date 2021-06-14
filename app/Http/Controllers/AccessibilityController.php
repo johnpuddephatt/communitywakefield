@@ -12,20 +12,22 @@ class AccessibilityController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+
     public function index(Request $request)
     {
         $accessibilities = Accessibility::all();
 
-        return view('accessibility.index', compact('accessibilities'));
+        return view("accessibility.index", compact("accessibilities"));
     }
 
     /**
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+
     public function create(Request $request)
     {
-        return view('accessibility.create');
+        return view("accessibility.create");
     }
 
     /**
@@ -36,9 +38,9 @@ class AccessibilityController extends Controller
     {
         $accessibility = Accessibility::create($request->validated());
 
-        $request->session()->flash('accessibility.id', $accessibility->id);
+        $request->session()->flash("accessibility.id", $accessibility->id);
 
-        return redirect()->route('accessibility.index');
+        return redirect()->route("accessibility.index");
     }
 
     /**
@@ -48,7 +50,7 @@ class AccessibilityController extends Controller
      */
     public function show(Request $request, Accessibility $accessibility)
     {
-        return view('accessibility.show', compact('accessibility'));
+        return view("accessibility.show", compact("accessibility"));
     }
 
     /**
@@ -58,7 +60,7 @@ class AccessibilityController extends Controller
      */
     public function edit(Request $request, Accessibility $accessibility)
     {
-        return view('accessibility.edit', compact('accessibility'));
+        return view("accessibility.edit", compact("accessibility"));
     }
 
     /**
@@ -66,13 +68,15 @@ class AccessibilityController extends Controller
      * @param \App\Models\Accessibility $accessibility
      * @return \Illuminate\Http\Response
      */
-    public function update(AccessibilityRequest $request, Accessibility $accessibility)
-    {
+    public function update(
+        AccessibilityRequest $request,
+        Accessibility $accessibility
+    ) {
         $accessibility->update($request->validated());
 
-        $request->session()->flash('accessibility.id', $accessibility->id);
+        $request->session()->flash("accessibility.id", $accessibility->id);
 
-        return redirect()->route('accessibility.index');
+        return redirect()->route("accessibility.index");
     }
 
     /**
@@ -84,6 +88,6 @@ class AccessibilityController extends Controller
     {
         $accessibility->delete();
 
-        return redirect()->route('accessibility.index');
+        return redirect()->route("accessibility.index");
     }
 }

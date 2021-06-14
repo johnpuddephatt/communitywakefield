@@ -1,0 +1,94 @@
+main {
+  position: relative;
+
+  @include mq(lg) {
+    transform-style: preserve-3d;
+  }
+
+  &::after {
+    display: block;
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    z-index: -999;
+    top: 0;
+    bottom: -50vh;
+    min-height: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-repeat: no-repeat;
+    @include mq(md) {
+      will-change: transform;
+      transform: translate3d(0, 0, -0.2px) scale(1.2);
+      transform-origin: bottom center;
+    }
+  }
+
+  body.volunteer-wakefield.single-pattern & {
+    &::after {
+      background-image: url("/images/volunteerwakefield-pattern-2.svg");
+      background-position: right (-2 * $spacing) bottom (0 * $spacing);
+      background-size: 20 * $spacing;
+    }
+  }
+
+  body.volunteer-wakefield.double-pattern & {
+    &::after {
+      background-image: url("/images/volunteerwakefield-pattern.svg"),
+        url("/images/volunteerwakefield-pattern-2.svg");
+      background-position: 7 * $spacing (-6 * $spacing), right (-2 * $spacing) bottom 0;
+      background-size: 12 * $spacing, 10 * $spacing;
+      @include mq(md) {
+        background-image: url("/images/volunteerwakefield-pattern-large.svg"),
+          url("/images/volunteerwakefield-pattern-2.svg");
+        background-position: (-2 * $spacing) 38vmax,
+          right (-2 * $spacing) bottom (0 * $spacing);
+        background-size: 57.5vmax, 20 * $spacing;
+        z-index: 9;
+      }
+    }
+  }
+
+  body.community-wakefield.single-pattern & {
+    &::after {
+      background-image: url("/images/communitywakefield-pattern-2.svg");
+      background-position: right (-2 * $spacing) bottom (4 * $spacing);
+      background-size: 24 * $spacing;
+    }
+  }
+
+  body.community-wakefield.double-pattern & {
+    &::after {
+      background-image: url("/images/communitywakefield-pattern.svg"),
+        url("/images/communitywakefield-pattern-2.svg");
+      background-position: -2 * $spacing (6 * $spacing),
+        right (-2 * $spacing) bottom 2 * $spacing;
+      background-size: 16 * $spacing, 22 * $spacing;
+      @include mq(md) {
+        background-position: (-4 * $spacing) 20vmax, right (-2 * $spacing) bottom 5vmax;
+        background-size: 24vmax, 30vmax;
+      }
+    }
+  }
+
+  @include mq(md) {
+    body:not(.no-fade) & {
+      &::before {
+        content: "";
+        background-image: linear-gradient(
+          to bottom,
+          transparentize($bg-color, 0.25) 0%,
+          transparentize($bg-color, 1) 100%
+        );
+        position: fixed;
+        z-index: -99;
+        top: -4em;
+        height: 75%;
+        width: 100%;
+        left: 0;
+        right: 0;
+      }
+    }
+  }
+}

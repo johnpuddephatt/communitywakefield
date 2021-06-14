@@ -1,0 +1,56 @@
+.section__home-district {
+  margin-bottom: 8 * $spacing;
+
+  .section-title {
+    font-size: ms(8);
+    color: $brand-blue-dark;
+  }
+}
+
+.district {
+  &--intro {
+    font-size: ms(1);
+    margin-top: $spacing/2;
+    margin-bottom: $spacing;
+    select {
+      font-size: inherit;
+    }
+  }
+
+  &--grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  &--button {
+    flex: 0 0 100%;
+    @include mq(md) {
+      flex: 0 0 calc(50% - 1rem / 2);
+    }
+    @include mq(xl) {
+      flex: 0 0 calc(33.3% - 2rem / 3);
+    }
+    appearance: none;
+    display: flex;
+    flex-direction: row;
+
+    border: none;
+    background-color: $brand-blue-light;
+    color: $brand-blue-dark;
+    font-weight: bold;
+    font-size: ms(2);
+    border-radius: $border-radius;
+    font-family: $font-family-heading;
+    align-items: center;
+    padding: 0 1rem;
+
+    svg {
+      width: 5em;
+      height: 5em;
+      padding-left: 1em;
+      margin-left: auto;
+    }
+  }
+}

@@ -22,7 +22,12 @@ class TeamResource extends Resource
             ->schema([
                 Components\TextInput::make('name'),
                 Components\TextInput::make('email'),
-                Components\TextInput::make('created_at')->disabled(true)
+                Components\TextInput::make('created_at')->disabled(true),
+                Components\FileUpload::make('logo')
+                    ->avatar() // Make the field suitable for uploading and displaying a circular avatar.
+                    ->image() // Allow only images to be uploaded.
+                    ->imageCropAspectRatio('1:1') // Crop images to this certain aspect ratio when they are uploaded, e.g: '1:1'.
+                    ->panelAspectRatio('1:1') // Set the aspect ratio of the panel, e.g: '1:1'.
             ]);
     }
 

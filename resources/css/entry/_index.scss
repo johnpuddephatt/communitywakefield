@@ -1,0 +1,12 @@
+.entry-index--wrapper {
+  width: 100%;
+  @include mq(lg) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .card {
+      flex: 1;
+    }
+  }
+}

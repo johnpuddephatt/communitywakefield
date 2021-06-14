@@ -8,6 +8,7 @@ use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\Team as JetstreamTeam;
 use App\Scopes\NonPersonalTeamScope;
+use Illuminate\Support\Str;
 
 class Team extends JetstreamTeam
 {
@@ -35,12 +36,16 @@ class Team extends JetstreamTeam
         'website',
         'auto_join',
         'info',
-        'logo'
+        'logo',
+        'slug'
     ];
 
     protected static function booted()
     {
         // static::addGlobalScope(new NonPersonalTeamScope);
+        static::saving(function ($model) {
+            $model->slug = Str::slug($model->name);
+        });
     }
 
     /**
@@ -88,5 +93,4 @@ class Team extends JetstreamTeam
     {
         return $this->hasMany(\App\Models\Course::class);
     }
-
 }

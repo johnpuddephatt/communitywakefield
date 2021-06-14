@@ -8,26 +8,28 @@
 // adapting to different screen sizes, for use in media queries.
 
 $breakpoints: (
-    sm: 480px,
-    md: 880px,
-    lg: 1080px,
-    xl: 1400px
+  sm: 480px,
+  md: 880px,
+  lg: 1150px,
+  xl: 1400px,
+  xxl: 1600px,
 );
 
-$container-max-width: 1400px;
+$container-max-width: map-get($breakpoints, lg);
 
 // Z-Index Stack
 //
 // Control the order of layers in the application
 $z-layers: (
-    'modal': 999,
-    'nav': 100,
-    'content-overlay': 30
+  "modal": 999,
+  "nav": 100,
+  "content-overlay": 30,
 );
 
 // Colors
 //
 // Grayscale.
+$black: #17181c;
 
 $gray-darkest: #333332;
 
@@ -35,13 +37,16 @@ $gray-dark: #48535f;
 $gray-medium: #75767a;
 $gray: #abbabd;
 $gray-light: #efefec;
-$gray-lightest: #f8f8f5;
+$gray-lightest: #f8f8f5; // f1f2f7?
 
 // Brand Colors
 $brand-pink: #ea34db;
 $brand-green: #2a5158;
-$brand-light-green: #86e5af;
+$brand-green-light: #86e5af;
+
 $brand-blue: #418de9;
+$brand-blue-dark: #173ccb;
+$brand-blue-light: lighten($brand-blue, 35%);
 $brand-peach: #f3c7ab;
 
 // $brand-light-blue: #86A7CE;
@@ -49,7 +54,7 @@ $brand-peach: #f3c7ab;
 
 // Color Mappings
 
-$bg-color: #FFF;
+$bg-color: $gray-lightest;
 $text-color: $gray-dark;
 
 $brand-color-primary: $brand-blue;
@@ -61,14 +66,14 @@ $brand-color-action-offset: darken($brand-peach, 6%);
 //
 // Font, line-height, and color for body text, headings, and more.
 
-$font-family-heading: Faro;
+$font-family-heading: Faro, Yantramanav, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
-$font-family-sans-serif: Yantramanav, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-$font-family-serif: 'Times New Roman', Georgia, Times, serif;
-$font-family-monospace: Menlo, Monaco, Consolas, 'Andale Mono', 'Courier New',
-    monospace;
+$font-family-sans-serif: Yantramanav, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font-family-monospace: Menlo, Monaco, Consolas, "Andale Mono", "Courier New", monospace;
 $font-family-base: $font-family-sans-serif;
 
 $font-size-root: 100%;
@@ -88,7 +93,7 @@ $text-line-length-xl: 35em;
 
 $modularscale: (
   base: $font-size-base,
-  ratio: 1.2
+  ratio: 1.2,
 );
 
 // Animation
@@ -105,10 +110,18 @@ $duration: 300ms;
 // Misc Shared
 //
 // common shared styles
+$spacing: 1.5rem;
 
-$spacing: 2rem;
+$card-width: map-get($breakpoints, md) / 1.175;
+
+$navbar-height: 3 * $spacing;
 
 $box-shadow: 0 2px 16px rgba(0, 0, 0, 0.075);
 $box-shadow-elevated: 0 6px 12px 0 rgba(0, 0, 0, 0.075);
 
-$border-radius: 0.5rem;
+$border-radius: 0.15rem;
+
+$border: 1px solid $gray;
+$border-light: 1px solid $gray-lightest;
+
+$ring: 0 0 0 3px transparentize($brand-blue, 0.5);

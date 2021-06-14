@@ -31,7 +31,9 @@ class TeamMemberRequestApprovedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ($notifiable->notification_emails && in_array('TeamMemberRequestApproved', $notifiable->notification_emails->toArray())) ? ['mail','database'] : ['database'];
+        return $notifiable->receives("TeamMemberRequestApproved")
+            ? ["mail", "database"]
+            : ["database"];
     }
 
     /**
@@ -44,10 +46,10 @@ class TeamMemberRequestApprovedNotification extends Notification
     {
         $team = $this->team;
 
-        return (new MailMessage)
+        return (new MailMessage())
             ->greeting("Your request to join $team->name has been approved")
             ->line("You can now add and manage listings for $team->name")
-            ->action('Visit your dashboard', route('dashboard'));
+            ->action("Visit your dashboard", route("dashboard"));
     }
 
     /**
@@ -61,7 +63,7 @@ class TeamMemberRequestApprovedNotification extends Notification
         $team = $this->team;
 
         return [
-            'title' => "Your request to join $team->name was approved.",
+            "title" => "Your request to join $team->name was approved.",
         ];
     }
 }

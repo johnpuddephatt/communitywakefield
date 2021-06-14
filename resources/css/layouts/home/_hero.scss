@@ -1,99 +1,193 @@
-.hero {
-  background-color: $brand-green;
-  color: #fff;
+.communitywakefield-hero-badges-bottom,
+.communitywakefield-hero-badge-top {
+  position: absolute;
+  top: 50vh;
+  left: -2em;
+  height: auto;
+  width: 100vw;
+  transform: translate3d(0, 0, -0.1px) scale(1.1);
+  z-index: -9;
+  display: none;
+
+  @include mq(md) {
+    display: block;
+  }
+}
+
+.communitywakefield-hero-badge-top {
+  top: 5em;
+  left: 45%;
+  width: 15vw;
+  transform: translate3d(0, 0, 0.2px) scale(0.8);
+}
+
+.home-hero--image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  transform: translate3d(0, 0, -0.2px) scale(1.2);
+  background-image: url("/images/communitywakefield-hero.jpg"),
+    linear-gradient(to bottom, #e0dfe4, #dce7ef);
+  background-size: auto 100%;
+  background-position: right 0vw bottom;
+  background-repeat: no-repeat;
+  z-index: -9;
+  display: none;
+
+  @include mq(md) {
+    display: block;
+  }
+
+  body.volunteer-wakefield & {
+    background-image: url("/images/hero-woman-magic_small.png");
+    background-size: auto 100%;
+    background-position: 30vw bottom;
+  }
+}
+
+.section__home-hero {
+  height: 100vh;
+  margin-top: -$navbar-height;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-bottom: 4 * $spacing;
+
+  @include mq(md) {
+    margin-bottom: 14 * $spacing;
+    align-items: center;
+  }
 
   .container {
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding-top: 2 * $spacing;
-    padding-bottom: 2 * $spacing;
-
-    @include orientation(portrait) {
-      flex-direction: column-reverse;
-      justify-content: center;
-      padding-top: 0;
+    @include mq-down(md) {
+      padding-left: 0;
+      padding-right: 0;
       padding-bottom: 0;
     }
   }
 
-  &__text {
-    margin-top: $spacing;
-    margin-bottom: $spacing;
-    flex: 0 0 50%;
-    padding-right: 4 * $spacing;
+  &__covid {
+    height: 100vh;
 
-    @include orientation(portrait) {
-        padding-right: 0;
+    @include mq(lg) {
+      .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero--message-box {
+        width: 50%;
+        margin-right: $spacing/2;
+      }
+
+      .hero--search-box--container {
+        width: 50%;
+        margin-top: 2 * $spacing;
+      }
     }
+  }
+}
 
-    p {
-        color: $gray;
+.hero--message-box {
+  h1 {
+    font-size: ms(7);
+    line-height: 1;
+    color: $brand-blue-dark;
+    margin-bottom: $spacing/2;
 
-        + p {
-            margin-top: $spacing/2;
-        }
+    @include mq-down(md) {
+      font-size: ms(5);
+      padding: $spacing $spacing 0;
+      margin-bottom: 0;
     }
+  }
 
-    a {
-        color: white;
-        text-decoration-color: transparentize(white,0.5);
+  p {
+    font-size: ms(1);
+    margin-bottom: -3 * $spacing;
 
+    @include mq-down(md) {
+      padding: $spacing/2 $spacing 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.hero--search-box--container {
+  @include mq(md) {
+    width: 70%;
+  }
+}
+
+.hero--search-box {
+  position: relative;
+  z-index: 99;
+  max-width: $card-width;
+  margin: $navbar-height auto 0;
+
+  @extend %heavily-padded-box;
+
+  &--title {
+    font-size: ms(5);
+    color: $brand-blue-dark;
+    margin-bottom: 1.5 * $spacing;
+
+    &__covid {
+      color: $text-color;
+      font-size: ms(3);
+      font-weight: 500;
+      font-family: $font-family-base;
+      margin-bottom: $spacing;
+    }
+  }
+
+  form {
+    max-width: 22rem;
+
+    .input {
+      flex: 1;
     }
 
     .button {
-      margin-top: $spacing;
+      text-transform: lowercase;
+      width: 100%;
+      font-size: ms(0);
+      // margin-bottom: $spacing/4;
+      margin-left: $spacing/4;
     }
-  }
-
-  &__title {
-    color: #fff;
-    text-transform: lowercase;
-    line-height: $line-height;
-    font-size: ms(3);
 
     @include mq(md) {
-      font-size: ms(4);
-    }
+      input {
+        margin: 0;
+      }
 
-    span::before {
-        vertical-align: middle;
-        content: '';
-        display: inline-block;
-        height: 0.8em;
-        width: 0.8em;
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center;
-        background-image: url(data:image/svg+xml;base64,ICAgICAgICA8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjI1LjIiIGhlaWdodD0iMjEiIHZpZXdib3g9IjAgMCAyNS4yIDIxIj48cGF0aCBmaWxsPSIjRkZGIiBkPSJNLjYgNS43TDE2IDExLjMgMCAxNS4xIDEuNCAyMWwyMy40LTUuNS4yLTMuNS4yLTMuOEwyLjYgMHoiLz48L3N2Zz4K);
+      .button {
+        width: auto;
+        margin-bottom: 0;
+      }
     }
   }
 
-  &__subtitle {
-    font-size: ms(3);
-    font-weight: $font-weight-bold;
-    line-height: $heading-line-height;
-    margin-top: $spacing/2;
-    margin-bottom: $spacing;
+  &--label {
+    display: block;
+    font-size: ms(1);
+    margin-bottom: $spacing/2;
   }
 
-  &__image {
-    flex: 1;
-    padding-top: 2 * $spacing;
-    padding-bottom: 2 * $spacing;
+  &--select {
+    display: block;
+    width: 100%;
+    margin-bottom: $spacing/4;
+    height: 2 * $spacing;
+  }
 
-    img {
-      padding-left: $spacing;
-      padding-right: $spacing;
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHg9IjAiIHk9IjAiIHZpZXdCb3g9IjAgMCA0NzUuMDY3IDUzMy44MDMiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI0NzUuMDY3IiBoZWlnaHQ9IjUzMy44MDMiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyIgaWQ9InN0eWxlODMzIj4uc3QxMntvcGFjaXR5Oi4xO2ZpbGw6IzYwZThhYX08L3N0eWxlPjxwYXRoIGNsYXNzPSJzdDEyIiBkPSJNMTA3LjAzMiAzMzkuNTA1bDIuMi0xLjg0YzEwLjU1LTguODEgMjYuNjUtNC41IDMxLjM5IDguNDFsLjk5IDIuNjlhMTAuMzcgMTAuMzcgMCAwMDExLjUgNi42NGwyLjgzLS40OWMxMy41NC0yLjM1IDI1LjMzIDkuNDMgMjIuOTggMjIuOThsLS40OSAyLjgyYy0uODUgNC45MyAxLjk0IDkuNzcgNi42NCAxMS41bDIuNjkuOTljMTIuOSA0Ljc0IDE3LjIyIDIwLjgzIDguNDEgMzEuMzlsLTEuODQgMi4yYTEwLjM0NyAxMC4zNDcgMCAwMDAgMTMuMjdsMS44NCAyLjJjOC44MSAxMC41NiA0LjQ5IDI2LjY1LTguNDEgMzEuMzlsLTIuNjkuOTljLTQuNyAxLjczLTcuNDkgNi41Ni02LjY0IDExLjQ5bC40OSAyLjgzYzIuMzUgMTMuNTQtOS40MyAyNS4zMy0yMi45OCAyMi45OGwtMi44My0uNDljLTQuOTMtLjg2LTkuNzcgMS45NC0xMS41IDYuNjNsLS45OSAyLjY5Yy00Ljc0IDEyLjktMjAuODMgMTcuMjEtMzEuMzkgOC40MWwtMi4yLTEuODRhMTAuMzQ3IDEwLjM0NyAwIDAwLTEzLjI3IDBsLTIuMiAxLjg0Yy0xMC41NSA4LjgtMjYuNjUgNC40OS0zMS4zOS04LjQxbC0uOTktMi42OWMtMS43My00LjctNi41Ni03LjQ5LTExLjUtNi42M2wtMi44My40OWMtMTMuNTQgMi4zNS0yNS4zMy05LjQzLTIyLjk4LTIyLjk4bC40OS0yLjgzYy44NS00LjkzLTEuOTQtOS43Ny02LjY0LTExLjQ5bC0yLjY5LS45OWMtMTIuOS00Ljc0LTE3LjIyLTIwLjgzLTguNDEtMzEuMzlsMS44NC0yLjJjMy4yMS0zLjg0IDMuMjEtOS40MyAwLTEzLjI3bC0xLjg0LTIuMmMtOC44MS0xMC41Ni00LjQ5LTI2LjY1IDguNDEtMzEuMzlsMi42OS0uOTlhMTAuMzcgMTAuMzcgMCAwMDYuNjQtMTEuNWwtLjQ5LTIuODJjLTIuMzUtMTMuNTQgOS40My0yNS4zMyAyMi45OC0yMi45OGwyLjgzLjQ5YzQuOTMuODUgOS43Ny0xLjk0IDExLjUtNi42NGwuOTktMi42OWM0Ljc0LTEyLjkxIDIwLjgzLTE3LjIyIDMxLjM5LTguNDFsMi4yIDEuODRjMy44NCAzLjIxIDkuNDMgMy4yMSAxMy4yNyAwIiBpZD0icGF0aDk0MyIvPjxwYXRoIGNsYXNzPSJzdDEyIiBkPSJNMzQwLjc1MiAyLjc3NWwxOS42OCA1NS4zM2MyLjM3IDYuNjYgOS45OCA5LjgxIDE2LjM3IDYuNzhsNTMuMDMtMjUuMjFjMy41NS0xLjY5IDcuMjUgMi4wMSA1LjU2IDUuNTZsLTI1LjIxIDUzLjAzYy0zLjA0IDYuMzkuMTIgMTQgNi43OCAxNi4zNmw1NS4zMyAxOS42OGMzLjcgMS4zMiAzLjcgNi41NSAwIDcuODdsLTU1LjMzIDE5LjY4Yy02LjY2IDIuMzctOS44MiA5Ljk4LTYuNzggMTYuMzdsMjUuMjEgNTMuMDNjMS42OSAzLjU1LTIuMDIgNy4yNS01LjU2IDUuNTZsLTUzLjAzLTI1LjIxYy02LjM5LTMuMDQtMTQgLjEyLTE2LjM3IDYuNzhsLTE5LjY4IDU1LjMzYy0xLjMyIDMuNy02LjU1IDMuNy03Ljg3IDBsLTE5LjY3LTU1LjMzYy0yLjM3LTYuNjYtOS45OC05LjgyLTE2LjM3LTYuNzhsLTUzLjAzIDI1LjIxYy0zLjU1IDEuNjktNy4yNS0yLjAyLTUuNTYtNS41NmwyNS4yMS01My4wM2MzLjA0LTYuMzktLjEyLTE0LTYuNzgtMTYuMzdsLTU1LjMzLTE5LjY4Yy0zLjctMS4zMi0zLjctNi41NSAwLTcuODdsNTUuMzMtMTkuNjhjNi42Ni0yLjM3IDkuODEtOS45OCA2Ljc4LTE2LjM2bC0yNS4yMS01My4wM2MtMS42OS0zLjU1IDIuMDEtNy4yNSA1LjU2LTUuNTZsNTMuMDMgMjUuMjFjNi4zOSAzLjA0IDE0LS4xMiAxNi4zNy02Ljc4bDE5LjY3LTU1LjMzYzEuMzItMy43IDYuNTYtMy43IDcuODcgMCIgaWQ9InBhdGg5NDUiLz48L3N2Zz4=');
+  &--postcode {
+    display: flex;
+    font-display: row;
   }
 }

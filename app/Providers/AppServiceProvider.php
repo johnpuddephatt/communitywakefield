@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Filament\Filament;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrap();
+
         Relation::morphMap([
             'activity' => 'App\Models\Activity',
             'course' => 'App\Models\Course',
@@ -32,5 +35,10 @@ class AppServiceProvider extends ServiceProvider
             'service' => 'App\Models\Service',
             'volunteering' => 'App\Models\Volunteering'
         ]);
+
+        view()->composer('*', function ($view) {
+            $view_name = str_replace('.', '-', $view->getName());
+            view()->share('view_name', $view_name);
+        });
     }
 }

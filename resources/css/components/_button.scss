@@ -1,7 +1,7 @@
 .button {
   position: relative;
-  font-size: ms(1);
   display: inline-block;
+  border-radius: $border-radius;
   border: 0.15em solid $brand-blue;
   background-color: $brand-blue;
   color: white;

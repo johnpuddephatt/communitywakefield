@@ -1,0 +1,105 @@
+.card {
+  position: relative;
+  z-index: 999;
+
+  @extend %box;
+}
+
+.card-header,
+.card-footer {
+  // border-bottom: $border-light;
+  padding: $spacing 0 $spacing/2;
+
+  @include mq(md) {
+    padding: 1.5 * $spacing 3 * $spacing $spacing/2;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.card-title {
+  margin-top: $spacing/2;
+  margin-bottom: 0;
+  color: $brand-blue-dark;
+  font-size: ms(4);
+  font-weight: 700;
+}
+
+.card-body {
+  padding: $spacing 0 2 * $spacing;
+
+  @include mq(md) {
+    padding: $spacing 3 * $spacing 3 * $spacing;
+  }
+
+  + .card-body {
+    margin-top: -2 * $spacing;
+    @include mq(md) {
+      margin-top: -3 * $spacing;
+    }
+  }
+}
+
+.placeholder {
+  background-color: $gray-light;
+  border-radius: $border-radius;
+  text-align: center;
+  padding: 2 * $spacing;
+  min-height: 12 * $spacing;
+  margin: $spacing 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-footer {
+  padding: $spacing 3 * $spacing 2 * $spacing;
+}
+
+.list-group {
+  margin: $spacing 0 3 * $spacing;
+  border-top: $border-light;
+}
+
+.list-group-item {
+  line-height: 2 * $spacing;
+  border-bottom: $border-light;
+  display: flex;
+  flex-direction: row;
+  padding: 0 3 * $spacing;
+
+  > * {
+    white-space: nowrap;
+  }
+}
+
+.item-title {
+  margin-right: $spacing/2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list-group-buttons {
+  margin-left: auto;
+  padding-left: $spacing/2;
+
+  a {
+    text-decoration: none;
+    // color: $medium-gray;
+    font-size: ms(-1);
+
+    + a {
+      margin-left: $spacing/4;
+    }
+
+    &:hover {
+      color: white;
+    }
+  }
+}

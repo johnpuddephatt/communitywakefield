@@ -33,48 +33,61 @@ class TeamMemberRequestNotification extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-     public function via($notifiable)
-     {
-         return ($notifiable->notification_emails && in_array('TeamMemberRequestReceived', $notifiable->notification_emails->toArray())) ? ['mail','database'] : ['database'];
-     }
+    public function via($notifiable)
+    {
+        return $notifiable->receives("TeamMemberRequestReceived")
+            ? ["mail", "database"]
+            : ["database"];
+    }
 
-     /**
-      * Get the mail representation of the notification.
-      *
-      * @param  mixed  $notifiable
-      * @return \Illuminate\Notifications\Messages\MailMessage
-      */
-     public function toMail($notifiable)
-     {
-         $team = $this->team;
-         $user = $this->user;
-         $teamRequest = $this->teamRequest;
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+    public function toMail($notifiable)
+    {
+        $team = $this->team;
+        $user = $this->user;
+        $teamRequest = $this->teamRequest;
 
-         return (new MailMessage)
-             ->greeting("$user->name has requested to join $team->name")
-             ->line("$user->name ($user->email) has just requested to join $team->name.")
-             ->line("If you recognose $user->name and want them to join your team, you can approve this request below.")
-             ->action('Approve this request', route('teams.approveRequest', ['team' => $team->id, 'teamRequest' => $teamRequest->id]));
-     }
+        return (new MailMessage())
+            ->greeting("$user->name has requested to join $team->name")
+            ->line("$user->name ($user->email) has just requested to join $team->name.")
+            ->line(
+                "If you recognise $user->name and want them to join your team, you can approve this request below."
+            )
+            ->action(
+                "Approve this request",
+                route("teams.approveRequest", [
+                    "team" => $team->id,
+                    "teamRequest" => $teamRequest->id,
+                ])
+            );
+    }
 
-     /**
-      * Get the array representation of the notification.
-      *
-      * @param  mixed  $notifiable
-      * @return array
-      */
-     public function toArray($notifiable)
-     {
-         $team = $this->team;
-         $user = $this->user;
-         $teamRequest = $this->teamRequest;
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toArray($notifiable)
+    {
+        $team = $this->team;
+        $user = $this->user;
+        $teamRequest = $this->teamRequest;
 
-         return [
-             'title' => "$user->name ($user->email) has requested to join $team->name.",
-             'action' => [
-                 'text' => "Approve this request",
-                 'url' => route('teams.approveRequest', ['team' => $team->id, 'teamRequest' => $teamRequest->id])
-             ]
-         ];
-     }
+        return [
+            "title" => "$user->name ($user->email) has requested to join $team->name.",
+            "action" => [
+                "text" => "Approve this request",
+                "url" => route("teams.approveRequest", [
+                    "team" => $team->id,
+                    "teamRequest" => $teamRequest->id,
+                ]),
+            ],
+        ];
+    }
 }

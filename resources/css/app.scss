@@ -6,50 +6,69 @@
 // UTILITIES
 //--------------------
 
-@import 'utils/functions';
-@import 'utils/variables';
-@import 'utils/mixins';
-@import 'utils/a11y-color';
-@import '~modularscale-sass/stylesheets/modularscale';
+@import "utils/functions";
+@import "utils/variables";
+@import "utils/mixins";
+@import "utils/a11y-color";
+@import "~modularscale-sass/stylesheets/modularscale";
 
 //--------------------
 // BASE MODULES
 // partials with global scope
 //--------------------
 
-@import 'base/fonts';
-@import 'base/forms';
-@import 'base/normalize';
-@import 'base/reboot';
-@import 'base/layout';
-@import 'base/typography';
-@import 'base/focus';
-@import 'base/utilities';
-@import 'base/screenreader';
-@import 'base/animation';
+@import "base/fonts";
+@import "base/forms";
+@import "base/normalize";
+@import "base/reboot";
+@import "base/layout";
+@import "base/typography";
+@import "base/focus";
+@import "base/utilities";
+@import "base/screenreader";
+@import "base/animation";
+
+@import "layouts/home/hero";
+@import "layouts/home/type";
+@import "layouts/home/district";
+@import "layouts/home/pullout";
+
+@import "layouts/volunteer/opportunities";
+
+@import "entry/single";
+@import "entry/single-sidebar";
+@import "entry/filter";
+@import "entry/index";
+@import "entry/index-sidebar";
 
 //--------------------
 // COMPONENTS
 // partials with local scope to a component
 //--------------------
-@import 'components/alert';
-@import 'components/button';
-@import 'components/header';
-@import 'components/nav';
-@import 'components/footer';
-@import 'components/icon';
-@import 'components/tag';
+@import "components/patterns";
+@import "components/alert";
+@import "components/badge";
+@import "components/boxes";
+@import "components/button";
+@import "components/card";
+@import "components/entry-card";
+@import "components/header";
+@import "components/nav";
+@import "components/footer";
+@import "components/icon";
+@import "components/tag";
+@import "components/pagination";
 
 //--------------------
 // PAGES
 // partials with scope to a specific page
 //--------------------
 
-@import 'layouts/home/hero';
-@import 'layouts/home/intro';
-@import 'layouts/home/feature';
-@import 'layouts/home/accessibility';
-@import 'layouts/home/timeline';
-@import 'layouts/home/signup';
+@import "layouts/features/hero";
+@import "layouts/features/intro";
+@import "layouts/features/feature";
+@import "layouts/features/accessibility";
+@import "layouts/features/timeline";
+@import "layouts/features/signup";
 
-@import 'layouts/page';
+@import "layouts/page";

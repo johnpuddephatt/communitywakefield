@@ -34,26 +34,26 @@ class Category extends Model
 
     public function activities()
     {
-        return $this->morphedByMany(\App\Model\Activity::class, 'categorisable');
+        return $this->morphedByMany(\App\Models\Activity::class, 'categorisable');
     }
 
     public function courses()
     {
-        return $this->morphedByMany(\App\Model\Course::class, 'categorisable');
+        return $this->morphedByMany(\App\Models\Course::class, 'categorisable');
     }
 
     public function events()
     {
-        return $this->morphedByMany(\App\Model\Event::class, 'categorisable');
+        return $this->morphedByMany(\App\Models\Event::class, 'categorisable');
     }
 
     public function services()
     {
-        return $this->morphedByMany(\App\Model\Service::class, 'categorisable');
+        return $this->morphedByMany(\App\Models\Service::class, 'categorisable');
     }
 
     public function volunteerings()
     {
-        return $this->morphedByMany(\App\Model\Volunteering::class, 'categorisable');
+        return $this->morphedByMany(\App\Models\Volunteering::class, 'categorisable');
     }
 }

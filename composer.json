@@ -19,6 +19,7 @@
         "laravel/jetstream": "2.1.3",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
+        "malhal/laravel-geographical": "^1.0",
         "mydnic/laravel-subscribers": "^1.6",
         "tightenco/ziggy": "^1.0"
     },

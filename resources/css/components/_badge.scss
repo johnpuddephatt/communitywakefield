@@ -1,0 +1,57 @@
+.badge {
+  background-color: $gray-light;
+  border-radius: $border-radius;
+  // color: white;
+  display: inline-block;
+  padding: $spacing/4 $spacing/2;
+
+  &-info {
+    background-color: $brand-blue-dark;
+    color: white;
+  }
+
+  &-small {
+    padding: 0 $spacing/2;
+    border-radius: 1em;
+  }
+
+  form,
+  button {
+    display: inline-block;
+  }
+
+  .button {
+    border: none;
+    vertical-align: middle;
+    outline-offset: -3px !important;
+    padding: 0;
+    float: right;
+    margin: (-$spacing/4) (-$spacing/2) (-$spacing/2) $spacing/4;
+    width: 1.5 * $spacing;
+    height: 1.5 * $spacing;
+    text-indent: -9999px;
+    background-color: transparent;
+    position: relative;
+    color: $gray;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background-color: $gray-medium;
+      color: #fff;
+    }
+
+    // svg {
+    //   position: absolute;
+    //   top: 30%;
+    //   width: 40%;
+    //   height: 40%;
+    //   left: 30%;
+    //   right: 0;
+    //   bottom: 0;
+    //   text-indent: 0;
+    // }
+  }
+}

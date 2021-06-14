@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Subteam;
 
 class SubteamSeeder extends Seeder
 {
@@ -13,6 +14,6 @@ class SubteamSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Subteam::factory()->count(25)->create();
     }
 }

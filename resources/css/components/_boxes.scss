@@ -1,0 +1,31 @@
+%box {
+  @include mq(md) {
+    background-color: transparentize(#fff,.1);
+    border-radius: $border-radius;
+    box-shadow: $box-shadow !important;
+  }
+
+  overflow: hidden;
+}
+
+%padded-box {
+    @extend %box;
+    padding: $spacing;
+}
+
+%heavily-padded-box {
+  @extend %box;
+
+  padding: 2 * $spacing $spacing;
+
+  @include mq(md) {
+    padding: 2 * $spacing;
+  }
+  @include mq(xl) {
+    padding: 3 * $spacing;
+  }
+
+  @include mq(xxl) {
+    padding: 4 * $spacing;
+  }
+}

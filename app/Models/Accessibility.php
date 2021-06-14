@@ -33,26 +33,26 @@ class Accessibility extends Model
 
     public function activities()
     {
-        return $this->morphedByMany(\App\Model\Activity::class, 'accessible');
+        return $this->morphedByMany(\App\Models\Activity::class, 'accessible');
     }
 
     public function courses()
     {
-        return $this->morphedByMany(\App\Model\Course::class, 'accessible');
+        return $this->morphedByMany(\App\Models\Course::class, 'accessible');
     }
 
     public function events()
     {
-        return $this->morphedByMany(\App\Model\Event::class, 'accessible');
+        return $this->morphedByMany(\App\Models\Event::class, 'accessible');
     }
 
     public function services()
     {
-        return $this->morphedByMany(\App\Model\Service::class, 'accessible');
+        return $this->morphedByMany(\App\Models\Service::class, 'accessible');
     }
 
     public function volunteerings()
     {
-        return $this->morphedByMany(\App\Model\Volunteering::class, 'accessible');
+        return $this->morphedByMany(\App\Models\Volunteering::class, 'accessible');
     }
 }

@@ -1,0 +1,52 @@
+.section__home-opportunities {
+    margin-bottom: 4 * $spacing;
+
+    .section-title {
+        text-align: center;
+        margin-bottom: $spacing;
+    }
+
+    .opportunity-card {
+        position: relative;
+        border-bottom: none;
+        background-color: #fff;
+        margin-top: $spacing/2;
+        box-shadow: $box-shadow;
+        display: flex;
+        padding: 0.75 * $spacing $spacing;
+
+        @include mq(md) {
+            padding: 1.25 * $spacing 1.5 * $spacing;
+        }
+
+        &--new-badge {
+            position: absolute;
+            right: $spacing;
+
+            @include mq(md) {
+                right: 1.5 * $spacing;
+            }
+        }
+
+        &--header {
+            margin-bottom: 0;
+            flex: 1;
+        }
+
+        &--footer {
+            margin-top: auto;
+            margin-left: auto;
+            padding-left: $spacing;
+            flex: 0 0 30%;
+        }
+
+        &--intro {
+            display: none;
+        }
+    }
+}
+
+.home-opportunities--footer {
+    text-align: center;
+    margin-top: 2 * $spacing;
+}
