@@ -48,17 +48,39 @@
 
     p {
       line-height: $heading-line-height;
+      margin-bottom: $spacing/4;
       // font-size: ms(-1);
     }
+  }
 
+  .icon {
+    display: block;
+    background-color: $brand-blue;
+    color: white !important;
+    margin-left: auto;
+    height: 3.5em;
+    width: 2em;
+    margin-right: 0;
+  }
+
+  &__activities {
+    border-top-color: $brand-pink;
     .icon {
-      display: block;
-      background-color: $brand-blue;
-      color: white !important;
-      margin-left: auto;
-      height: 3.5em;
-      width: 2em;
-      margin-right: 0;
+      background-color: $brand-pink;
+    }
+  }
+
+  &__courses {
+    border-top-color: $brand-orange;
+    .icon {
+      background-color: $brand-orange;
+    }
+  }
+
+  &__events {
+    border-top-color: $brand-green-light;
+    .icon {
+      background-color: $brand-green-light;
     }
   }
 

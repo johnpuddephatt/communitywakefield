@@ -57,8 +57,9 @@ trait HasFiltersTrait
             // $filter_plural = Str::plural($filter);
             if (method_exists($new_model, $filter)) {
                 $related_model = get_class($new_model->$filter()->getRelated());
-                $filtersValues->$filter = Cache::rememberForever(
+                $filtersValues->$filter = Cache::remember(
                     get_class() . "_index_" . $filter,
+                    300,
                     function () use ($model_name, $related_model) {
                         return $related_model
                             ::has($model_name)

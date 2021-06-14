@@ -7,6 +7,20 @@
 
     .card {
       flex: 1;
+      background-color: transparentize(#fff, 0.1);
+      border-top: $spacing/3 solid $brand-blue;
+
+      &__activities {
+        border-top-color: $brand-pink;
+      }
+
+      &__courses {
+        border-top-color: $brand-orange;
+      }
+
+      &__events {
+        border-top-color: $brand-green-light;
+      }
     }
   }
 }

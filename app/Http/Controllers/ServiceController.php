@@ -19,12 +19,13 @@ class ServiceController extends Controller
         $entries = Service::published()
             ->postcodeFilter($request->input("postcode"))
             ->teamFilter($request->input("team"))
+            ->suitabilityFilter($request->input("suitability"))
             ->locationFilter($location)
             ->categoryFilter($request->input("category"))
             ->orderBy("created_at", "desc")
             ->paginate(config("system.results_per_page"));
 
-        $filters = Service::filters(["postcode", "team", "categories"]);
+        $filters = Service::filters(["postcode", "suitabilities", "team", "categories"]);
         $name = Service::$name;
 
         return view("index", compact("name", "entries", "location", "filters"));

@@ -8,7 +8,7 @@
         <input id="sidebar-trigger" type="checkbox" class="entry-index--sidebar--trigger">
         @include('index-sidebar')
 
-        <div class="card">
+        <div class="card card__{{ strtolower($name) }}">
             <div class="card-header">
                 @if($location)
                 <a href="{{ route(strtolower($name) . '.index') }}">

@@ -69,7 +69,7 @@
   <div class="container container__wide">
     <h2 class="section-title">Find what you’re looking for.</h2>
     <div class="type--grid">
-      <a href="{{ route('services.index') }}" class="type">
+      <a href="{{ route('services.index') }}" class="type type__services">
         <img src="/images/home-services.jpg" alt="Woman working on laptop offering advice to another woman">
         <div class="type--text">
           <div>
@@ -79,7 +79,7 @@
           <x-icon.chevron-right />
         </div>
       </a>
-      <a href="{{ route('activities.index') }}" class="type">
+      <a href="{{ route('activities.index') }}" class="type type__activities">
         <img src="/images/home-activities.jpg" alt="Older woman smiling as she takes part in an exercise class">
         <div class="type--text">
           <div>
@@ -89,7 +89,7 @@
           <x-icon.chevron-right />
         </div>
       </a>
-      <a href="{{ route('courses.index') }}" class="type">
+      <a href="{{ route('courses.index') }}" class="type type__courses">
         <img src="/images/home-courses.jpg" alt="Close up of person explaining an idea in a classroom">
         <div class="type--text">
           <div>
@@ -99,7 +99,7 @@
           <x-icon.chevron-right />
         </div>
       </a>
-      <a href="{{ route('events.index') }}" class="type">
+      <a href="{{ route('events.index') }}" class="type type__events">
         <img src="/images/home-events.jpg" alt="Band performing on stage">
         <div class="type--text">
           <div>
