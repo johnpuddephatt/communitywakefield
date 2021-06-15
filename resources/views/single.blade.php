@@ -161,7 +161,7 @@
     <img class="entry-single--sidebar--photo" src="/images/community-wakefield-placeholder.svg" />
     @endif
     @if($entry->team->logo)
-    <img class="entry-single--sidebar--logo" src="{{ Storage::disk('public')->url($entry->team->logo) }}" />
+    <img class="entry-single--sidebar--logo" src="{{ $entry->team->logo }}" />
     @endif
     <h3 class="entry-single--sidebar--name">{{ $entry->team->name }}</h3>
     @if($entry->subteam)
