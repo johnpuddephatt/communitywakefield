@@ -22,13 +22,19 @@
     @include mq(lg) {
       display: flex;
       flex-direction: row;
-      spacing: $spacing/2;
+      justify-content: space-between;
+      gap: $spacing/2;
     }
   }
 
   &--enquire-button {
     display: block;
     margin-bottom: auto;
+    margin-top: $spacing;
+
+    @include mq(lg) {
+      margin-top: -$spacing/4;
+    }
 
     // @include mq-down(lg) {
     //   position: fixed;
