@@ -33,10 +33,10 @@
 
   &--button {
     flex: 0 0 100%;
-    @include mq(md) {
+    @include mq(sm) {
       flex: 0 0 calc(50% - 1rem / 2);
     }
-    @include mq(xl) {
+    @include mq(lg) {
       flex: 0 0 calc(33.3% - 2rem / 3);
     }
     appearance: none;
