@@ -4,23 +4,38 @@
 
   .section-title {
     color: #fff;
-    font-size: ms(6);
+    font-size: ms(4);
+    @include mq(md) {
+      font-size: ms(6);
+    }
   }
 
   .container {
-    padding: 4 * $spacing;
+    padding-top: $spacing;
+    padding-bottom: 2 * $spacing;
     background-color: $black;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
+
+    @include mq(md) {
+      flex-direction: row;
+      padding: 4 * $spacing;
+    }
   }
 }
 
 .pullout {
   &--image {
     flex: 0 0 60%;
-    margin-left: -6 * $spacing;
-    margin-right: 2 * $spacing;
+    display: block;
+    margin-bottom: $spacing;
+
+    @include mq(md) {
+      margin-bottom: 0;
+      margin-left: -6 * $spacing;
+      margin-right: 2 * $spacing;
+    }
 
     img {
       max-width: 100%;

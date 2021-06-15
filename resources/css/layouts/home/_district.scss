@@ -1,8 +1,15 @@
 .section__home-district {
-  margin-bottom: 8 * $spacing;
+  margin-bottom: 4 * $spacing;
+
+  @include mq(md) {
+    margin-bottom: 8 * $spacing;
+  }
 
   .section-title {
-    font-size: ms(8);
+    font-size: ms(5);
+    @include mq(md) {
+      font-size: ms(8);
+    }
     color: $brand-blue-dark;
   }
 }

@@ -18,22 +18,31 @@
 
   margin-top: 2 * $spacing;
 
+  &--title-wrapper {
+    @include mq(lg) {
+      display: flex;
+      flex-direction: row;
+      spacing: $spacing/2;
+    }
+  }
+
   &--enquire-button {
     display: block;
+    margin-bottom: auto;
 
-    @include mq-down(lg) {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 99;
-    }
+    // @include mq-down(lg) {
+    //   position: fixed;
+    //   bottom: 0;
+    //   left: 0;
+    //   right: 0;
+    //   z-index: 99;
+    // }
 
-    @include mq(lg) {
-      float: right;
-      margin-top: -$spacing/3;
-      margin-left: $spacing/2;
-    }
+    // @include mq(lg) {
+    //   float: right;
+    //   margin-top: -$spacing/3;
+    //   margin-left: $spacing/2;
+    // }
   }
 
   &--title {
@@ -73,6 +82,25 @@
 
     li[data-list="ordered"] {
       list-style-type: decimal;
+    }
+  }
+
+  &--book {
+    background-color: $brand-blue-light;
+    border: $brand-blue;
+    border-radius: $border-radius;
+    padding: 1px $spacing $spacing;
+    margin: $spacing 0;
+
+    @include mq-down(md) {
+      margin: $spacing (-$spacing) 0;
+    }
+
+    .button {
+      margin-top: $spacing/2;
+      @include mq-down(md) {
+        display: block;
+      }
     }
   }
 

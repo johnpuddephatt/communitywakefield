@@ -13,6 +13,10 @@
     color: $brand-blue-dark;
   }
 
+  body.green_nav & {
+    background-color: $brand-green;
+  }
+
   &--brand {
     font-family: $font-family-heading;
     -webkit-font-smoothing: antialiased;
@@ -118,7 +122,7 @@
     flex: 1;
     @include mq-down(md) {
       flex-direction: column;
-      background-color: white;
+      background-color: $brand-blue-dark;
       position: fixed;
       transform: translateX(100%);
       top: 0;
@@ -148,25 +152,28 @@
 }
 
 .navbar--toggler {
+  outline: none !important;
   appearance: none;
+  background-color: transparent;
   border: none;
-  position: fixed;
+  margin-left: auto;
+  // position: fixed;
   z-index: 99;
-  top: $spacing/2;
-  right: $spacing;
+  // top: $spacing/2;
+  // right: $spacing;
   border-radius: 50%;
-  height: 2.5 * $spacing;
-  width: 2.5 * $spacing;
-  box-shadow: $box-shadow;
+  // height: 2.5 * $spacing;
+  // width: 2.5 * $spacing;
+  // box-shadow: $box-shadow;
   @include mq(md) {
     display: none;
   }
 
   svg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
   }
 }
 

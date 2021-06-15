@@ -1,4 +1,4 @@
-@extends('frontend', ['classes' => 'inverted_nav'])
+@extends('frontend', ['classes' => 'green_nav'])
 
 @section('content')
 @if (session('subscribed'))
@@ -15,7 +15,7 @@
         District</p>
       <p>We’ve put together this page to talk you through all the exciting features of the new Community Wakefield
         website.</p>
-      <p>Want to know when it’s launching? <a href="#signup">Sign up here</a>.</p>
+      <p>Want to start adding your group’s information? <a href="{{ route('register') }}">Sign up here</a>.</p>
     </div>
     <div class="hero__image">
       <img src="/images/hero.png" />
@@ -78,8 +78,8 @@
 </div>
 
 <div class="accessibility">
-  <div class="accessibility__pre-title container">Open and accessible</div>
-  <h2 class="accessibility__title container">How we’re making design choices that benefit everyone</h2>
+  <div class="container accessibility__pre-title">Open and accessible</div>
+  <h2 class="container accessibility__title">How we’re making design choices that benefit everyone</h2>
 
   <div class="container accessibility__container">
 
@@ -211,20 +211,21 @@
 <div class="signup" id="signup">
   <div class="container signup__container">
     <div class="signup__text">
-      <h1 class="signup__title">Sign up to find out when we’re launching</h1>
+      <h1 class="signup__title">Start adding your services, activities, opportunities and events</h1>
       <div>
+        <a href="{{ route ('register') }}" class="button">Sign up to get started</a>
 
-        <form action="{{ route('subscribers.store') }}" method="post">
-          @csrf
-          @if (session('subscribed'))
-          <div class="alert alert-success">
-            {{ session('subscribed') }}
-          </div>
-          @else
-          <input name="email" size="30" type="text" class="input" placeholder="Enter your email address">
-          <input type="submit" class="button button--white" value="Sign me up!">
-          @endif
-        </form>
+        {{-- <form action="{{ route('subscribers.store') }}" method="post">
+        @csrf
+        @if (session('subscribed'))
+        <div class="alert alert-success">
+          {{ session('subscribed') }}
+        </div>
+        @else
+        <input name="email" size="30" type="text" class="input" placeholder="Enter your email address">
+        <input type="submit" class="button button--white" value="Sign me up!">
+        @endif
+        </form> --}}
       </div>
     </div>
   </div>

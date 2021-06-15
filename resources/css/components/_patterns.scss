@@ -51,21 +51,20 @@ main {
   }
 
   body.community-wakefield.single-pattern & {
-    &::after {
-      background-image: url("/images/communitywakefield-pattern-2.svg");
-      background-position: right (-2 * $spacing) bottom (4 * $spacing);
-      background-size: 24 * $spacing;
+    @include mq(md) {
+      &::after {
+        background-image: url("/images/communitywakefield-pattern-2.svg");
+        background-position: right (-2 * $spacing) bottom (4 * $spacing);
+        background-size: 24 * $spacing;
+      }
     }
   }
 
   body.community-wakefield.double-pattern & {
-    &::after {
-      background-image: url("/images/communitywakefield-pattern.svg"),
-        url("/images/communitywakefield-pattern-2.svg");
-      background-position: -2 * $spacing (6 * $spacing),
-        right (-2 * $spacing) bottom 2 * $spacing;
-      background-size: 16 * $spacing, 22 * $spacing;
-      @include mq(md) {
+    @include mq(md) {
+      &::after {
+        background-image: url("/images/communitywakefield-pattern.svg"),
+          url("/images/communitywakefield-pattern-2.svg");
         background-position: (-4 * $spacing) 20vmax, right (-2 * $spacing) bottom 5vmax;
         background-size: 24vmax, 30vmax;
       }

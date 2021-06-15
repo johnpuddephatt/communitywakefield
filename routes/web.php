@@ -20,35 +20,33 @@ Route::domain(config("system.volunteerwakefield_url"))->group(function () {
         App\Http\Controllers\VolunteerWakefield\HomeController::class,
         "index",
     ])->name("volunteering.home");
-    Route::get("/opportunities/{location:slug?}", [
+    Route::get("opportunities/{location:slug?}", [
         App\Http\Controllers\VolunteerWakefield\VolunteeringController::class,
         "index",
     ])->name("opportunities.index");
 
-    Route::get("/opportunities/{entry:slug}", [
+    Route::get("opportunity/{entry:slug}", [
         App\Http\Controllers\VolunteerWakefield\VolunteeringController::class,
         "single",
     ])->name("opportunities.single");
 
-    Route::get("/opportunities/{entry:slug}/enquire", [
+    Route::get("opportunity/{entry:slug}/enquire", [
         App\Http\Controllers\VolunteerWakefield\VolunteeringController::class,
         "enquire",
     ])->name("opportunities.enquire");
 
-    Route::post("/opportunities/{entry:slug}/enquire", [
+    Route::post("opportunity/{entry:slug}/enquire", [
         App\Http\Controllers\VolunteerWakefield\VolunteeringController::class,
         "storeEnquiry",
     ])->name("opportunities.enquire.store");
 });
 
 Route::domain(config("system.communitywakefield_url"))->group(function () {
-    Route::get("/", function () {
+    Route::get("/", [App\Http\Controllers\HomeController::class, "index"])->name("home");
+
+    Route::get("about", function () {
         return view("about");
     })->name("about");
-
-    Route::get("preview", [App\Http\Controllers\HomeController::class, "index"])->name(
-        "home"
-    );
 
     Route::get("search", [App\Http\Controllers\HomeController::class, "search"])->name(
         "home.search"
@@ -59,70 +57,70 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
         "location",
     ])->name("home.location");
 
-    Route::get("/activities/{location:slug?}", [
+    Route::get("activities/{location:slug?}", [
         App\Http\Controllers\ActivityController::class,
         "index",
     ])->name("activities.index");
-    Route::get("/activities/{entry:slug}", [
+    Route::get("activity/{entry:slug}", [
         App\Http\Controllers\ActivityController::class,
         "single",
     ])->name("activities.single");
-    Route::get("/activities/{entry:slug}/enquire", [
+    Route::get("activity/{entry:slug}/enquire", [
         App\Http\Controllers\ActivityController::class,
         "enquire",
     ])->name("activities.enquire");
-    Route::post("/activities/{entry:slug}/enquire", [
+    Route::post("activity/{entry:slug}/enquire", [
         App\Http\Controllers\ActivityController::class,
         "storeEnquiry",
     ])->name("activities.enquire.store");
 
-    Route::get("/events/{location:slug?}", [
-        App\Http\Controllers\EventController::class,
-        "index",
-    ])->name("events.index");
-    Route::get("/events/{entry:slug}", [
-        App\Http\Controllers\EventController::class,
-        "single",
-    ])->name("events.single");
-    Route::get("/events/{entry:slug}/enquire", [
-        App\Http\Controllers\EventController::class,
-        "enquire",
-    ])->name("events.enquire");
-    Route::post("/events/{entry:slug}/enquire", [
-        App\Http\Controllers\EventController::class,
-        "storeEnquiry",
-    ])->name("events.enquire.store");
-
-    Route::get("/services/{location:slug?}", [
+    Route::get("services/{location:slug?}", [
         App\Http\Controllers\ServiceController::class,
         "index",
     ])->name("services.index");
-    Route::get("/service/{entry:slug}", [
+    Route::get("service/{entry:slug}", [
         App\Http\Controllers\ServiceController::class,
         "single",
     ])->name("services.single");
-    Route::get("/service/{entry:slug}/enquire", [
+    Route::get("service/{entry:slug}/enquire", [
         App\Http\Controllers\ServiceController::class,
         "enquire",
     ])->name("services.enquire");
-    Route::post("/service/{entry:slug}/enquire", [
+    Route::post("service/{entry:slug}/enquire", [
         App\Http\Controllers\ServiceController::class,
         "storeEnquiry",
     ])->name("services.enquire.store");
 
-    Route::get("/courses/{location:slug?}", [
+    Route::get("events/{location:slug?}", [
+        App\Http\Controllers\EventController::class,
+        "index",
+    ])->name("events.index");
+    Route::get("/event/{entry:slug}", [
+        App\Http\Controllers\EventController::class,
+        "single",
+    ])->name("events.single");
+    Route::get("/event/{entry:slug}/enquire", [
+        App\Http\Controllers\EventController::class,
+        "enquire",
+    ])->name("events.enquire");
+    Route::post("/event/{entry:slug}/enquire", [
+        App\Http\Controllers\EventController::class,
+        "storeEnquiry",
+    ])->name("events.enquire.store");
+
+    Route::get("courses/{location:slug?}", [
         App\Http\Controllers\CourseController::class,
         "index",
     ])->name("courses.index");
-    Route::get("/courses/{entry:slug}", [
+    Route::get("course/{entry:slug}", [
         App\Http\Controllers\CourseController::class,
         "single",
     ])->name("courses.single");
-    Route::get("/courses/{entry:slug}/enquire", [
+    Route::get("course/{entry:slug}/enquire", [
         App\Http\Controllers\CourseController::class,
         "enquire",
     ])->name("courses.enquire");
-    Route::post("/courses/{entry:slug}/enquire", [
+    Route::post("course/{entry:slug}/enquire", [
         App\Http\Controllers\CourseController::class,
         "storeEnquiry",
     ])->name("courses.enquire.store");

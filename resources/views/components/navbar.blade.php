@@ -3,7 +3,8 @@
         <a class="navbar--brand" href="{{ url('/') }}">
             {!! convert_name_to_logo(config('settings.name'))!!}
         </a>
-        <button class="navbar--toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+        <button class="navbar--toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <x-icon.menu />
         </button>
 
@@ -18,7 +19,7 @@
             </ul>
             <ul class="navbar--nav navbar--nav__right">
                 <li class="nav-item">
-                    <a class="button button__inverted nav-link" href="{{ route('dashboard')}}">Manage listings</a>
+                    <a class="button button__inverted nav-link" href="{{ route('register')}}">Manage listings</a>
                 </li>
             </ul>
         </div>

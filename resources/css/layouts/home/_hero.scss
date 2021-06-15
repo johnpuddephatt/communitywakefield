@@ -35,11 +35,11 @@
   background-position: right 0vw bottom;
   background-repeat: no-repeat;
   z-index: -9;
-  display: none;
+  // display: none;
 
-  @include mq(md) {
-    display: block;
-  }
+  // @include mq(md) {
+  //   display: block;
+  // }
 
   body.volunteer-wakefield & {
     background-image: url("/images/hero-woman-magic_small.png");
@@ -54,7 +54,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  margin-bottom: 4 * $spacing;
+  margin-bottom: 6 * $spacing;
 
   @include mq(md) {
     margin-bottom: 14 * $spacing;
@@ -93,30 +93,30 @@
   }
 }
 
-.hero--message-box {
-  h1 {
-    font-size: ms(7);
-    line-height: 1;
-    color: $brand-blue-dark;
-    margin-bottom: $spacing/2;
+// .hero--message-box {
+//   h1 {
+//     font-size: ms(7);
+//     line-height: 1;
+//     color: $brand-blue-dark;
+//     margin-bottom: $spacing/2;
 
-    @include mq-down(md) {
-      font-size: ms(5);
-      padding: $spacing $spacing 0;
-      margin-bottom: 0;
-    }
-  }
+//     @include mq-down(md) {
+//       font-size: ms(5);
+//       padding: $spacing $spacing 0;
+//       margin-bottom: 0;
+//     }
+//   }
 
-  p {
-    font-size: ms(1);
-    margin-bottom: -3 * $spacing;
+//   p {
+//     font-size: ms(1);
+//     margin-bottom: -3 * $spacing;
 
-    @include mq-down(md) {
-      padding: $spacing/2 $spacing 0;
-      margin-bottom: 0;
-    }
-  }
-}
+//     @include mq-down(md) {
+//       padding: $spacing/2 $spacing 0;
+//       margin-bottom: 0;
+//     }
+//   }
+// }
 
 .hero--search-box--container {
   @include mq(md) {
@@ -136,6 +136,11 @@
     font-size: ms(5);
     color: $brand-blue-dark;
     margin-bottom: 1.5 * $spacing;
+
+    @include mq-down(md) {
+      font-size: ms(3);
+      margin-bottom: $spacing;
+    }
 
     &__covid {
       color: $text-color;

@@ -1,11 +1,11 @@
 html {
-    font-size: $font-size-root /  1.1;
-    @include mq(lg) {
-      font-size: $font-size-root;
-    }
-    @include mq(xl) {
-      font-size: $font-size-root * 1.1;
-    }
+  font-size: $font-size-root / 1.1;
+  @include mq(lg) {
+    font-size: $font-size-root;
+  }
+  @include mq(xl) {
+    font-size: $font-size-root * 1.1;
+  }
 }
 
 h1,
@@ -31,7 +31,7 @@ p {
 }
 
 a {
-  color: $brand-blue;
+  color: $brand-blue-dark;
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-decoration-color: transparentize($brand-blue, 0.7);
