@@ -21,12 +21,14 @@ class EventController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('viewAny', Event::class);
+        $this->authorize("viewAny", Event::class);
 
-        return Inertia::render('Events/Index', [
-            'events' => \Auth::user()->currentTeam->events()->with('subteam:id,name')->get()
+        return Inertia::render("Events/Index", [
+            "events" => \Auth::user()
+                ->currentTeam->events()
+                ->with("subteam:id,name")
+                ->get(),
         ]);
-        ;
     }
 
     /**
@@ -35,13 +37,22 @@ class EventController extends Controller
      */
     public function create(Request $request)
     {
-        $this->authorize('create', Event::class);
+        $this->authorize("create", Event::class);
 
-        return Inertia::render('Events/Form', [
-            'categories' => Category::where('type', 'event')->orWhere('type', null)->select('id', 'title')->get(),
-            'accessibilities' => Accessibility::select('id', 'title')->get(),
-            'subteams' => \Auth::user()->currentTeam->subteams()->select('id', 'name')->get(),
-            'team' => \Auth::user()->currentTeam()->select('name', 'phone', 'email')->first()
+        return Inertia::render("Events/Form", [
+            "categories" => Category::where("type", "event")
+                ->orWhere("type", null)
+                ->select("id", "title")
+                ->get(),
+            "accessibilities" => Accessibility::select("id", "title")->get(),
+            "subteams" => \Auth::user()
+                ->currentTeam->subteams()
+                ->select("id", "name")
+                ->get(),
+            "team" => \Auth::user()
+                ->currentTeam()
+                ->select("name", "phone", "email")
+                ->first(),
         ]);
     }
 
@@ -51,14 +62,16 @@ class EventController extends Controller
      */
     public function store(EventRequest $request)
     {
-        $this->authorize('create', Event::class);
+        $this->authorize("create", Event::class);
 
-        $event = Event::create(array_merge($request->validated(), ['created_by' => \Auth::user()->id]));
+        $event = Event::create(
+            array_merge($request->validated(), ["created_by" => \Auth::user()->id])
+        );
         $event->categories()->sync($request->categories);
         $event->accessibilities()->sync($request->accessibilities);
 
-        return Redirect::route('event.edit', [
-            'event' => $event
+        return Redirect::route("event.edit", [
+            "event" => $event,
         ]);
     }
 
@@ -81,16 +94,28 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        $this->authorize('update', $event);
+        $this->authorize("update", $event);
 
-        $event->categories = $event->categories()->allRelatedIds()->toArray();
-        $event->accessibilities = $event->accessibilities()->allRelatedIds()->toArray();
+        $event->categories = $event
+            ->categories()
+            ->allRelatedIds()
+            ->toArray();
+        $event->accessibilities = $event
+            ->accessibilities()
+            ->allRelatedIds()
+            ->toArray();
 
-        return Inertia::render('Events/Form', [
-            'event' => $event,
-            'categories' => Category::where('type', 'event')->orWhere('type', null)->select('id', 'title')->get(),
-            'accessibilities' => Accessibility::select('id', 'title')->get(),
-            'subteams' => \Auth::user()->currentTeam->subteams()->select('id', 'name')->get()
+        return Inertia::render("Events/Form", [
+            "event" => $event,
+            "categories" => Category::where("type", "event")
+                ->orWhere("type", null)
+                ->select("id", "title")
+                ->get(),
+            "accessibilities" => Accessibility::select("id", "title")->get(),
+            "subteams" => \Auth::user()
+                ->currentTeam->subteams()
+                ->select("id", "name")
+                ->get(),
         ]);
     }
 
@@ -101,14 +126,14 @@ class EventController extends Controller
      */
     public function update(EventRequest $request, Event $event)
     {
-        $this->authorize('update', $event);
+        $this->authorize("update", $event);
 
         $event->update($request->validated());
         $event->categories()->sync($request->categories);
         $event->accessibilities()->sync($request->accessibilities);
-        $event->update(['updated_by' => \Auth::user()->id]);
+        $event->update(["updated_by" => \Auth::user()->id]);
 
-        return Redirect::route('event.edit', compact('event'));
+        return Redirect::route("event.edit", compact("event"));
     }
 
     /**
@@ -118,25 +143,25 @@ class EventController extends Controller
      */
     public function destroy(Request $request, Event $event)
     {
-        $this->authorize('delete', $event);
+        $this->authorize("delete", $event);
 
         $event->delete();
-        return Redirect::route('events.show');
+        return Redirect::route("events.show");
     }
 
     public function destroyAll(Request $request, $event_ids)
     {
-        $event_ids_array = explode('-', $event_ids);
-        $events_query = Event::whereIn('id', $event_ids_array);
+        $event_ids_array = explode("-", $event_ids);
+        $events_query = Event::whereIn("id", $event_ids_array);
 
         $events = $events_query->get();
 
         foreach ($events as $event) {
-            $this->authorize('delete', $event);
+            $this->authorize("delete", $event);
         }
 
         $events_query->delete();
 
-        return Redirect::route('events.show');
+        return Redirect::route("events.show");
     }
 }

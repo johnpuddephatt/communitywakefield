@@ -22,12 +22,14 @@ class ServiceController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('viewAny', Service::class);
+        $this->authorize("viewAny", Service::class);
 
-        return Inertia::render('Services/Index', [
-            'services' => \Auth::user()->currentTeam->services()->with('subteam:id,name')->get()
+        return Inertia::render("Services/Index", [
+            "services" => \Auth::user()
+                ->currentTeam->services()
+                ->with("subteam:id,name")
+                ->get(),
         ]);
-        ;
     }
 
     /**
@@ -36,14 +38,26 @@ class ServiceController extends Controller
      */
     public function create(Request $request)
     {
-        $this->authorize('create', Service::class);
+        $this->authorize("create", Service::class);
 
-        return Inertia::render('Services/Form', [
-            'categories' => Category::where('type', 'service')->orWhere('type', null)->select('id', 'title')->get(),
-            'accessibilities' => Accessibility::select('id', 'title')->get(),
-            'suitabilities' => Suitability::where('type', 'service')->orWhere('type', null)->select('id', 'title')->get(),
-            'subteams' => \Auth::user()->currentTeam->subteams()->select('id', 'name')->get(),
-            'team' => \Auth::user()->currentTeam()->select('name', 'phone', 'email')->first()
+        return Inertia::render("Services/Form", [
+            "categories" => Category::where("type", "service")
+                ->orWhere("type", null)
+                ->select("id", "title")
+                ->get(),
+            "accessibilities" => Accessibility::select("id", "title")->get(),
+            "suitabilities" => Suitability::where("type", "service")
+                ->orWhere("type", null)
+                ->select("id", "title")
+                ->get(),
+            "subteams" => \Auth::user()
+                ->currentTeam->subteams()
+                ->select("id", "name")
+                ->get(),
+            "team" => \Auth::user()
+                ->currentTeam()
+                ->select("name", "phone", "email")
+                ->first(),
         ]);
     }
 
@@ -53,15 +67,17 @@ class ServiceController extends Controller
      */
     public function store(ServiceRequest $request)
     {
-        $this->authorize('create', Service::class);
+        $this->authorize("create", Service::class);
 
-        $service = Service::create(array_merge($request->validated(), ['created_by' => \Auth::user()->id]));
+        $service = Service::create(
+            array_merge($request->validated(), ["created_by" => \Auth::user()->id])
+        );
         $service->categories()->sync($request->categories);
         $service->accessibilities()->sync($request->accessibilities);
         $service->suitabilities()->sync($request->suitabilities);
 
-        return Redirect::route('service.edit', [
-            'service' => $service
+        return Redirect::route("service.edit", [
+            "service" => $service,
         ]);
     }
 
@@ -84,19 +100,36 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        $this->authorize('update', $service);
+        $this->authorize("update", $service);
 
-        $service->categories = $service->categories()->allRelatedIds()->toArray();
-        $service->accessibilities = $service->accessibilities()->allRelatedIds()->toArray();
-        $service->suitabilities = $service->suitabilities()->allRelatedIds()->toArray();
+        $service->categories = $service
+            ->categories()
+            ->allRelatedIds()
+            ->toArray();
+        $service->accessibilities = $service
+            ->accessibilities()
+            ->allRelatedIds()
+            ->toArray();
+        $service->suitabilities = $service
+            ->suitabilities()
+            ->allRelatedIds()
+            ->toArray();
 
-
-        return Inertia::render('Services/Form', [
-            'service' => $service,
-            'categories' => Category::where('type', 'service')->orWhere('type', null)->select('id', 'title')->get(),
-            'accessibilities' => Accessibility::select('id', 'title')->get(),
-            'suitabilities' => Suitability::where('type', 'service')->orWhere('type', null)->select('id', 'title')->get(),
-            'subteams' => \Auth::user()->currentTeam->subteams()->select('id', 'name')->get()
+        return Inertia::render("Services/Form", [
+            "service" => $service,
+            "categories" => Category::where("type", "service")
+                ->orWhere("type", null)
+                ->select("id", "title")
+                ->get(),
+            "accessibilities" => Accessibility::select("id", "title")->get(),
+            "suitabilities" => Suitability::where("type", "service")
+                ->orWhere("type", null)
+                ->select("id", "title")
+                ->get(),
+            "subteams" => \Auth::user()
+                ->currentTeam->subteams()
+                ->select("id", "name")
+                ->get(),
         ]);
     }
 
@@ -107,15 +140,15 @@ class ServiceController extends Controller
      */
     public function update(ServiceRequest $request, Service $service)
     {
-        $this->authorize('update', $service);
+        $this->authorize("update", $service);
 
         $service->update($request->validated());
         $service->categories()->sync($request->categories);
         $service->accessibilities()->sync($request->accessibilities);
         $service->suitabilities()->sync($request->suitabilities);
-        $service->update(['updated_by' => \Auth::user()->id]);
+        $service->update(["updated_by" => \Auth::user()->id]);
 
-        return Redirect::route('service.edit', compact('service'));
+        return Redirect::route("service.edit", compact("service"));
     }
 
     /**
@@ -125,25 +158,25 @@ class ServiceController extends Controller
      */
     public function destroy(Request $request, Service $service)
     {
-        $this->authorize('delete', $service);
+        $this->authorize("delete", $service);
 
         $service->delete();
-        return Redirect::route('services.show');
+        return Redirect::route("services.show");
     }
 
     public function destroyAll(Request $request, $service_ids)
     {
-        $service_ids_array = explode('-', $service_ids);
-        $services_query = Service::whereIn('id', $service_ids_array);
+        $service_ids_array = explode("-", $service_ids);
+        $services_query = Service::whereIn("id", $service_ids_array);
 
         $services = $services_query->get();
 
         foreach ($services as $service) {
-            $this->authorize('delete', $service);
+            $this->authorize("delete", $service);
         }
 
         $services_query->delete();
 
-        return Redirect::route('services.show');
+        return Redirect::route("services.show");
     }
 }
