@@ -121,7 +121,10 @@
                 </svg> -->
         <p class="relative max-w-2xl mt-24 mb-3 text-gray-700">
           It will soon be possible for you to manage your
-          <a target="_blank" href="https://volunteerwakefield.org/"
+          <a
+            class="underline text-navy"
+            target="_blank"
+            href="https://volunteerwakefield.org/"
             >Volunteer Wakefield</a
           >
           opportunities directly from the Community Wakefield dashboard, meaning you’ll be
@@ -129,13 +132,17 @@
         </p>
         <p class="relative max-w-2xl mb-3 text-gray-700">
           From the public’s point of view nothing will change; they’ll still be able to
-          find opportunities through Volunteer Wakefield as normal.
+          find opportunities through Volunteer Wakefield as normal, but the change should
+          simplify things for organisations.
         </p>
         <p class="relative max-w-2xl text-gray-700">
           We’ll be in touch with all active users of Volunteer Wakefield to explain these
           changes in detail. For now, please continue to add your volunteering
           opportunities over on
-          <a target="_blank" href="https://volunteerwakefield.org/"
+          <a
+            class="underline text-navy"
+            target="_blank"
+            href="https://volunteerwakefield.org/"
             >Volunteer Wakefield</a
           >
           as normal.
