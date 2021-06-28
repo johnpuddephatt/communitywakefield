@@ -147,6 +147,7 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
                         ],
                     ]
                 )->middleware("team");
+
                 Route::delete("activity/destroyAll/{ids}", [
                     App\Http\Controllers\Dashboard\ActivityController::class,
                     "destroyAll",
@@ -161,8 +162,9 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
                         ],
                     ]
                 )->middleware("team");
-                Route::delete("activity/destroyAll/{ids}", [
-                    App\Http\Controllers\Dashboard\ActivityController::class,
+
+                Route::delete("event/destroyAll/{ids}", [
+                    App\Http\Controllers\Dashboard\EventController::class,
                     "destroyAll",
                 ])->name("events.destroy");
 
@@ -175,6 +177,7 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
                         ],
                     ]
                 )->middleware("team");
+
                 Route::delete("service/destroyAll/{ids}", [
                     App\Http\Controllers\Dashboard\ServiceController::class,
                     "destroyAll",
