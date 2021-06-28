@@ -220,7 +220,20 @@ export default {
   },
   methods: {
     select() {
-      this.selected = this.selectAll ? [] : this.events.map((o) => o.id);
+      if (this.selectAll) {
+        this.selected = [];
+      } else {
+        this.selected = this.events
+          .filter((event) => this.canDelete(event))
+          .map((event) => event.id);
+      }
+    },
+
+    canDelete(event) {
+      return (
+        event.created_by == this.$page.props.user.id ||
+        this.permissions.canDeleteTeamEntries
+      );
     },
 
     days_past(date) {
