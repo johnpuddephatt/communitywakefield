@@ -21,12 +21,20 @@ class ActivityController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('viewAny', Activity::class);
+        $this->authorize("viewAny", Activity::class);
 
-        return Inertia::render('Activities/Index', [
-            'activities' => \Auth::user()->currentTeam->activities()->with('subteam:id,name')->get()
+        return Inertia::render("Activities/Index", [
+            "activities" => \Auth::user()
+                ->currentTeam->activities()
+                ->with("subteam:id,name")
+                ->get(),
+            "permissions" => [
+                "canDeleteTeamEntries" => Gate::check(
+                    "delete",
+                    \Auth::user()->currentTeam
+                ),
+            ],
         ]);
-        ;
     }
 
     /**
@@ -35,13 +43,22 @@ class ActivityController extends Controller
      */
     public function create(Request $request)
     {
-        $this->authorize('create', Activity::class);
+        $this->authorize("create", Activity::class);
 
-        return Inertia::render('Activities/Form', [
-            'categories' => Category::where('type', 'activity')->orWhere('type', null)->select('id', 'title')->get(),
-            'accessibilities' => Accessibility::select('id', 'title')->get(),
-            'subteams' => \Auth::user()->currentTeam->subteams()->select('id', 'name')->get(),
-            'team' => \Auth::user()->currentTeam()->select('name', 'phone', 'email')->first()
+        return Inertia::render("Activities/Form", [
+            "categories" => Category::where("type", "activity")
+                ->orWhere("type", null)
+                ->select("id", "title")
+                ->get(),
+            "accessibilities" => Accessibility::select("id", "title")->get(),
+            "subteams" => \Auth::user()
+                ->currentTeam->subteams()
+                ->select("id", "name")
+                ->get(),
+            "team" => \Auth::user()
+                ->currentTeam()
+                ->select("name", "phone", "email")
+                ->first(),
         ]);
     }
 
@@ -51,14 +68,16 @@ class ActivityController extends Controller
      */
     public function store(ActivityRequest $request)
     {
-        $this->authorize('create', Activity::class);
+        $this->authorize("create", Activity::class);
 
-        $activity = Activity::create(array_merge($request->validated(), ['created_by' => \Auth::user()->id]));
+        $activity = Activity::create(
+            array_merge($request->validated(), ["created_by" => \Auth::user()->id])
+        );
         $activity->categories()->sync($request->categories);
         $activity->accessibilities()->sync($request->accessibilities);
 
-        return Redirect::route('activity.edit', [
-            'activity' => $activity
+        return Redirect::route("activity.edit", [
+            "activity" => $activity,
         ]);
     }
 
@@ -81,16 +100,28 @@ class ActivityController extends Controller
      */
     public function edit(Activity $activity)
     {
-        $this->authorize('update', $activity);
+        $this->authorize("update", $activity);
 
-        $activity->categories = $activity->categories()->allRelatedIds()->toArray();
-        $activity->accessibilities = $activity->accessibilities()->allRelatedIds()->toArray();
+        $activity->categories = $activity
+            ->categories()
+            ->allRelatedIds()
+            ->toArray();
+        $activity->accessibilities = $activity
+            ->accessibilities()
+            ->allRelatedIds()
+            ->toArray();
 
-        return Inertia::render('Activities/Form', [
-            'activity' => $activity,
-            'categories' => Category::where('type', 'activity')->orWhere('type', null)->select('id', 'title')->get(),
-            'accessibilities' => Accessibility::select('id', 'title')->get(),
-            'subteams' => \Auth::user()->currentTeam->subteams()->select('id', 'name')->get()
+        return Inertia::render("Activities/Form", [
+            "activity" => $activity,
+            "categories" => Category::where("type", "activity")
+                ->orWhere("type", null)
+                ->select("id", "title")
+                ->get(),
+            "accessibilities" => Accessibility::select("id", "title")->get(),
+            "subteams" => \Auth::user()
+                ->currentTeam->subteams()
+                ->select("id", "name")
+                ->get(),
         ]);
     }
 
@@ -101,14 +132,14 @@ class ActivityController extends Controller
      */
     public function update(ActivityRequest $request, Activity $activity)
     {
-        $this->authorize('update', $activity);
+        $this->authorize("update", $activity);
 
         $activity->update($request->validated());
         $activity->categories()->sync($request->categories);
         $activity->accessibilities()->sync($request->accessibilities);
-        $activity->update(['updated_by' => \Auth::user()->id]);
+        $activity->update(["updated_by" => \Auth::user()->id]);
 
-        return Redirect::route('activity.edit', compact('activity'));
+        return Redirect::route("activity.edit", compact("activity"));
     }
 
     /**
@@ -118,25 +149,25 @@ class ActivityController extends Controller
      */
     public function destroy(Request $request, Activity $activity)
     {
-        $this->authorize('delete', $activity);
+        $this->authorize("delete", $activity);
 
         $activity->delete();
-        return Redirect::route('activities.show');
+        return Redirect::route("activities.show");
     }
 
     public function destroyAll(Request $request, $activity_ids)
     {
-        $activity_ids_array = explode('-', $activity_ids);
-        $activities_query = Activity::whereIn('id', $activity_ids_array);
+        $activity_ids_array = explode("-", $activity_ids);
+        $activities_query = Activity::whereIn("id", $activity_ids_array);
 
         $activities = $activities_query->get();
 
         foreach ($activities as $activity) {
-            $this->authorize('delete', $activity);
+            $this->authorize("delete", $activity);
         }
 
         $activities_query->delete();
 
-        return Redirect::route('activities.show');
+        return Redirect::route("activities.show");
     }
 }

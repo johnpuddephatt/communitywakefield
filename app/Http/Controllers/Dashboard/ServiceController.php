@@ -29,6 +29,12 @@ class ServiceController extends Controller
                 ->currentTeam->services()
                 ->with("subteam:id,name")
                 ->get(),
+            "permissions" => [
+                "canDeleteTeamEntries" => Gate::check(
+                    "delete",
+                    \Auth::user()->currentTeam
+                ),
+            ],
         ]);
     }
 

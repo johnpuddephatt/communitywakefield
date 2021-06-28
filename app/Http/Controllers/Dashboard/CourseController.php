@@ -28,6 +28,12 @@ class CourseController extends Controller
                 ->currentTeam->courses()
                 ->with("subteam:id,name")
                 ->get(),
+            "permissions" => [
+                "canDeleteTeamEntries" => Gate::check(
+                    "delete",
+                    \Auth::user()->currentTeam
+                ),
+            ],
         ]);
     }
 

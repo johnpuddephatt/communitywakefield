@@ -41,8 +41,18 @@
                             <tr v-for="volunteering in volunteerings">
                                 <td class="px-6 py-3 text-center">
                                     <label class="form-checkbox">
-                                        <input type="checkbox" :value="volunteering.id" v-model="selected">
-                                        <i class="form-icon"></i>
+<input
+                      :disabled="!canDelete(volunteering)"
+                      type="checkbox"
+                      :value="volunteering.id"
+                      v-model="selected"
+                      :class="{ 'opacity-20 cursor-not-allowed': !canDelete(volunteering) }"
+                      :title="
+                        !canDelete(volunteering)
+                          ? 'You don’t have permission to delete this entry'
+                          : ''
+                      "
+                    />                                        <i class="form-icon"></i>
                                     </label>
                                 </td>
                                 <td class="px-6 py-4">
@@ -161,6 +171,7 @@ import JetSecondaryButton from "@/Jetstream/SecondaryButton";
 export default {
   props: {
     volunteerings: Array,
+    permissions: Object,
   },
   components: {
     AppLayout,
@@ -190,7 +201,20 @@ export default {
   },
   methods: {
     select() {
-      this.selected = this.selectAll ? [] : this.volunteerings.map((o) => o.id);
+      if (this.selectAll) {
+        this.selected = [];
+      } else {
+        this.selected = this.volunteerings
+          .filter((volunteering) => this.canDelete(volunteering))
+          .map((volunteering) => volunteering.id);
+      }
+    },
+
+    canDelete(volunteering) {
+      return (
+        volunteering.created_by == this.$page.props.user.id ||
+        this.permissions.canDeleteTeamEntries
+      );
     },
 
     days_past(date) {

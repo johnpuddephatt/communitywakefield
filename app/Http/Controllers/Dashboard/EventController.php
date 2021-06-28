@@ -28,6 +28,12 @@ class EventController extends Controller
                 ->currentTeam->events()
                 ->with("subteam:id,name")
                 ->get(),
+            "permissions" => [
+                "canDeleteTeamEntries" => Gate::check(
+                    "delete",
+                    \Auth::user()->currentTeam
+                ),
+            ],
         ]);
     }
 
