@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Category extends Model
 {
@@ -14,14 +15,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'title',
-        'slug',
-        'type',
-        'icon',
-        'image',
-        'colour',
-    ];
+    protected $fillable = ["title", "slug", "type", "icon", "image", "colour"];
 
     /**
      * The attributes that should be cast to native types.
@@ -29,31 +23,38 @@ class Category extends Model
      * @var array
      */
     protected $casts = [
-        'id' => 'integer',
+        "id" => "integer",
     ];
+
+    protected static function booted()
+    {
+        static::saving(function () {
+            Cache::flush();
+        });
+    }
 
     public function activities()
     {
-        return $this->morphedByMany(\App\Models\Activity::class, 'categorisable');
+        return $this->morphedByMany(\App\Models\Activity::class, "categorisable");
     }
 
     public function courses()
     {
-        return $this->morphedByMany(\App\Models\Course::class, 'categorisable');
+        return $this->morphedByMany(\App\Models\Course::class, "categorisable");
     }
 
     public function events()
     {
-        return $this->morphedByMany(\App\Models\Event::class, 'categorisable');
+        return $this->morphedByMany(\App\Models\Event::class, "categorisable");
     }
 
     public function services()
     {
-        return $this->morphedByMany(\App\Models\Service::class, 'categorisable');
+        return $this->morphedByMany(\App\Models\Service::class, "categorisable");
     }
 
     public function volunteerings()
     {
-        return $this->morphedByMany(\App\Models\Volunteering::class, 'categorisable');
+        return $this->morphedByMany(\App\Models\Volunteering::class, "categorisable");
     }
 }

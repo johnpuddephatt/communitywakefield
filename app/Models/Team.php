@@ -9,6 +9,7 @@ use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\Team as JetstreamTeam;
 use App\Scopes\NonPersonalTeamScope;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 class Team extends JetstreamTeam
 {
@@ -20,7 +21,7 @@ class Team extends JetstreamTeam
      * @var array
      */
     protected $casts = [
-        'personal_team' => 'boolean'
+        "personal_team" => "boolean",
     ];
 
     /**
@@ -29,15 +30,15 @@ class Team extends JetstreamTeam
      * @var array
      */
     protected $fillable = [
-        'name',
-        'personal_team',
-        'phone',
-        'email',
-        'website',
-        'auto_join',
-        'info',
-        'logo',
-        'slug'
+        "name",
+        "personal_team",
+        "phone",
+        "email",
+        "website",
+        "auto_join",
+        "info",
+        "logo",
+        "slug",
     ];
 
     protected static function booted()
@@ -45,6 +46,7 @@ class Team extends JetstreamTeam
         // static::addGlobalScope(new NonPersonalTeamScope);
         static::saving(function ($model) {
             $model->slug = Str::slug($model->name);
+            Cache::flush();
         });
     }
 
@@ -54,9 +56,9 @@ class Team extends JetstreamTeam
      * @var array
      */
     protected $dispatchesEvents = [
-        'created' => TeamCreated::class,
-        'updated' => TeamUpdated::class,
-        'deleted' => TeamDeleted::class,
+        "created" => TeamCreated::class,
+        "updated" => TeamUpdated::class,
+        "deleted" => TeamDeleted::class,
     ];
 
     public function subteams()
