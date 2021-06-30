@@ -131,21 +131,21 @@
       </div>
       @endif
 
-      @if($entry->skills_gained && $entry->skills_gained->count())
+      @if(!empty($entry->skills_gained))
       <div>
         <h3>Skills gained</h3>
         {{ is_array($entry->skills_gained) ? implode(', ', $entry->skills_gained) : $entry->skills_gained}}
       </div>
       @endif
 
-      @if($entry->skills_needed && $entry->skills_needed->count())
+      @if(!empty($entry->skills_needed))
       <div>
         <h3>Skills needed</h3>
         {{ is_array($entry->skills_needed) ? implode(', ', $entry->skills_needed) : $entry->skills_needed}}
       </div>
       @endif
 
-      @if($entry->requirements && $entry->requirements->count())
+      @if(!empty($entry->requirements))
       <div>
         <h3>Requirements</h3>
         {{ is_array($entry->requirements) ? implode(', ', $entry->requirements) : $entry->requirements}}
