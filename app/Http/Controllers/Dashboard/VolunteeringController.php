@@ -49,11 +49,15 @@ class VolunteeringController extends Controller
         return Inertia::render("Volunteering/Form", [
             "categories" => Category::where("type", "volunteering")
                 ->orWhere("type", null)
+                ->orderBy("title")
                 ->select("id", "title")
                 ->get(),
-            "accessibilities" => Accessibility::select("id", "title")->get(),
+            "accessibilities" => Accessibility::orderBy("title")
+                ->select("id", "title")
+                ->get(),
             "suitabilities" => Suitability::where("type", "volunteering")
                 ->orWhere("type", null)
+                ->orderBy("title")
                 ->select("id", "title")
                 ->get(),
             "requirements" => config("system.requirements"),
@@ -127,12 +131,16 @@ class VolunteeringController extends Controller
             "volunteering" => $volunteering,
             "categories" => Category::where("type", "volunteering")
                 ->orWhere("type", null)
+                ->orderBy("title")
                 ->select("id", "title")
                 ->get(),
-            "accessibilities" => Accessibility::select("id", "title")->get(),
+            "accessibilities" => Accessibility::orderBy("title")
+                ->select("id", "title")
+                ->get(),
             "requirements" => config("system.requirements"),
             "suitabilities" => Suitability::where("type", "volunteering")
                 ->orWhere("type", null)
+                ->orderBy("title")
                 ->select("id", "title")
                 ->get(),
             "skills" => config("system.skills"),

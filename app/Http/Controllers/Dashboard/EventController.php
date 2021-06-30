@@ -48,9 +48,12 @@ class EventController extends Controller
         return Inertia::render("Events/Form", [
             "categories" => Category::where("type", "event")
                 ->orWhere("type", null)
+                ->orderBy("title")
                 ->select("id", "title")
                 ->get(),
-            "accessibilities" => Accessibility::select("id", "title")->get(),
+            "accessibilities" => Accessibility::orderBy("title")
+                ->select("id", "title")
+                ->get(),
             "subteams" => \Auth::user()
                 ->currentTeam->subteams()
                 ->select("id", "name")
@@ -115,9 +118,12 @@ class EventController extends Controller
             "event" => $event,
             "categories" => Category::where("type", "event")
                 ->orWhere("type", null)
+                ->orderBy("title")
                 ->select("id", "title")
                 ->get(),
-            "accessibilities" => Accessibility::select("id", "title")->get(),
+            "accessibilities" => Accessibility::orderBy("title")
+                ->select("id", "title")
+                ->get(),
             "subteams" => \Auth::user()
                 ->currentTeam->subteams()
                 ->select("id", "name")

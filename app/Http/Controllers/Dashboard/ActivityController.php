@@ -48,9 +48,12 @@ class ActivityController extends Controller
         return Inertia::render("Activities/Form", [
             "categories" => Category::where("type", "activity")
                 ->orWhere("type", null)
+                ->orderBy("title")
                 ->select("id", "title")
                 ->get(),
-            "accessibilities" => Accessibility::select("id", "title")->get(),
+            "accessibilities" => Accessibility::orderBy("title")
+                ->select("id", "title")
+                ->get(),
             "subteams" => \Auth::user()
                 ->currentTeam->subteams()
                 ->select("id", "name")
@@ -115,9 +118,12 @@ class ActivityController extends Controller
             "activity" => $activity,
             "categories" => Category::where("type", "activity")
                 ->orWhere("type", null)
+                ->orderBy("title")
                 ->select("id", "title")
                 ->get(),
-            "accessibilities" => Accessibility::select("id", "title")->get(),
+            "accessibilities" => Accessibility::orderBy("title")
+                ->select("id", "title")
+                ->get(),
             "subteams" => \Auth::user()
                 ->currentTeam->subteams()
                 ->select("id", "name")

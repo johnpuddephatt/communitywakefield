@@ -49,11 +49,15 @@ class ServiceController extends Controller
         return Inertia::render("Services/Form", [
             "categories" => Category::where("type", "service")
                 ->orWhere("type", null)
+                ->orderBy("title")
                 ->select("id", "title")
                 ->get(),
-            "accessibilities" => Accessibility::select("id", "title")->get(),
+            "accessibilities" => Accessibility::orderBy("title")
+                ->select("id", "title")
+                ->get(),
             "suitabilities" => Suitability::where("type", "service")
                 ->orWhere("type", null)
+                ->orderBy("title")
                 ->select("id", "title")
                 ->get(),
             "subteams" => \Auth::user()
@@ -125,11 +129,15 @@ class ServiceController extends Controller
             "service" => $service,
             "categories" => Category::where("type", "service")
                 ->orWhere("type", null)
+                ->orderBy("title")
                 ->select("id", "title")
                 ->get(),
-            "accessibilities" => Accessibility::select("id", "title")->get(),
+            "accessibilities" => Accessibility::orderBy("title")
+                ->select("id", "title")
+                ->get(),
             "suitabilities" => Suitability::where("type", "service")
                 ->orWhere("type", null)
+                ->orderBy("title")
                 ->select("id", "title")
                 ->get(),
             "subteams" => \Auth::user()
