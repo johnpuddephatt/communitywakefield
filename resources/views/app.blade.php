@@ -26,6 +26,13 @@
 </head>
 
 <body class="font-sans antialiased bg-gradient-to-b from-indigo-50 to-white ">
+    @impersonating($guard = null)
+    <div class="py-2 text-xs font-semibold text-center text-green-800 bg-green-100 border-b border-green-400">
+        You are currently impersonating {{ Auth::user()->name }}. <a class="underline"
+            href="{{ route('impersonate.leave') }}">Leave impersonation</a>
+    </div>
+    @endImpersonating
+
     @inertia
 </body>
 

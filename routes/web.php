@@ -15,6 +15,8 @@ use Inertia\Inertia;
 |
 */
 
+Route::impersonate();
+
 Route::domain(config("system.volunteerwakefield_url"))->group(function () {
     Route::get("/", [
         App\Http\Controllers\VolunteerWakefield\HomeController::class,

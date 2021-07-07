@@ -14,6 +14,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 // use Laravel\Jetstream\HasTeams;
 use App\Traits\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Lab404\Impersonate\Models\Impersonate;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
@@ -24,6 +25,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use Impersonate;
 
     public static $filamentUserColumn = "is_admin";
 
@@ -65,14 +67,22 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public static $notificationEmails = [
         "TeamMemberAutojoined" => "Someone automatically joins an organisation I created",
-        "TeamMemberRequestReceived" => "Someone requests to join an organisation I administer",
-        "TeamMemberRequestApproved" => "My request to join an organisation has been approved",
+        "TeamMemberRequestReceived" =>
+            "Someone requests to join an organisation I administer",
+        "TeamMemberRequestApproved" =>
+            "My request to join an organisation has been approved",
         "EntryExpiresSoon" => "One of my listings will expire soon",
         "EntryExpired" => "One of my listings has expired",
         "EntryReported" => "An inaccuracy has been reported in one of my listings",
         "EnquiryCreated" => "An enquiry has been received about a listing I created",
-        "TeamEnquiryCreated" => "An enquiry has been received about any of my team’s listings",
+        "TeamEnquiryCreated" =>
+            "An enquiry has been received about any of my team’s listings",
     ];
+
+    public function canImpersonate()
+    {
+        return $this->is_admin == 1;
+    }
 
     public function receives($notification)
     {
