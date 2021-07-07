@@ -92,17 +92,17 @@ trait HasFiltersTrait
         $result = json_decode($response->getBody(), true)["result"];
 
         return $query
-            // ->distance($result["latitude"], $result["longitude"])
+            ->distance($result["latitude"], $result["longitude"])
             // ->having("distance", ">", 0)
-            ->geofence(
-                $result["latitude"],
-                $result["longitude"],
-                0,
-                config("system.max_radius")
-            )
-            ->orHavingRaw("from_home = 1");
-        // ->having("distance", "<", config("system.max_radius"))
-        // ->orderBy("distance", "ASC");
+            ->having("distance", "<", config("system.max_radius"))
+            // ->geofence(
+            //     $result["latitude"],
+            //     $result["longitude"],
+            //     0,
+            //     config("system.max_radius")
+            // )
+            ->orHavingRaw("from_home = 1")
+            ->orderBy("distance", "ASC");
     }
 
     public function scopeTeamFilter($query, $organisation)
