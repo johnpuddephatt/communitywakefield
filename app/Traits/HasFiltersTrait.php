@@ -102,6 +102,7 @@ trait HasFiltersTrait
             //     config("system.max_radius")
             // )
             ->orHavingRaw("from_home = 1")
+            ->orHavingRaw("address IS NULL")
             ->orderBy("distance", "ASC");
     }
 
