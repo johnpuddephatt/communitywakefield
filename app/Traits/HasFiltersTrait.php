@@ -93,7 +93,7 @@ trait HasFiltersTrait
 
         return $query
             ->distance($result["latitude"], $result["longitude"])
-            ->having("distance", ">", 0)
+            // ->having("distance", ">", 0)
             ->having("distance", "<", config("system.max_radius"))
             ->orderBy("distance", "ASC");
     }
