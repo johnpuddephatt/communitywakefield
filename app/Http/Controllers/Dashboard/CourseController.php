@@ -101,6 +101,48 @@ class CourseController extends Controller
      * @param \App\Models\Course $course
      * @return \Illuminate\Http\Response
      */
+    public function clone(Course $course)
+    {
+        $this->authorize("create", $course);
+
+        $course->id = null;
+        $course->created_by = null;
+        $course->updated_by = null;
+        $course->display_until = null;
+        $course->created_at = null;
+        $course->updated_at = null;
+
+        $course->categories = $course
+            ->categories()
+            ->allRelatedIds()
+            ->toArray();
+        $course->accessibilities = $course
+            ->accessibilities()
+            ->allRelatedIds()
+            ->toArray();
+
+        return Inertia::render("Courses/Form", [
+            "course" => $course,
+            "accessibilities" => Accessibility::orderBy("title")
+                ->select("id", "title")
+                ->get(),
+            "categories" => Category::where("type", "course")
+                ->orWhere("type", null)
+                ->orderBy("title")
+                ->select("id", "title")
+                ->get(),
+            "subteams" => \Auth::user()
+                ->currentTeam->subteams()
+                ->select("id", "name")
+                ->get(),
+        ]);
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Course $course
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Course $course)
     {
         $this->authorize("update", $course);

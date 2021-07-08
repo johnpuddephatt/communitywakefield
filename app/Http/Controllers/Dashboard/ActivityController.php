@@ -101,6 +101,48 @@ class ActivityController extends Controller
      * @param \App\Models\Activity $activity
      * @return \Illuminate\Http\Response
      */
+    public function clone(Activity $activity)
+    {
+        $this->authorize("create", $activity);
+
+        $activity->id = null;
+        $activity->created_by = null;
+        $activity->updated_by = null;
+        $activity->display_until = null;
+        $activity->created_at = null;
+        $activity->updated_at = null;
+
+        $activity->categories = $activity
+            ->categories()
+            ->allRelatedIds()
+            ->toArray();
+        $activity->accessibilities = $activity
+            ->accessibilities()
+            ->allRelatedIds()
+            ->toArray();
+
+        return Inertia::render("Activities/Form", [
+            "activity" => $activity,
+            "categories" => Category::where("type", "activity")
+                ->orWhere("type", null)
+                ->orderBy("title")
+                ->select("id", "title")
+                ->get(),
+            "accessibilities" => Accessibility::orderBy("title")
+                ->select("id", "title")
+                ->get(),
+            "subteams" => \Auth::user()
+                ->currentTeam->subteams()
+                ->select("id", "name")
+                ->get(),
+        ]);
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Activity $activity
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Activity $activity)
     {
         $this->authorize("update", $activity);

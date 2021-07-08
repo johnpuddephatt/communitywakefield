@@ -47,6 +47,7 @@ class ServiceController extends Controller
         $this->authorize("create", Service::class);
 
         return Inertia::render("Services/Form", [
+            "service" => isset($request->existing_data) ? $request->existing_data : null,
             "categories" => Category::where("type", "service")
                 ->orWhere("type", null)
                 ->orderBy("title")
@@ -101,6 +102,57 @@ class ServiceController extends Controller
         // return Inertia::render('Services/Form', [
         //     'service' => $service
         // ]);
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Service $service
+     * @return \Illuminate\Http\Response
+     */
+    public function clone(Service $service)
+    {
+        $this->authorize("create", $service);
+
+        $service->id = null;
+        $service->created_by = null;
+        $service->updated_by = null;
+        $service->display_until = null;
+        $service->created_at = null;
+        $service->updated_at = null;
+
+        $service->categories = $service
+            ->categories()
+            ->allRelatedIds()
+            ->toArray();
+        $service->accessibilities = $service
+            ->accessibilities()
+            ->allRelatedIds()
+            ->toArray();
+        $service->suitabilities = $service
+            ->suitabilities()
+            ->allRelatedIds()
+            ->toArray();
+
+        return Inertia::render("Services/Form", [
+            "service" => $service,
+            "categories" => Category::where("type", "service")
+                ->orWhere("type", null)
+                ->orderBy("title")
+                ->select("id", "title")
+                ->get(),
+            "accessibilities" => Accessibility::orderBy("title")
+                ->select("id", "title")
+                ->get(),
+            "suitabilities" => Suitability::where("type", "service")
+                ->orWhere("type", null)
+                ->orderBy("title")
+                ->select("id", "title")
+                ->get(),
+            "subteams" => \Auth::user()
+                ->currentTeam->subteams()
+                ->select("id", "name")
+                ->get(),
+        ]);
     }
 
     /**

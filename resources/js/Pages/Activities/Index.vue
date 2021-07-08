@@ -97,6 +97,11 @@
                   </span>
                 </td>
                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                  <inertia-link
+                    class="pr-3 text-indigo-600 hover:text-indigo-900"
+                    :href="route('activity.clone', { activity: activity.id })"
+                    >Clone</inertia-link
+                  >
                   <a
                     :href="route('activity.edit', activity.id)"
                     class="pr-6 text-indigo-600 hover:text-indigo-900"

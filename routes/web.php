@@ -150,6 +150,11 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
                     ]
                 )->middleware("team");
 
+                Route::get("activity/{activity}/clone", [
+                    App\Http\Controllers\Dashboard\ActivityController::class,
+                    "clone",
+                ])->name("activity.clone");
+
                 Route::delete("activity/destroyAll/{ids}", [
                     App\Http\Controllers\Dashboard\ActivityController::class,
                     "destroyAll",
@@ -164,6 +169,11 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
                         ],
                     ]
                 )->middleware("team");
+
+                Route::get("event/{event}/clone", [
+                    App\Http\Controllers\Dashboard\EventController::class,
+                    "clone",
+                ])->name("event.clone");
 
                 Route::delete("event/destroyAll/{ids}", [
                     App\Http\Controllers\Dashboard\EventController::class,
@@ -180,6 +190,11 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
                     ]
                 )->middleware("team");
 
+                Route::get("service/{service}/clone", [
+                    App\Http\Controllers\Dashboard\ServiceController::class,
+                    "clone",
+                ])->name("service.clone");
+
                 Route::delete("service/destroyAll/{ids}", [
                     App\Http\Controllers\Dashboard\ServiceController::class,
                     "destroyAll",
@@ -194,6 +209,12 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
                         ],
                     ]
                 )->middleware("team");
+
+                Route::get("volunteering/{volunteering}/clone", [
+                    App\Http\Controllers\Dashboard\VolunteeringController::class,
+                    "clone",
+                ])->name("volunteering.clone");
+
                 Route::delete("volunteering/destroyAll/{ids}", [
                     App\Http\Controllers\Dashboard\VolunteeringController::class,
                     "destroyAll",
@@ -208,6 +229,12 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
                         ],
                     ]
                 )->middleware("team");
+
+                Route::get("course/{course}/clone", [
+                    App\Http\Controllers\Dashboard\CourseController::class,
+                    "clone",
+                ])->name("course.clone");
+
                 Route::delete("course/destroyAll/{ids}", [
                     App\Http\Controllers\Dashboard\CourseController::class,
                     "destroyAll",
@@ -217,14 +244,17 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
                     App\Http\Controllers\SubteamController::class,
                     "store",
                 ])->name("subteam.store");
+
                 Route::delete("teams/{team}/subteams/{subteam}/destroy", [
                     App\Http\Controllers\SubteamController::class,
                     "destroy",
                 ])->name("subteam.destroy");
+
                 Route::put("teams/{team}/subteams/{subteam}/update", [
                     App\Http\Controllers\SubteamController::class,
                     "update",
                 ])->name("subteam.update");
+
                 Route::get("teams/{team}/subteams/{subteam}/edit", [
                     App\Http\Controllers\SubteamController::class,
                     "edit",
@@ -234,6 +264,7 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
                     App\Http\Controllers\TeamController::class,
                     "join",
                 ])->name("teams.join");
+
                 Route::post("team/{team}/request", [
                     App\Http\Controllers\TeamController::class,
                     "request",
@@ -243,6 +274,7 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
                     App\Http\Controllers\TeamController::class,
                     "approveRequest",
                 ])->name("teams.approveRequest");
+
                 Route::get("team/{team}/request/{teamRequest}/approve", [
                     App\Http\Controllers\TeamController::class,
                     "approveRequest",

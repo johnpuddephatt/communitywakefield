@@ -152,6 +152,59 @@ class VolunteeringController extends Controller
     }
 
     /**
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Volunteering $volunteering
+     * @return \Illuminate\Http\Response
+     */
+    public function clone(Volunteering $volunteering)
+    {
+        $this->authorize("create", $volunteering);
+
+        $volunteering->id = null;
+        $volunteering->created_by = null;
+        $volunteering->updated_by = null;
+        $volunteering->display_until = null;
+        $volunteering->created_at = null;
+        $volunteering->updated_at = null;
+
+        $volunteering->categories = $volunteering
+            ->categories()
+            ->allRelatedIds()
+            ->toArray();
+        $volunteering->accessibilities = $volunteering
+            ->accessibilities()
+            ->allRelatedIds()
+            ->toArray();
+        $volunteering->suitabilities = $volunteering
+            ->suitabilities()
+            ->allRelatedIds()
+            ->toArray();
+
+        return Inertia::render("Volunteering/Form", [
+            "volunteering" => $volunteering,
+            "categories" => Category::where("type", "volunteering")
+                ->orWhere("type", null)
+                ->orderBy("title")
+                ->select("id", "title")
+                ->get(),
+            "accessibilities" => Accessibility::orderBy("title")
+                ->select("id", "title")
+                ->get(),
+            "requirements" => config("system.requirements"),
+            "suitabilities" => Suitability::where("type", "volunteering")
+                ->orWhere("type", null)
+                ->orderBy("title")
+                ->select("id", "title")
+                ->get(),
+            "skills" => config("system.skills"),
+            "subteams" => \Auth::user()
+                ->currentTeam->subteams()
+                ->select("id", "name")
+                ->get(),
+        ]);
+    }
+
+    /**
      * @param \App\Http\Requests\VolunteeringRequest $request
      * @param \App\Models\Volunteering $volunteering
      * @return \Illuminate\Http\Response

@@ -132,6 +132,48 @@ class EventController extends Controller
     }
 
     /**
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Event $event
+     * @return \Illuminate\Http\Response
+     */
+    public function clone(Event $event)
+    {
+        $this->authorize("create", $event);
+
+        $event->id = null;
+        $event->created_by = null;
+        $event->updated_by = null;
+        $event->display_until = null;
+        $event->created_at = null;
+        $event->updated_at = null;
+
+        $event->categories = $event
+            ->categories()
+            ->allRelatedIds()
+            ->toArray();
+        $event->accessibilities = $event
+            ->accessibilities()
+            ->allRelatedIds()
+            ->toArray();
+
+        return Inertia::render("Events/Form", [
+            "event" => $event,
+            "categories" => Category::where("type", "event")
+                ->orWhere("type", null)
+                ->orderBy("title")
+                ->select("id", "title")
+                ->get(),
+            "accessibilities" => Accessibility::orderBy("title")
+                ->select("id", "title")
+                ->get(),
+            "subteams" => \Auth::user()
+                ->currentTeam->subteams()
+                ->select("id", "name")
+                ->get(),
+        ]);
+    }
+
+    /**
      * @param \App\Http\Requests\EventRequest $request
      * @param \App\Models\Event $event
      * @return \Illuminate\Http\Response
