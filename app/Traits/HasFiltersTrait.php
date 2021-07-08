@@ -93,17 +93,11 @@ trait HasFiltersTrait
 
         return $query
             ->distance($result["latitude"], $result["longitude"])
-            // ->having("distance", ">", 0)
+            ->having("distance", ">", 0)
             ->having("distance", "<", config("system.max_radius"))
-            // ->geofence(
-            //     $result["latitude"],
-            //     $result["longitude"],
-            //     0,
-            //     config("system.max_radius")
-            // )
             ->orHavingRaw("from_home = 1")
             ->orHavingRaw("address IS NULL")
-            ->orderBy("distance", "ASC");
+            ->orderByRaw("-distance DESC");
     }
 
     public function scopeTeamFilter($query, $organisation)
