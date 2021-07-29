@@ -16,10 +16,13 @@ class HomeController extends Controller
 
     public function search(Request $request)
     {
-        return redirect()->route(
-            $request->input("category") . ".index",
-            Request()->except("category")
-        );
+        if ($request->input("category")) {
+            return redirect()->route(
+                $request->input("category") . ".index",
+                Request()->except("category")
+            );
+        }
+        return redirect()->back();
     }
 
     public function location(Request $request, Location $location)
