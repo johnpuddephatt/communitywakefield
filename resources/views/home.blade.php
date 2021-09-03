@@ -121,7 +121,7 @@
     <div class="pullout--image">
       <img src="/images/three-laughing-women.jpg" alt="Three woman stood laughing with each other" />
     </div>
-    <h2 class="section-title">Together, for a happier, healthier Wakefield District</h2>
+    <h2 class="section-title">Together, for a happier, healthier <strong>Wakefield District.</strong></h2>
 
   </div>
 </section>
