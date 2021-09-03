@@ -27,7 +27,7 @@ Route::domain(config("system.volunteerwakefield_url"))->group(function () {
         "index",
     ])->name("opportunities.index");
 
-    Route::get("opportunity/{entry:slug}", [
+    Route::get("opportunity/{team:slug}/{volunteering:slug}", [
         App\Http\Controllers\VolunteerWakefield\VolunteeringController::class,
         "single",
     ])->name("opportunities.single");
@@ -63,10 +63,6 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
         App\Http\Controllers\ActivityController::class,
         "index",
     ])->name("activities.index");
-    Route::get("activity/{entry:slug}", [
-        App\Http\Controllers\ActivityController::class,
-        "single",
-    ])->name("activities.single");
     Route::get("activity/{entry:slug}/enquire", [
         App\Http\Controllers\ActivityController::class,
         "enquire",
@@ -75,15 +71,15 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
         App\Http\Controllers\ActivityController::class,
         "storeEnquiry",
     ])->name("activities.enquire.store");
+    Route::get("activity/{team:slug}/{activity:slug}", [
+        App\Http\Controllers\ActivityController::class,
+        "single",
+    ])->name("activities.single");
 
     Route::get("services/{location:slug?}", [
         App\Http\Controllers\ServiceController::class,
         "index",
     ])->name("services.index");
-    Route::get("service/{entry:slug}", [
-        App\Http\Controllers\ServiceController::class,
-        "single",
-    ])->name("services.single");
     Route::get("service/{entry:slug}/enquire", [
         App\Http\Controllers\ServiceController::class,
         "enquire",
@@ -92,15 +88,15 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
         App\Http\Controllers\ServiceController::class,
         "storeEnquiry",
     ])->name("services.enquire.store");
+    Route::get("service/{team:slug}/{service:slug}", [
+        App\Http\Controllers\ServiceController::class,
+        "single",
+    ])->name("services.single");
 
     Route::get("events/{location:slug?}", [
         App\Http\Controllers\EventController::class,
         "index",
     ])->name("events.index");
-    Route::get("/event/{entry:slug}", [
-        App\Http\Controllers\EventController::class,
-        "single",
-    ])->name("events.single");
     Route::get("/event/{entry:slug}/enquire", [
         App\Http\Controllers\EventController::class,
         "enquire",
@@ -109,15 +105,15 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
         App\Http\Controllers\EventController::class,
         "storeEnquiry",
     ])->name("events.enquire.store");
+    Route::get("/event/{team:slug}/{event:slug}", [
+        App\Http\Controllers\EventController::class,
+        "single",
+    ])->name("events.single");
 
     Route::get("courses/{location:slug?}", [
         App\Http\Controllers\CourseController::class,
         "index",
     ])->name("courses.index");
-    Route::get("course/{entry:slug}", [
-        App\Http\Controllers\CourseController::class,
-        "single",
-    ])->name("courses.single");
     Route::get("course/{entry:slug}/enquire", [
         App\Http\Controllers\CourseController::class,
         "enquire",
@@ -126,6 +122,10 @@ Route::domain(config("system.communitywakefield_url"))->group(function () {
         App\Http\Controllers\CourseController::class,
         "storeEnquiry",
     ])->name("courses.enquire.store");
+    Route::get("course/{team:slug}/{course:slug}", [
+        App\Http\Controllers\CourseController::class,
+        "single",
+    ])->name("courses.single");
 
     Route::middleware(["auth:sanctum", "verified"])
         ->get("/dashboard", function () {

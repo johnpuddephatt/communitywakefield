@@ -15,13 +15,15 @@
           Wakefield District.</h2>
         <form method="GET" action="{{ route('home.search') }}">
           <label for="hero-categories" class="hero--search-box--label">I’m looking for...</label>
-          <select id="hero-categories" class="input hero--search-box--select" name="category" class="input">
-            <option selected value="services">Services</option>
-            {{-- <option value="opportunities">Volunteering</option> --}}
-            <option value="courses">Courses</option>
-            <option value="activities">Activities</option>
-            <option value="events">Events</option>
-          </select>
+          <div class="select">
+            <select id="hero-categories" class="hero--search-box--select" name="category">
+              <option selected value="services">Services</option>
+              {{-- <option value="opportunities">Volunteering</option> --}}
+              <option value="courses">Courses</option>
+              <option value="activities">Activities</option>
+              <option value="events">Events</option>
+            </select>
+          </div>
           <div class="hero--search-box--postcode">
             <input class="input" type="text" name="postcode" placeholder="Enter postcode">
             <button class="button" type="submit">
@@ -42,13 +44,13 @@
     <h2 class="section-title">Search the district.</h2>
     <form method="POST">
       @csrf
-      <p class="district--intro">Show me <select name="category" class="input">
-          <option selected value="services">services</option>
-          {{-- <option value="opportunities">volunteering</option> --}}
-          <option value="courses">courses</option>
-          <option value="activities">activities</option>
-          <option value="events">events</option>
-        </select> near to...</p>
+      <div class="district--intro">Show me <div class="select"><select name="category">
+            <option selected value="services">services</option>
+            {{-- <option value="opportunities">volunteering</option> --}}
+            <option value="courses">courses</option>
+            <option value="activities">activities</option>
+            <option value="events">events</option>
+          </select></div> near to...</div>
 
       <div class="district--grid">
         @foreach($locations as $location)

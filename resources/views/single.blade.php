@@ -7,7 +7,7 @@
   <div class="entry-single--main">
     <a class="entry-single--back-link" href="{{ route(strtolower(get_class($entry)::$name) . '.index') }}">&larr; Back
       to all
-      {{ Str::plural(strtolower(get_class($entry)::$name)) }}</a>
+      {{ strtolower(get_class($entry)::$name) }}</a>
     <div class="entry-single--title-wrapper">
 
       <h2 class="entry-single--title">{{ $entry->title}}</h2>

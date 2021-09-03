@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller as Controller;
 
 use App\Http\Requests\VolunteeringRequest;
 use App\Models\Volunteering;
+use App\Models\Team;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -17,9 +18,9 @@ use Redirect;
 
 class VolunteeringController extends Controller
 {
-    public function single(Volunteering $entry)
+    public function single(Team $team, Volunteering $volunteering)
     {
-        return view("single", compact("entry"));
+        return view("single", ["entry" => $volunteering]);
     }
 
     public function index(Request $request, Location $location = null)

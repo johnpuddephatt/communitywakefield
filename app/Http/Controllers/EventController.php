@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use App\Http\Controllers\EnquiryController;
 
 class EventController extends Controller
 {
-    public function single(Event $entry)
+    public function single(Team $team, Event $event)
     {
-        return view("single", compact("entry"));
+        return view("single", ["entry" => $event]);
     }
 
     public function index(Request $request, Location $location = null)

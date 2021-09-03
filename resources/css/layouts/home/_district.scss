@@ -7,6 +7,7 @@
 
   .section-title {
     font-size: ms(5);
+    margin-bottom: 1.5 * $spacing;
     @include mq(md) {
       font-size: ms(8);
     }
@@ -16,11 +17,11 @@
 
 .district {
   &--intro {
-    font-size: ms(1);
+    font-size: ms(2);
     margin-top: $spacing/2;
     margin-bottom: $spacing;
-    select {
-      font-size: inherit;
+    .select {
+      display: inline-flex;
     }
   }
 
@@ -32,10 +33,8 @@
   }
 
   &--button {
-    flex: 0 0 100%;
-    @include mq(sm) {
-      flex: 0 0 calc(50% - 1rem / 2);
-    }
+    min-height: 3 * $spacing;
+    flex: 0 0 calc(50% - 1rem / 2);
     @include mq(lg) {
       flex: 0 0 calc(33.3% - 2rem / 3);
     }

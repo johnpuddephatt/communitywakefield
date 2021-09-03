@@ -30,7 +30,7 @@ class UpdateTeamName implements UpdatesTeamNames
             "phone" => ["nullable", "string"],
             "email" => ["nullable", "string"],
             "auto_join" => ["nullable", "string"],
-            "info" => ["nullable", "string:500"],
+            "info" => ["nullable", "string:300"],
         ])->validateWithBag("updateTeamName");
 
         if (isset($input["logo"])) {

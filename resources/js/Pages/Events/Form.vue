@@ -266,10 +266,11 @@
 
             <template #form>
               <div class="col-span-6 sm:col-span-4">
-                <jet-label for="booking_link" value="Booking link" />
+                <jet-label for="booking_link" value="Website booking link" />
                 <jet-input
                   id="booking_link"
-                  type="text"
+                  placeholder="http://www..."
+                  type="url"
                   class="block w-full mt-1"
                   v-model="form.booking_link"
                 />

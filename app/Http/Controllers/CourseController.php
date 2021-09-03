@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use App\Http\Controllers\EnquiryController;
 
 class CourseController extends Controller
 {
-    public function single(Course $entry)
+    public function single(Team $team, Course $course)
     {
-        return view("single", compact("entry"));
+        return view("single", ["entry" => $course]);
     }
 
     public function index(Request $request, Location $location = null)

@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\Location;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use App\Http\Controllers\EnquiryController;
 
 class ActivityController extends Controller
 {
-    public function single(Activity $entry)
+    public function single(Team $team, Activity $activity)
     {
-        return view("single", compact("entry"));
+        return view("single", ["entry" => $activity]);
     }
 
     public function index(Request $request, Location $location = null)
