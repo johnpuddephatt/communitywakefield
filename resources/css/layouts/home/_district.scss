@@ -58,6 +58,11 @@
       height: 5em;
       padding-left: 1em;
       margin-left: auto;
+      display: none;
+
+      @include mq(md) {
+        display: block;
+      }
 
       * {
         fill: $brand-blue-light;
