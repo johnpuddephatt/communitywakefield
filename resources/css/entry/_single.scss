@@ -113,6 +113,10 @@
     li {
       list-style-type: disc;
       list-style-position: outside;
+
+      p {
+        margin-bottom: 0;
+      }
     }
 
     li[data-list="ordered"] {

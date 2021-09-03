@@ -22,6 +22,7 @@ class CourseController extends Controller
             ->categoryFilter($request->input("category"))
             ->locationFilter($location)
             ->orderBy("created_at", "desc")
+            ->with("team")
             ->paginate(config("system.results_per_page"));
 
         $filters = Course::filters(["postcode", "team", "categories"]);

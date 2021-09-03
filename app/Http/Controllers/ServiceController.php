@@ -24,6 +24,7 @@ class ServiceController extends Controller
             ->locationFilter($location)
             ->categoryFilter($request->input("category"))
             ->orderBy("created_at", "desc")
+            ->with("team")
             ->paginate(config("system.results_per_page"));
 
         $filters = Service::filters(["postcode", "suitabilities", "team", "categories"]);

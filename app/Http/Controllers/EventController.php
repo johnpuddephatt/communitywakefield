@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Team;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\EnquiryController;
 
@@ -21,7 +22,9 @@ class EventController extends Controller
             ->teamFilter($request->input("team"))
             ->categoryFilter($request->input("category"))
             ->locationFilter($location)
-            ->orderBy("created_at", "desc")
+            ->where("start_date", ">=", Carbon::now()->toDateTimeString())
+            ->orderBy("start_date", "asc")
+            ->with("team")
             ->paginate(config("system.results_per_page"));
 
         $filters = Event::filters(["postcode", "team", "categories"]);

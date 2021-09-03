@@ -31,6 +31,7 @@ class VolunteeringController extends Controller
             ->suitabilityFilter($request->input("suitability"))
             ->locationFilter($location)
             ->orderBy("created_at", "desc")
+            ->with("team")
             ->paginate(config("system.results_per_page"));
 
         $filters = Volunteering::filters(["postcode", "team", "categories"]);
