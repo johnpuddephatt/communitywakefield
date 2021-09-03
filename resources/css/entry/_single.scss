@@ -1,6 +1,11 @@
 .entry-single {
   margin-top: 2 * $spacing;
 
+  &--back-link {
+    display: inline-block;
+    margin-bottom: $spacing;
+  }
+
   &--main {
     @extend %heavily-padded-box;
 
@@ -13,6 +18,20 @@
       max-width: 100%;
       border-top-left-radius: 0 !important;
       border-bottom-left-radius: 0 !important;
+    }
+
+    border-top: $spacing/3 solid $brand-blue;
+
+    .entry-single__activities & {
+      border-top-color: $brand-pink;
+    }
+
+    .entry-single__courses & {
+      border-top-color: $brand-orange;
+    }
+
+    .entry-single__events & {
+      border-top-color: $brand-green-light;
     }
   }
 
@@ -55,6 +74,10 @@
     font-size: ms(3);
     color: $brand-blue-dark;
     margin-bottom: 0;
+
+    @include mq(xl) {
+      font-size: ms(5);
+    }
   }
 
   &--intro {

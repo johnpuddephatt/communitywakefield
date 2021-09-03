@@ -16,6 +16,7 @@ body {
 
 main {
   min-height: calc(100vh - #{$navbar-height});
+  z-index: 99;
 }
 
 #app {

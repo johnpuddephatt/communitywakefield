@@ -2,9 +2,14 @@
 
 @section('content')
 
-<div class="container container__row-reverse entry-single">
+<div class="container container__row-reverse entry-single entry-single__{{ strtolower(get_class($entry)::$name) }}">
+
   <div class="entry-single--main">
+    <a class="entry-single--back-link" href="{{ route(strtolower(get_class($entry)::$name) . '.index') }}">&larr; Back
+      to all
+      {{ Str::plural(strtolower(get_class($entry)::$name)) }}</a>
     <div class="entry-single--title-wrapper">
+
       <h2 class="entry-single--title">{{ $entry->title}}</h2>
       <a class="button button__secondary entry-single--enquire-button"
         href="{{ route(strtolower(get_class($entry)::$name) . '.enquire', ['entry' => $entry ])}}">Enquire</a>
@@ -51,9 +56,11 @@
       @if($entry->booking_link || $entry->booking_instructions)
       <div class="entry-single--book">
         <h3>How to book</h3>
-        {!! nl2br(htmlspecialchars($entry->booking_instructions)) ?? 'You can book using the button below.' !!}
+        <p>
+          {!! nl2br(htmlspecialchars($entry->booking_instructions)) ?? 'You can book using the button below.' !!}
+        </p>
         @if($entry->booking_link)
-        <a href="{{ $entry->booking_link }}" target="_blank" class="button">Book</a>
+        <a href="{{ $entry->booking_link }}" target="_blank" class="button">Book now</a>
         @endif
       </div>
       @endif
@@ -180,6 +187,11 @@
     @if($entry->email)
     <div class="entry-single--sidebar--email">
       <x-icon.email /> <a href="mailto:{{ $entry->email }}">{{ $entry->email }}</a></div>
+    @endif
+    @if($entry->team->website)
+    <div class="entry-single--sidebar--website">
+      <x-icon.website /> <a target="_blank"
+        href="{{ $entry->team->website }}">{{ str_replace('http://', '', $entry->team->website) }}</a></div>
     @endif
     {{-- <a class="button button__inverted" href="{{ route('entry.index') }}?{{ http_build_query(['organisation' => $entry->team->slug]) }}">See
     all opportunities with this organisation</a> --}}

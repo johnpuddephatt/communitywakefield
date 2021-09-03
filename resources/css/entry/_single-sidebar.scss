@@ -8,6 +8,19 @@
   @extend %padded-box;
 
   background-color: lighten($brand-blue, 35%) !important;
+
+  .entry-single__activities & {
+    background-color: lighten($brand-pink, 40%) !important;
+  }
+
+  .entry-single__courses & {
+    background-color: lighten($brand-orange, 40%) !important;
+  }
+
+  .entry-single__events & {
+    background-color: lighten($brand-green-light, 25%) !important;
+  }
+
   box-shadow: none;
 
   &--photo {
@@ -19,6 +32,18 @@
     max-width: none;
     display: block;
     background-color: $brand-blue;
+
+    .entry-single__activities & {
+      background-color: $brand-pink;
+    }
+
+    .entry-single__courses & {
+      background-color: $brand-orange;
+    }
+
+    .entry-single__events & {
+      background-color: $brand-green-light;
+    }
   }
 
   &--logo {
@@ -42,26 +67,28 @@
     font-family: $font-family-base;
     margin-top: $spacing;
     margin-bottom: $spacing/2;
+
+    + .entry-single--sidebar--name {
+      margin-top: -$spacing/4;
+    }
   }
 
   &--info {
     margin-bottom: $spacing;
   }
 
-  &--email {
+  &--email,
+  &--website {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   &--email,
-  &--phone {
+  &--phone,
+  &--website {
     svg {
       opacity: 0.5;
     }
-  }
-
-  &--email {
-    margin-bottom: $spacing;
   }
 }
