@@ -5,6 +5,7 @@ if (!function_exists("sanitize_html")) {
     {
         $data = strip_tags($data, "<h3><p><a><ul><ol><li><blockquote><strong><em>");
         $data = str_replace("<p></p>", "", $data);
+        $data = str_replace("•  ", "", $data);
         return str_replace("<p>&nbsp;</p>", "", $data);
     }
 }
