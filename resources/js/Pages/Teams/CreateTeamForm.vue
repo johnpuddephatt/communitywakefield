@@ -82,7 +82,7 @@
           v-model="form.website"
         />
         <jet-input-error :message="form.errors.website" class="mt-2" />
-        <p class="mt-1 ml-6 text-xs text-gray-700 font-italic">
+        <p class="mt-1 text-xs text-gray-700 font-italic">
           Must begin http:// or https://
         </p>
       </div>
