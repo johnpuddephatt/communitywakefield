@@ -1,7 +1,7 @@
 <?php
 
 return [
-    "validity" => 90,
+    "validity" => 180,
     "max_radius" => 8,
     "max_days_for_new" => 7,
     "results_per_page" => 12,
