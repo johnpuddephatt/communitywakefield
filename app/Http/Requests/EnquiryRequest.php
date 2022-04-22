@@ -24,14 +24,11 @@ class EnquiryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:200'],
-            'phone' => ['string', 'max:20'],
-            'email' => ['email', 'max:60'],
-            'message' => ['required', 'string'],
-            'name' => ['required', 'string', 'max:200'],
-            'phone' => ['string', 'max:20'],
-            'email' => ['email', 'max:60'],
-            'message' => ['required', 'string'],
+            "name" => ["required", "string", "max:200"],
+            "phone" => ["string", "max:20"],
+            "email" => ["email", "max:60"],
+            "message" => ["required", "string"],
+            "website" => ["string"],
         ];
     }
 }
