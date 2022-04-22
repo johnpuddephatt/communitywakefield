@@ -44,6 +44,7 @@ class ServiceController extends Controller
             "phone" => $request->phone,
             "email" => $request->email,
             "message" => $request->message,
+            "website" => $request->website,
         ]);
     }
 }

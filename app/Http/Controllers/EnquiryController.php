@@ -14,8 +14,7 @@ class EnquiryController extends Controller
      */
     public static function store($entry, $data)
     {
-        dd($data);
-        if ($data["website"]) {
+        if (isset($data["website"]) && $data["website"]) {
             return redirect()
                 ->back()
                 ->with("message", "Your enquiry could not be sent!");
