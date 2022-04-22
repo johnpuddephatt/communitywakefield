@@ -14,6 +14,7 @@ class EnquiryController extends Controller
      */
     public static function store($entry, $data)
     {
+        dd($data);
         if ($data["website"]) {
             return redirect()
                 ->back()
