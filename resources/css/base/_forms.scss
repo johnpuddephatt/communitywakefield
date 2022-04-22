@@ -1,4 +1,8 @@
 .form-group {
+  &.website {
+    display: none; // Used for spam control
+  }
+
   @include mq(lg) {
     display: flex;
     flex-direction: row;

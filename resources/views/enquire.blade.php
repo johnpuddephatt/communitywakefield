@@ -22,6 +22,10 @@
         <label for="email" class="control-label">Email</label>
         <input name="email" type="text" id="email" class="input">
       </div>
+      <div class="form-group website">
+        <label for="website" class="control-label">Website</label>
+        <input name="website" type="text" id="website" class="input">
+      </div>
       <div class="form-group">
         <label for="phone" class="control-label">Phone</label>
         <input name="phone" type="text" id="phone" class="input"></div>
