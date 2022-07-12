@@ -86,9 +86,7 @@ trait HasFiltersTrait
         );
 
         if ($response->getStatusCode() != 200) {
-            redirect("/")
-                ->send()
-                ->with("postcode_error", "Please enter a full, valid postcode");
+            redirect("/invalid-postcode")->send();
         }
 
         $result = json_decode($response->getBody(), true)["result"];

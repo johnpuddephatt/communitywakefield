@@ -46,6 +46,10 @@ Route::domain(config("system.volunteerwakefield_url"))->group(function () {
 Route::domain(config("system.communitywakefield_url"))->group(function () {
     Route::get("/", [App\Http\Controllers\HomeController::class, "index"])->name("home");
 
+    Route::get("/invalid-postcode", function () {
+        return "Please enter a full, valid postcode.";
+    });
+
     Route::get("about", function () {
         return view("about");
     })->name("about");
