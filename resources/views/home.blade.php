@@ -32,6 +32,11 @@
             </button>
           </div>
         </form>
+        @if (\Session::has('postcode_error'))
+            <div class="alert alert-success">
+                {!! \Session::get('postcode_error') !!}
+            </div>
+        @endif
       </div>
     </div>
   </div>
