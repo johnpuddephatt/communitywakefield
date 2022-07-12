@@ -25,18 +25,13 @@
             </select>
           </div>
           <div class="hero--search-box--postcode">
-            <input class="input" type="text" name="postcode" placeholder="Enter postcode">
+            <input class="input" type="text" name="postcode" placeholder="Enter a full, valid postcode">
             <button class="button" type="submit">
               Search
               <x-icon.search />
             </button>
           </div>
         </form>
-        @if (\Session::has('postcode_error'))
-            <div class="alert alert-success">
-                {!! \Session::get('postcode_error') !!}
-            </div>
-        @endif
       </div>
     </div>
   </div>
