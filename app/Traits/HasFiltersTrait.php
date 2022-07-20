@@ -87,17 +87,18 @@ trait HasFiltersTrait
 
         if ($response->getStatusCode() != 200) {
             redirect("/invalid-postcode")->send();
+            die();
+        } else {
+            $result = json_decode($response->getBody(), true)["result"];
+
+            return $query
+                ->distance($result["latitude"], $result["longitude"])
+                ->having("distance", ">", 0)
+                ->having("distance", "<", config("system.max_radius"))
+                ->orHavingRaw("from_home = 1")
+                ->orHavingRaw("address IS NULL")
+                ->orderByRaw("-distance DESC");
         }
-
-        $result = json_decode($response->getBody(), true)["result"];
-
-        return $query
-            ->distance($result["latitude"], $result["longitude"])
-            ->having("distance", ">", 0)
-            ->having("distance", "<", config("system.max_radius"))
-            ->orHavingRaw("from_home = 1")
-            ->orHavingRaw("address IS NULL")
-            ->orderByRaw("-distance DESC");
     }
 
     public function scopeTeamFilter($query, $organisation)
